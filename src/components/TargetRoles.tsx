@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
+import { Target } from "lucide-react";
 
 const roles = [
-  "FP&A Analyst",
   "Cost Accountant",
   "Financial Analyst",
+  "FP&A Analyst",
   "MIS / Reporting Analyst",
   "Remote Finance & Reporting",
 ];
@@ -18,7 +19,7 @@ const TargetRoles = () => (
         className="text-center mb-12"
       >
         <span className="text-xs font-semibold tracking-widest uppercase golden-text">Opportunities</span>
-        <h2 className="text-3xl md:text-4xl font-bold mt-2">Target Roles</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Target Roles</h2>
       </motion.div>
 
       <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
@@ -29,9 +30,11 @@ const TargetRoles = () => (
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="bg-card border border-border rounded-xl px-6 py-4 text-center hover:border-primary/40 hover:shadow-md transition-all"
+            whileHover={{ scale: 1.05 }}
+            className="bg-card border border-border rounded-2xl px-6 py-4 text-center hover:border-primary/40 hover:shadow-lg transition-all flex items-center gap-2"
           >
-            <h3 className="font-semibold text-sm">{role}</h3>
+            <Target className="w-4 h-4 golden-text" />
+            <h3 className="font-bold text-sm">{role}</h3>
           </motion.div>
         ))}
       </div>

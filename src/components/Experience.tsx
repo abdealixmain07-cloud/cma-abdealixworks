@@ -11,7 +11,7 @@ const Experience = () => (
         className="text-center mb-12"
       >
         <span className="text-xs font-semibold tracking-widest uppercase golden-text">Experience</span>
-        <h2 className="text-3xl md:text-4xl font-bold mt-2">Work Experience</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Work Experience</h2>
       </motion.div>
 
       <div className="max-w-3xl mx-auto space-y-8">
@@ -19,7 +19,7 @@ const Experience = () => (
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-card border border-border rounded-xl p-6"
+          className="bg-card border border-border rounded-2xl p-6 hover:shadow-lg hover:border-primary/30 transition-all"
         >
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -28,7 +28,7 @@ const Experience = () => (
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-1">
                 <h3 className="text-xl font-bold">Junior Analyst</h3>
-                <span className="text-xs bg-success/20 text-success px-2 py-0.5 rounded font-medium">Current Role</span>
+                <span className="text-xs bg-success/20 text-success px-2.5 py-0.5 rounded-full font-bold">Current Role</span>
               </div>
               <p className="text-sm text-muted-foreground mb-3">MBP & Associates, Dahod</p>
               <ul className="text-sm text-muted-foreground space-y-2">
@@ -46,7 +46,7 @@ const Experience = () => (
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-card border border-border rounded-xl p-6"
+          className="bg-card border border-border rounded-2xl p-6 hover:shadow-lg hover:border-primary/30 transition-all"
         >
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -55,7 +55,7 @@ const Experience = () => (
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-1">
                 <h3 className="text-xl font-bold">CMA Article Trainee</h3>
-                <span className="text-xs text-muted-foreground font-medium">Jan 2024 – Apr 2025</span>
+                <span className="text-xs text-muted-foreground font-bold">Jan 2024 – Apr 2025</span>
               </div>
               <p className="text-sm text-muted-foreground mb-3">S.S. Puranik & Associates, Vadodara</p>
               <ul className="text-sm text-muted-foreground space-y-2">

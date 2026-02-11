@@ -12,7 +12,7 @@ const About = () => (
         className="text-center mb-12"
       >
         <span className="text-xs font-semibold tracking-widest uppercase golden-text">Introduction</span>
-        <h2 className="text-3xl md:text-4xl font-bold mt-2">About Me</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">About Me</h2>
       </motion.div>
 
       <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -24,7 +24,7 @@ const About = () => (
           <img
             src={workspaceImg}
             alt="Financial Analysis Workspace"
-            className="rounded-xl shadow-lg w-full object-cover max-h-96"
+            className="rounded-2xl shadow-xl w-full object-cover max-h-96"
           />
         </motion.div>
 
@@ -37,7 +37,7 @@ const About = () => (
             I am a finance professional focused on helping businesses improve how they manage and understand their financial data. My work centers on building structured reporting systems, automating manual processes, and delivering meaningful insights that support better decision-making.
           </p>
 
-          <h4 className="font-semibold mb-3">Key Strengths</h4>
+          <h4 className="font-bold mb-3">Key Strengths</h4>
           <ul className="space-y-2 text-sm text-muted-foreground mb-8">
             {[
               "Strong experience in financial reporting and MIS preparation",
@@ -54,10 +54,10 @@ const About = () => (
           </ul>
 
           <div className="flex gap-4">
-            <a href="#portfolio" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
+            <a href="#portfolio" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-primary/25">
               View Projects <ArrowRight className="w-4 h-4" />
             </a>
-            <a href="#contact" className="inline-flex items-center gap-2 border border-border text-foreground px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-muted transition-colors">
+            <a href="#contact" className="inline-flex items-center gap-2 border border-border text-foreground px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-muted transition-colors">
               <MessageCircle className="w-4 h-4" /> Get in Touch
             </a>
           </div>

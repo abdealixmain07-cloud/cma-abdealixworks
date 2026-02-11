@@ -41,7 +41,7 @@ const Portfolio = () => (
         className="text-center mb-12"
       >
         <span className="text-xs font-semibold tracking-widest uppercase golden-text">Projects</span>
-        <h2 className="text-3xl md:text-4xl font-bold mt-2">Finance & Reporting Projects</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Finance & Reporting Projects</h2>
         <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
           Excel dashboards and financial reporting projects that deliver real business value
         </p>
@@ -55,7 +55,7 @@ const Portfolio = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-shadow group"
+            className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
           >
             <div className="overflow-hidden h-48">
               <img
@@ -69,7 +69,7 @@ const Portfolio = () => (
               <p className="text-sm text-muted-foreground mb-3">{p.desc}</p>
               <div className="flex flex-wrap gap-1.5">
                 {p.tags.map((t) => (
-                  <span key={t} className="text-[11px] bg-primary/10 golden-text px-2 py-0.5 rounded-full font-medium">
+                  <span key={t} className="text-[11px] bg-primary/10 golden-text px-2.5 py-0.5 rounded-full font-semibold">
                     {t}
                   </span>
                 ))}
