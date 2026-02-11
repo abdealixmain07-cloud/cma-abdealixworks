@@ -44,7 +44,7 @@ const Services = () => (
         className="text-center mb-12"
       >
         <span className="text-xs font-semibold tracking-widest uppercase golden-text">Services</span>
-        <h2 className="text-3xl md:text-4xl font-bold mt-2">How I Support Businesses</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">How I Support Businesses</h2>
         <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
           Specialized in FP&A, Cost Accounting, and Financial Reporting for growing businesses
         </p>
@@ -58,18 +58,18 @@ const Services = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="bg-card border border-border rounded-xl p-6 hover:shadow-lg hover:border-primary/30 transition-all group"
+            className="bg-card border border-border rounded-2xl p-6 hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group"
           >
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                 <s.icon className="w-5 h-5 golden-text" />
               </div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Core Expertise</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Core Expertise</span>
             </div>
             <h3 className="text-lg font-bold mb-2">{s.title}</h3>
             <div className="flex flex-wrap gap-1.5 mb-3">
               {s.tags.map((t) => (
-                <span key={t} className="text-[11px] bg-primary/10 golden-text px-2 py-0.5 rounded-full font-medium">
+                <span key={t} className="text-[11px] bg-primary/10 golden-text px-2.5 py-0.5 rounded-full font-semibold">
                   {t}
                 </span>
               ))}
