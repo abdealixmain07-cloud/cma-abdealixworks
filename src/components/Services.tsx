@@ -1,41 +1,27 @@
 import { motion } from "framer-motion";
-import { BarChart3, Calculator, LayoutDashboard, BookOpen, Presentation } from "lucide-react";
+import { Calculator, BarChart3, LayoutDashboard, BookOpen } from "lucide-react";
 
 const services = [
   {
     icon: Calculator,
     title: "Cost Accounting & Audit",
-    tags: ["Cost Allocation", "BOM Variance", "Cost per Unit", "Cost Audits"],
-    desc: "Deep cost analysis including material, labor & overhead allocation, standard vs actual variance, and cost audit compliance for manufacturing and utility sectors.",
+    desc: "Cost allocation, BOM variance analysis, and cost audit compliance for manufacturing sectors.",
     highlight: true,
   },
   {
     icon: BarChart3,
-    title: "FP&A & Performance Analytics",
-    tags: ["Budgeting", "Rolling Forecasts", "Plan vs Actual", "KPI Tracking"],
-    desc: "Comprehensive financial planning with budget variance analysis, rolling forecasts, and executive KPI dashboards (EBITDA, Gross Margin, Burn Rate, Runway).",
-    highlight: false,
+    title: "FP&A & Budgeting",
+    desc: "Budget variance, rolling forecasts, and KPI dashboards — EBITDA, Gross Margin, Burn Rate.",
   },
   {
     icon: LayoutDashboard,
-    title: "Automated Dashboard & Reporting",
-    tags: ["Power BI", "Excel Dashboards", "Power Query", "Multi-Entity"],
-    desc: "Building automated dashboards and consolidated reporting systems using Power BI and Advanced Excel that transform raw data into visual, actionable insights.",
-    highlight: false,
+    title: "Power BI & Excel Reporting",
+    desc: "Automated dashboards and multi-entity consolidation using Power BI and Power Query.",
   },
   {
     icon: BookOpen,
     title: "Bookkeeping & Compliance",
-    tags: ["Month-End Close", "GST/Tax Filing", "Bank Reconciliation", "AP Management"],
-    desc: "Full-cycle bookkeeping including journal entries, accruals, reconciliations, vendor management, and GST compliance for 70+ clients with 100% on-time filing.",
-    highlight: false,
-  },
-  {
-    icon: Presentation,
-    title: "Financial Presentations & MIS",
-    tags: ["PowerPoint", "Data Storytelling", "MIS Reports", "Executive Decks"],
-    desc: "Creating professional financial presentations and MIS reports that communicate performance, trends, and strategic recommendations to C-suite stakeholders.",
-    highlight: false,
+    desc: "Month-end close, GST/tax filing, bank reconciliation, and AP management.",
   },
 ];
 
@@ -49,13 +35,10 @@ const Services = () => (
         className="text-center mb-12"
       >
         <span className="text-xs font-semibold tracking-widest uppercase golden-text">Services</span>
-        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">How I Support Businesses</h2>
-        <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-          Specialized in Cost Accounting, FP&A, and Financial Reporting for growing organizations
-        </p>
+        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">What I Do</h2>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
         {services.map((s, i) => (
           <motion.div
             key={s.title}
@@ -63,40 +46,24 @@ const Services = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
-            whileHover={{ y: -6, scale: 1.02 }}
-            className={`relative rounded-2xl p-6 transition-all duration-300 group overflow-hidden ${
+            whileHover={{ y: -6 }}
+            className={`relative rounded-2xl p-6 transition-all duration-300 group text-center ${
               s.highlight
                 ? "bg-primary text-primary-foreground shadow-xl shadow-primary/30 border-2 border-primary"
                 : "bg-card border border-border hover:shadow-xl hover:border-primary/30"
             }`}
           >
             {s.highlight && (
-              <div className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-widest bg-primary-foreground/20 px-2 py-0.5 rounded-full">
-                Core Specialty
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-widest bg-primary-foreground text-primary px-3 py-0.5 rounded-full shadow">
+                Core
               </div>
             )}
-            <div className="flex items-center gap-3 mb-4">
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${
-                s.highlight ? "bg-primary-foreground/15" : "bg-primary/10 group-hover:bg-primary/20"
-              }`}>
-                <s.icon className={`w-6 h-6 ${s.highlight ? "text-primary-foreground" : "golden-text"}`} />
-              </div>
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-colors ${
+              s.highlight ? "bg-primary-foreground/15" : "bg-primary/10 group-hover:bg-primary/20"
+            }`}>
+              <s.icon className={`w-7 h-7 ${s.highlight ? "text-primary-foreground" : "golden-text"}`} />
             </div>
-            <h3 className="text-lg font-bold mb-3">{s.title}</h3>
-            <div className="flex flex-wrap gap-1.5 mb-3">
-              {s.tags.map((t) => (
-                <span
-                  key={t}
-                  className={`text-[11px] px-2.5 py-0.5 rounded-full font-semibold ${
-                    s.highlight
-                      ? "bg-primary-foreground/15 text-primary-foreground"
-                      : "bg-primary/10 golden-text"
-                  }`}
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
+            <h3 className="font-bold mb-2">{s.title}</h3>
             <p className={`text-sm leading-relaxed ${s.highlight ? "text-primary-foreground/85" : "text-muted-foreground"}`}>
               {s.desc}
             </p>
