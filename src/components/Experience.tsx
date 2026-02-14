@@ -11,7 +11,7 @@ const Experience = () => (
         className="text-center mb-12"
       >
         <span className="text-xs font-semibold tracking-widest uppercase golden-text">Experience</span>
-        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Work Experience</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Professional Experience</h2>
       </motion.div>
 
       <div className="max-w-3xl mx-auto space-y-8">
@@ -27,16 +27,18 @@ const Experience = () => (
             </div>
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-1">
-                <h3 className="text-xl font-bold">Junior Analyst</h3>
+                <h3 className="text-xl font-bold">Financial Reporting Analyst</h3>
                 <span className="text-xs bg-success/20 text-success px-2.5 py-0.5 rounded-full font-bold">Current Role</span>
               </div>
-              <p className="text-sm text-muted-foreground mb-3">MBP & Associates, Dahod</p>
+              <p className="text-sm text-muted-foreground mb-1">MBP & Associates, Dahod | May 2025 – Present</p>
+              <p className="text-xs text-primary font-semibold mb-3">US & Canada Clients · Power BI · Advanced Excel · Month-End Closing</p>
               <ul className="text-sm text-muted-foreground space-y-2">
-                <li>• Prepare monthly financial reports, reconciliations, and variance analysis to support business decision-making</li>
-                <li>• Analyze financial performance data to identify trends, risks, and improvement opportunities</li>
-                <li>• Assist in developing dashboards and structured reports to enhance financial visibility</li>
-                <li>• Support process improvement initiatives that streamline financial reporting workflows</li>
-                <li>• Create powerful PowerPoint presentations to showcase financial insights and business performance</li>
+                <li>• Manage end-to-end accounting and bookkeeping for international clients, including $50M+ funded SaaS startups, ensuring accurate financial reporting and compliance</li>
+                <li>• Perform Plan vs Actual analysis, budgeting, and rolling forecasts to improve reporting accuracy and strategic financial visibility for founders and CFOs</li>
+                <li>• Lead full-cycle month-end close including journal entries, accruals, reconciliations, and preparation of financial statements with audit-ready documentation</li>
+                <li>• Designed automated Power BI dashboards to monitor revenue, operating expenses, burn rate, and cash flow trends</li>
+                <li>• Built advanced Excel-based consolidation models providing KPIs such as EBITDA, Gross Margin, Burn Rate, Runway using Power Query for multi-entity reporting</li>
+                <li>• Coordinated with international stakeholders to resolve discrepancies, strengthen internal controls, and improve financial reporting accuracy</li>
               </ul>
             </div>
           </div>
@@ -54,15 +56,19 @@ const Experience = () => (
             </div>
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-1">
-                <h3 className="text-xl font-bold">CMA Article Trainee</h3>
+                <h3 className="text-xl font-bold">Article Assistant (Cost Audit)</h3>
                 <span className="text-xs text-muted-foreground font-bold">Jan 2024 – Apr 2025</span>
               </div>
               <p className="text-sm text-muted-foreground mb-3">S.S. Puranik & Associates, Vadodara</p>
               <ul className="text-sm text-muted-foreground space-y-2">
-                <li>• Assisted in cost audits for multiple organizations, supporting accurate financial reporting and compliance</li>
-                <li>• Prepared and filed GST returns while ensuring adherence to regulatory requirements</li>
-                <li>• Supported tax filings, financial documentation, and audit procedures</li>
-                <li>• Contributed to improving reporting processes and maintaining organized financial records</li>
+                <li>• Prepared and analyzed cost records for manufacturing and electricity sector companies — material consumption, labor cost, utility usage, and overhead absorption</li>
+                <li>• Assisted in Cost Audits for 12+ companies, ensuring compliance with cost accounting standards</li>
+                <li>• Computed cost per unit of electricity generation for a State Electricity Board through area-wise cost bifurcation</li>
+                <li>• Conducted Actual vs BOM variance analysis for transmission-based companies to identify inefficiencies</li>
+                <li>• Developed raw material cost models for ₹100+ Cr turnover chemical manufacturing company with monthly cost variance reports for CEO review</li>
+                <li>• Managed GST compliance for 70+ clients — GSTR-1, GSTR-2 reconciliation, GSTR-3B filings with 100% on-time compliance</li>
+                <li>• Conducted 30+ statutory and tax audits, ensuring accurate financial reporting and regulatory compliance</li>
+                <li>• Performed Concurrent Audit for a major PSU Bank — loan documentation, financial ratios, sanction compliance, fraud risk</li>
               </ul>
             </div>
           </div>

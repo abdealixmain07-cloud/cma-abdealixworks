@@ -16,10 +16,10 @@ const AnimatedNumber = ({ target, prefix = "", suffix = "" }: { target: number; 
 };
 
 const stats = [
-  { value: 12, prefix: "", suffix: "+", label: "Cost Audits", sub: "Assisted" },
-  { value: 70, prefix: "", suffix: "+", label: "GST Returns", sub: "Filed Monthly" },
+  { value: 12, prefix: "", suffix: "+", label: "Cost Audits", sub: "Completed" },
+  { value: 70, prefix: "", suffix: "+", label: "GST Clients", sub: "100% On-Time" },
   { value: 100, prefix: "₹", suffix: "Cr+", label: "Financial Data", sub: "Analyzed" },
-  { value: 0, prefix: "", suffix: "SaaS", label: "Financial Dashboards", sub: "Built for Businesses" },
+  { value: 30, prefix: "", suffix: "+", label: "Statutory Audits", sub: "Conducted" },
 ];
 
 const StatsBar = () => (
@@ -34,11 +34,7 @@ const StatsBar = () => (
         {stats.map((s) => (
           <div key={s.label} className="text-center">
             <p className="text-3xl md:text-4xl font-extrabold golden-text">
-              {s.value > 0 ? (
-                <AnimatedNumber target={s.value} prefix={s.prefix} suffix={s.suffix} />
-              ) : (
-                s.suffix
-              )}
+              <AnimatedNumber target={s.value} prefix={s.prefix} suffix={s.suffix} />
             </p>
             <p className="text-sm font-bold mt-1.5">{s.label}</p>
             <p className="text-xs text-muted-foreground">{s.sub}</p>

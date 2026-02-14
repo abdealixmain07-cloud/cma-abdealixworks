@@ -7,27 +7,27 @@ import projectKPI from "@/assets/project-kpi-tracking.jpg";
 const projects = [
   {
     img: projectDashboard,
-    title: "Automated Financial Excel Dashboard",
-    desc: "Developed an Excel-based dashboard to monitor revenue, expenses, and key financial metrics, reducing reporting time and improving management visibility.",
-    tags: ["Excel", "Automation", "Financial Metrics"],
+    title: "Automated Cost & Revenue Dashboard",
+    desc: "Built Excel-based consolidated dashboard tracking revenue, COGS, gross margin, and operating expenses for multi-entity SaaS startups using Power Query automation.",
+    tags: ["Excel", "Power Query", "Cost Analysis", "SaaS"],
   },
   {
     img: projectMIS,
-    title: "Monthly MIS Reporting System",
-    desc: "Designed a structured MIS reporting framework in Excel to standardize business performance tracking and improve reporting consistency.",
-    tags: ["MIS", "Reporting", "Excel"],
+    title: "Monthly MIS & Variance Reporting",
+    desc: "Designed structured MIS framework with Plan vs Actual variance analysis, budget tracking, and rolling forecast templates for CFO-level reporting.",
+    tags: ["MIS", "Variance Analysis", "Budgeting"],
   },
   {
     img: projectAnalysis,
-    title: "Financial Data Analysis & Business Insights",
-    desc: "Analyzed financial datasets to identify trends, cost patterns, and performance gaps to support management planning and decision-making.",
-    tags: ["Data Analysis", "Trends", "Insights"],
+    title: "Cost Audit & Raw Material Analysis",
+    desc: "Developed raw material cost models for ₹100+ Cr chemical manufacturing company — analyzing imported material usage across departments with monthly cost variance reports.",
+    tags: ["Cost Audit", "Manufacturing", "Material Cost"],
   },
   {
     img: projectKPI,
-    title: "KPI Performance Tracking Dashboard",
-    desc: "Built an Excel-based KPI tracking system using automated formulas and visual summaries for business performance monitoring.",
-    tags: ["KPI", "Dashboard", "Performance"],
+    title: "KPI & Financial Performance Tracker",
+    desc: "Built KPI tracking system monitoring EBITDA, Burn Rate, Runway, Gross Margin with automated formulas and visual summaries for executive decision-making.",
+    tags: ["KPI", "EBITDA", "Financial Metrics"],
   },
 ];
 
@@ -41,9 +41,9 @@ const Portfolio = () => (
         className="text-center mb-12"
       >
         <span className="text-xs font-semibold tracking-widest uppercase golden-text">Projects</span>
-        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Finance & Reporting Projects</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Cost & Financial Projects</h2>
         <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-          Excel dashboards and financial reporting projects that deliver real business value
+          Cost analysis, financial dashboards, and reporting projects delivering real business impact
         </p>
       </motion.div>
 
