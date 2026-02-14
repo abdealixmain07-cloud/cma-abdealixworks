@@ -7,27 +7,27 @@ import projectKPI from "@/assets/project-kpi-tracking.jpg";
 const projects = [
   {
     img: projectDashboard,
-    title: "Automated Cost & Revenue Dashboard",
-    desc: "Built Excel-based consolidated dashboard tracking revenue, COGS, gross margin, and operating expenses for multi-entity SaaS startups using Power Query automation.",
-    tags: ["Excel", "Power Query", "Cost Analysis", "SaaS"],
+    title: "Cost & Revenue Dashboard",
+    desc: "Excel-based consolidated dashboard tracking revenue, COGS, and gross margin for multi-entity SaaS startups using Power Query.",
+    tags: ["Excel", "Power Query", "SaaS"],
   },
   {
     img: projectMIS,
-    title: "Monthly MIS & Variance Reporting",
-    desc: "Designed structured MIS framework with Plan vs Actual variance analysis, budget tracking, and rolling forecast templates for CFO-level reporting.",
-    tags: ["MIS", "Variance Analysis", "Budgeting"],
+    title: "MIS & Variance Reporting",
+    desc: "Plan vs Actual variance analysis with budget tracking and rolling forecast templates for CFO-level reporting.",
+    tags: ["MIS", "Variance", "Budgeting"],
   },
   {
     img: projectAnalysis,
-    title: "Cost Audit & Raw Material Analysis",
-    desc: "Developed raw material cost models for ₹100+ Cr chemical manufacturing company — analyzing imported material usage across departments with monthly cost variance reports.",
-    tags: ["Cost Audit", "Manufacturing", "Material Cost"],
+    title: "Raw Material Cost Analysis",
+    desc: "Cost models for ₹100Cr+ chemical manufacturing — department-wise material usage with monthly variance reports.",
+    tags: ["Cost Audit", "Manufacturing"],
   },
   {
     img: projectKPI,
-    title: "KPI & Financial Performance Tracker",
-    desc: "Built KPI tracking system monitoring EBITDA, Burn Rate, Runway, Gross Margin with automated formulas and visual summaries for executive decision-making.",
-    tags: ["KPI", "EBITDA", "Financial Metrics"],
+    title: "KPI Performance Tracker",
+    desc: "EBITDA, Burn Rate, Runway & Gross Margin tracking with automated formulas and executive summaries.",
+    tags: ["KPI", "EBITDA", "Metrics"],
   },
 ];
 
@@ -41,10 +41,7 @@ const Portfolio = () => (
         className="text-center mb-12"
       >
         <span className="text-xs font-semibold tracking-widest uppercase golden-text">Projects</span>
-        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Cost & Financial Projects</h2>
-        <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-          Cost analysis, financial dashboards, and reporting projects delivering real business impact
-        </p>
+        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Key Projects</h2>
       </motion.div>
 
       <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">

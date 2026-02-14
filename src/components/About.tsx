@@ -34,25 +34,24 @@ const About = () => (
           viewport={{ once: true }}
         >
           <p className="text-muted-foreground leading-relaxed mb-6">
-            Qualified Cost Accountant (CMA) with hands-on experience in Financial Planning & Analysis, corporate reporting, and cost analytics across US, UK, and Canada-based organizations, including $50M+ funded SaaS companies. I specialize in budgeting, rolling forecasts, variance analysis, financial consolidation, and performance reporting — transforming financial data into actionable insights that drive profitability and executive decision-making.
+            Qualified CMA with hands-on FP&A and cost analytics experience across $50M+ funded SaaS companies in the US, UK & Canada. I transform financial data into actionable insights that drive profitability and executive decision-making.
           </p>
 
-          <h4 className="font-bold mb-3">Key Strengths</h4>
-          <ul className="space-y-2 text-sm text-muted-foreground mb-8">
+          <div className="grid grid-cols-2 gap-3 mb-6">
             {[
-              "Cost Accounting expertise — Cost Audits, BOM Variance, Cost Allocation",
-              "FP&A — Budgeting, Rolling Forecasts, Plan vs Actual Analysis",
-              "Advanced Excel (Power Query, SUMIFS, VLOOKUP) & Power BI Dashboards",
-              "Multi-entity financial consolidation and intercompany reporting",
-              "International client experience — US, UK, Canada organizations",
-              "Languages: English, Hindi, Gujarati, Arabic",
+              "Cost Audits & BOM Variance",
+              "FP&A & Rolling Forecasts",
+              "Power BI & Advanced Excel",
+              "Multi-Entity Consolidation",
+              "International Clients",
+              "English · Hindi · Gujarati · Arabic",
             ].map((item) => (
-              <li key={item} className="flex items-start gap-2">
-                <span className="mt-1 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+              <div key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
                 {item}
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
 
           <div className="flex gap-4">
             <a href="#portfolio" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-primary/25">
