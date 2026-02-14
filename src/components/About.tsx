@@ -34,17 +34,18 @@ const About = () => (
           viewport={{ once: true }}
         >
           <p className="text-muted-foreground leading-relaxed mb-6">
-            I am a finance professional focused on helping businesses improve how they manage and understand their financial data. My work centers on building structured reporting systems, automating manual processes, and delivering meaningful insights that support better decision-making.
+            Qualified Cost Accountant (CMA) with hands-on experience in Financial Planning & Analysis, corporate reporting, and cost analytics across US, UK, and Canada-based organizations, including $50M+ funded SaaS companies. I specialize in budgeting, rolling forecasts, variance analysis, financial consolidation, and performance reporting — transforming financial data into actionable insights that drive profitability and executive decision-making.
           </p>
 
           <h4 className="font-bold mb-3">Key Strengths</h4>
           <ul className="space-y-2 text-sm text-muted-foreground mb-8">
             {[
-              "Strong experience in financial reporting and MIS preparation",
-              "Advanced Excel dashboard and data analysis skills",
-              "Qualified CMA with solid accounting and finance knowledge",
-              "Experience supporting international business clients",
-              "Focused on turning numbers into business clarity",
+              "Cost Accounting expertise — Cost Audits, BOM Variance, Cost Allocation",
+              "FP&A — Budgeting, Rolling Forecasts, Plan vs Actual Analysis",
+              "Advanced Excel (Power Query, SUMIFS, VLOOKUP) & Power BI Dashboards",
+              "Multi-entity financial consolidation and intercompany reporting",
+              "International client experience — US, UK, Canada organizations",
+              "Languages: English, Hindi, Gujarati, Arabic",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
                 <span className="mt-1 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />

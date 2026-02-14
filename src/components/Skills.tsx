@@ -2,30 +2,30 @@ import { motion } from "framer-motion";
 
 const skillCategories = [
   {
-    title: "Financial Reporting & Analysis",
+    title: "Cost Accounting & Finance",
     skills: [
-      { name: "Financial Statements Preparation", metric: "50+ Reports Prepared", pct: 95 },
-      { name: "MIS Reporting", metric: "30+ MIS Delivered", pct: 90 },
-      { name: "Budget vs Actual Analysis", metric: "₹100Cr+ Analyzed", pct: 90 },
-      { name: "KPI & Ratio Analysis", metric: "15+ KPIs Tracked", pct: 80 },
+      { name: "Cost Audits Completed", metric: "12+", pct: 90 },
+      { name: "Variance Analysis (Actual vs BOM)", metric: "₹100Cr+ Analyzed", pct: 92 },
+      { name: "GST/Tax Compliance", metric: "70+ Clients", pct: 95 },
+      { name: "Month-End Close & Reconciliation", metric: "500+ Entries", pct: 88 },
     ],
   },
   {
-    title: "Automation & Tools",
+    title: "Data & Reporting Tools",
     skills: [
-      { name: "Advanced Microsoft Excel", metric: "5,000+ Hours", pct: 95 },
-      { name: "Power BI Dashboard Development", metric: "8 Dashboards Built", pct: 78 },
-      { name: "Power Query & Data Modeling", metric: "20+ Data Models", pct: 75 },
-      { name: "Microsoft PowerPoint", metric: "100+ Decks Designed", pct: 92 },
+      { name: "Advanced Excel (Power Query, SUMIFS)", metric: "5,000+ Hours", pct: 96 },
+      { name: "Power BI Dashboards", metric: "8 Dashboards", pct: 78 },
+      { name: "Financial Modeling & Consolidation", metric: "20+ Models", pct: 82 },
+      { name: "PowerPoint & Data Storytelling", metric: "100+ Decks", pct: 90 },
     ],
   },
   {
-    title: "Accounting Software",
+    title: "Accounting & ERP Software",
     skills: [
-      { name: "QuickBooks Online", metric: "12 Clients Managed", pct: 88 },
-      { name: "Xero Accounting Software", metric: "6 Clients Handled", pct: 72 },
-      { name: "Tally ERP", metric: "3+ Years Usage", pct: 82 },
-      { name: "Bank Reconciliations", metric: "500+ Reconciled", pct: 90 },
+      { name: "QuickBooks Online", metric: "12 Clients", pct: 88 },
+      { name: "Tally ERP-9", metric: "3+ Years", pct: 85 },
+      { name: "Zoho Books", metric: "4 Clients", pct: 72 },
+      { name: "MySQL (Data Queries)", metric: "50+ Queries", pct: 65 },
     ],
   },
 ];
@@ -40,7 +40,7 @@ const Skills = () => (
         className="text-center mb-12"
       >
         <span className="text-xs font-semibold tracking-widest uppercase golden-text">Technical Skills</span>
-        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Technical & Financial Expertise</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Core Competencies</h2>
       </motion.div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">

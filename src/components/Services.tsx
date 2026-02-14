@@ -3,34 +3,39 @@ import { BarChart3, Calculator, LayoutDashboard, BookOpen, Presentation } from "
 
 const services = [
   {
-    icon: BarChart3,
-    title: "FP&A & Performance Analysis",
-    tags: ["Forecasting", "Budgeting", "Variance Analysis", "KPI Tracking"],
-    desc: "Developing comprehensive financial forecasts, budget variance analysis, and performance analytics to support executive decision-making and drive business growth.",
+    icon: Calculator,
+    title: "Cost Accounting & Audit",
+    tags: ["Cost Allocation", "BOM Variance", "Cost per Unit", "Cost Audits"],
+    desc: "Deep cost analysis including material, labor & overhead allocation, standard vs actual variance, and cost audit compliance for manufacturing and utility sectors.",
+    highlight: true,
   },
   {
-    icon: Calculator,
-    title: "Cost Management & Accounting",
-    tags: ["Cost Control", "Profitability Analysis", "Cost Allocation"],
-    desc: "Delivering cost accounting expertise including cost allocation, profitability analysis, and expense optimization to improve margins and operational efficiency.",
+    icon: BarChart3,
+    title: "FP&A & Performance Analytics",
+    tags: ["Budgeting", "Rolling Forecasts", "Plan vs Actual", "KPI Tracking"],
+    desc: "Comprehensive financial planning with budget variance analysis, rolling forecasts, and executive KPI dashboards (EBITDA, Gross Margin, Burn Rate, Runway).",
+    highlight: false,
   },
   {
     icon: LayoutDashboard,
-    title: "Automated Dashboard Development",
-    tags: ["Excel Dashboards", "Power BI", "Real-time Reporting"],
-    desc: "Building automated dashboards and real-time reporting systems that transform raw financial data into visual, actionable insights for stakeholder analysis.",
+    title: "Automated Dashboard & Reporting",
+    tags: ["Power BI", "Excel Dashboards", "Power Query", "Multi-Entity"],
+    desc: "Building automated dashboards and consolidated reporting systems using Power BI and Advanced Excel that transform raw data into visual, actionable insights.",
+    highlight: false,
   },
   {
     icon: BookOpen,
-    title: "Bookkeeping & Reconciliation",
-    tags: ["Bank Reconciliation", "GL Review", "Month-End Close"],
-    desc: "Managing full-cycle bookkeeping operations including bank reconciliations, transaction categorization, and monthly financial closing procedures for international clients.",
+    title: "Bookkeeping & Compliance",
+    tags: ["Month-End Close", "GST/Tax Filing", "Bank Reconciliation", "AP Management"],
+    desc: "Full-cycle bookkeeping including journal entries, accruals, reconciliations, vendor management, and GST compliance for 70+ clients with 100% on-time filing.",
+    highlight: false,
   },
   {
     icon: Presentation,
-    title: "Business Presentation Design",
-    tags: ["PowerPoint", "Data Storytelling", "Executive Reporting"],
-    desc: "Creating professional PowerPoint presentations that showcase financial insights, business performance, and strategic recommendations with compelling visual narratives.",
+    title: "Financial Presentations & MIS",
+    tags: ["PowerPoint", "Data Storytelling", "MIS Reports", "Executive Decks"],
+    desc: "Creating professional financial presentations and MIS reports that communicate performance, trends, and strategic recommendations to C-suite stakeholders.",
+    highlight: false,
   },
 ];
 
@@ -46,7 +51,7 @@ const Services = () => (
         <span className="text-xs font-semibold tracking-widest uppercase golden-text">Services</span>
         <h2 className="text-3xl md:text-4xl font-extrabold mt-2">How I Support Businesses</h2>
         <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-          Specialized in FP&A, Cost Accounting, and Financial Reporting for growing businesses
+          Specialized in Cost Accounting, FP&A, and Financial Reporting for growing organizations
         </p>
       </motion.div>
 
@@ -54,27 +59,47 @@ const Services = () => (
         {services.map((s, i) => (
           <motion.div
             key={s.title}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="bg-card border border-border rounded-2xl p-6 hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group"
+            transition={{ delay: i * 0.08 }}
+            whileHover={{ y: -6, scale: 1.02 }}
+            className={`relative rounded-2xl p-6 transition-all duration-300 group overflow-hidden ${
+              s.highlight
+                ? "bg-primary text-primary-foreground shadow-xl shadow-primary/30 border-2 border-primary"
+                : "bg-card border border-border hover:shadow-xl hover:border-primary/30"
+            }`}
           >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <s.icon className="w-5 h-5 golden-text" />
+            {s.highlight && (
+              <div className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-widest bg-primary-foreground/20 px-2 py-0.5 rounded-full">
+                Core Specialty
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Core Expertise</span>
+            )}
+            <div className="flex items-center gap-3 mb-4">
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${
+                s.highlight ? "bg-primary-foreground/15" : "bg-primary/10 group-hover:bg-primary/20"
+              }`}>
+                <s.icon className={`w-6 h-6 ${s.highlight ? "text-primary-foreground" : "golden-text"}`} />
+              </div>
             </div>
-            <h3 className="text-lg font-bold mb-2">{s.title}</h3>
+            <h3 className="text-lg font-bold mb-3">{s.title}</h3>
             <div className="flex flex-wrap gap-1.5 mb-3">
               {s.tags.map((t) => (
-                <span key={t} className="text-[11px] bg-primary/10 golden-text px-2.5 py-0.5 rounded-full font-semibold">
+                <span
+                  key={t}
+                  className={`text-[11px] px-2.5 py-0.5 rounded-full font-semibold ${
+                    s.highlight
+                      ? "bg-primary-foreground/15 text-primary-foreground"
+                      : "bg-primary/10 golden-text"
+                  }`}
+                >
                   {t}
                 </span>
               ))}
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+            <p className={`text-sm leading-relaxed ${s.highlight ? "text-primary-foreground/85" : "text-muted-foreground"}`}>
+              {s.desc}
+            </p>
           </motion.div>
         ))}
       </div>

@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import { Mail, Phone, Linkedin, MapPin, Send } from "lucide-react";
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const mailtoLink = `mailto:abdealixmain07@gmail.com?subject=${encodeURIComponent(form.subject || "Portfolio Contact")}&body=${encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`)}`;
+    const mailtoLink = `mailto:abdealixmain07@gmail.com?subject=${encodeURIComponent("Portfolio Contact from " + form.name)}&body=${encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`)}`;
     window.open(mailtoLink);
   };
 
@@ -23,7 +23,7 @@ const Contact = () => {
           <span className="text-xs font-semibold tracking-widest uppercase golden-text">Contact</span>
           <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Let's Work Together</h2>
           <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-            Open to opportunities where I can support businesses and finance teams with reporting, analysis, and dashboard automation.
+            Open to opportunities in Cost Accounting, FP&A, and Financial Analysis roles across international organizations.
           </p>
         </motion.div>
 
@@ -37,8 +37,8 @@ const Contact = () => {
             {[
               { icon: Mail, label: "Email", value: "abdealixmain07@gmail.com", href: "mailto:abdealixmain07@gmail.com" },
               { icon: Phone, label: "Phone", value: "+91 70693 21604", href: "tel:+917069321604" },
-              { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/abdeali-main", href: "https://linkedin.com/in/abdeali-main" },
-              { icon: MapPin, label: "Location", value: "Open to Remote & International Opportunities", href: null },
+              { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/abdeali-main", href: "https://www.linkedin.com/in/abdeali-main" },
+              { icon: MapPin, label: "Location", value: "Dahod, India · Open to Remote & International", href: null },
             ].map((item) => (
               <div key={item.label} className="flex items-start gap-4 bg-card border border-border rounded-2xl p-4 hover:border-primary/30 transition-all">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -87,27 +87,14 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-semibold mb-1 block">Subject</label>
-                  <select
-                    value={form.subject}
-                    onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl border border-input bg-background text-sm focus:ring-2 focus:ring-ring focus:outline-none"
-                  >
-                    <option value="">Select a subject</option>
-                    <option>Job Opportunity</option>
-                    <option>Freelance Project</option>
-                    <option>Collaboration</option>
-                    <option>General Inquiry</option>
-                  </select>
-                </div>
-                <div>
                   <label className="text-sm font-semibold mb-1 block">Message *</label>
                   <textarea
                     required
-                    rows={4}
+                    rows={5}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl border border-input bg-background text-sm focus:ring-2 focus:ring-ring focus:outline-none resize-none"
+                    placeholder="Tell me about the opportunity or how I can help..."
                   />
                 </div>
                 <button

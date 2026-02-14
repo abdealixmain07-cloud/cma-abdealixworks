@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Award } from "lucide-react";
+
+const cmaStages = [
+  { stage: "CMA Final", date: "Dec 2025", marks: "453/800", note: "Exemption in 3 papers" },
+  { stage: "CMA Inter (Group II)", date: "Jun 2023", marks: "213/400", note: "Exemption in 2 papers" },
+  { stage: "CMA Inter (Group I)", date: "Dec 2022", marks: "228/400", note: "Exemption in 1 paper" },
+  { stage: "CMA Foundation", date: "Jun 2022", marks: "308/400", note: "Exemption in all papers" },
+];
 
 const Education = () => (
   <section className="py-20">
@@ -23,19 +30,30 @@ const Education = () => (
         >
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <GraduationCap className="w-6 h-6 golden-text" />
+              <Award className="w-6 h-6 golden-text" />
             </div>
-            <div>
-              <span className="text-xs bg-primary/15 text-primary px-2.5 py-0.5 rounded-full font-bold">CMA Qualified</span>
-              <h3 className="text-xl font-bold mt-2">Qualified CMA</h3>
+            <div className="flex-1">
+              <span className="text-xs bg-primary/15 text-primary px-2.5 py-0.5 rounded-full font-bold">Qualified CMA</span>
+              <h3 className="text-xl font-bold mt-2">Cost & Management Accountant (CMA)</h3>
               <p className="text-sm text-muted-foreground">The Institute of Cost Accountants of India (ICMAI)</p>
-              <p className="text-sm text-muted-foreground mt-3 mb-2">Advanced expertise in financial and managerial accounting, including:</p>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Financial Reporting & Analysis | Strategic Financial Management</li>
-                <li>• Corporate Laws & Governance | Direct & Indirect Taxation</li>
-                <li>• Auditing & Assurance | Cost Control & Performance Analysis</li>
-                <li>• Professional emphasis on compliance and financial decision support</li>
-              </ul>
+
+              <div className="mt-4 space-y-2">
+                {cmaStages.map((s, i) => (
+                  <motion.div
+                    key={s.stage}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm py-2 border-b border-border last:border-0"
+                  >
+                    <span className="font-semibold min-w-[160px]">{s.stage}</span>
+                    <span className="text-muted-foreground text-xs">{s.date}</span>
+                    <span className="font-bold golden-text">{s.marks}</span>
+                    <span className="text-xs bg-success/15 text-success px-2 py-0.5 rounded-full font-semibold">{s.note}</span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>
@@ -52,12 +70,9 @@ const Education = () => (
             </div>
             <div>
               <h3 className="text-xl font-bold">Bachelor of Commerce (B.Com)</h3>
-              <p className="text-sm text-muted-foreground">Gujarat University | Completed 2024</p>
-              <p className="text-sm text-muted-foreground mt-3 mb-2">Built a strong foundation in business and finance including:</p>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Accounting & Financial Management | Business Economics</li>
-                <li>• Corporate & Commercial Law | Business Operations & Management</li>
-              </ul>
+              <p className="text-sm text-muted-foreground">Gujarat University | Mar 2021</p>
+              <p className="text-sm font-bold golden-text mt-1">560/600</p>
+              <p className="text-sm text-muted-foreground mt-2">Strong foundation in Accounting, Financial Management, Business Economics, and Corporate Law.</p>
             </div>
           </div>
         </motion.div>

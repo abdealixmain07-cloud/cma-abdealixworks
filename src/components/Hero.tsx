@@ -3,6 +3,45 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
 import profilePhoto from "@/assets/profile-photo.jpg";
 
+const typingRoles = ["Cost Accountant", "Financial Analyst", "FP&A Specialist"];
+
+const TypingAnimation = () => {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = typingRoles[roleIndex];
+    const speed = isDeleting ? 40 : 80;
+
+    if (!isDeleting && text === current) {
+      const pause = setTimeout(() => setIsDeleting(true), 2000);
+      return () => clearTimeout(pause);
+    }
+    if (isDeleting && text === "") {
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % typingRoles.length);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setText(isDeleting ? current.slice(0, text.length - 1) : current.slice(0, text.length + 1));
+    }, speed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, roleIndex]);
+
+  return (
+    <span className="golden-text">
+      {text}
+      <motion.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
+        className="inline-block w-0.5 h-[1.1em] bg-primary ml-0.5 align-text-bottom"
+      />
+    </span>
+  );
+};
+
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center pt-20 pb-16">
@@ -38,7 +77,7 @@ const Hero = () => {
               transition={{ delay: 0.3 }}
               className="text-sm font-semibold tracking-widest uppercase text-primary mb-3"
             >
-              Cost Accountant & Financial Analyst
+              Qualified CMA · Finance Professional
             </motion.p>
 
             <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-2 tracking-tight">
@@ -47,20 +86,16 @@ const Hero = () => {
               <span className="golden-text">Gangardiwala</span>
             </h1>
 
-            <p className="text-lg md:text-xl mt-4 mb-4">
-              <span className="font-semibold">FP&A Specialist</span>
-              <span className="text-muted-foreground"> · </span>
-              <span className="font-semibold golden-text">Qualified CMA</span>
-              <span className="text-muted-foreground"> · </span>
-              <span className="font-semibold text-muted-foreground">Financial Analyst</span>
+            <p className="text-lg md:text-xl mt-4 mb-4 h-8">
+              <TypingAnimation />
             </p>
 
             <p className="text-muted-foreground mb-2 text-base leading-relaxed border-l-2 border-primary pl-4 italic">
-              "I help businesses turn complex financial data into clear, decision-ready insights through structured reporting, automation, and dashboard solutions."
+              "Transforming complex financial data into actionable insights that drive profitability, cost optimization, and executive decision-making."
             </p>
 
             <p className="text-muted-foreground mb-8 text-sm leading-relaxed">
-              Delivering financial clarity through MIS reporting, Excel dashboards, and performance analysis for finance teams and growing businesses.
+              Delivering financial clarity through FP&A, cost analytics, Power BI dashboards, and multi-entity reporting for US, UK & Canada-based organizations.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -71,7 +106,8 @@ const Hero = () => {
                 View My Work <ArrowRight className="w-4 h-4" />
               </a>
               <a
-                href="#contact"
+                href="/Abdeali_Gangardiwala_Resume.pdf"
+                download
                 className="inline-flex items-center gap-2 border-2 border-primary text-primary px-6 py-3 rounded-xl font-semibold hover:bg-primary/10 transition-colors"
               >
                 <Download className="w-4 h-4" /> Download Resume
@@ -158,27 +194,25 @@ const AnimatedDashboard = () => {
         </div>
 
         <div className="bg-card border border-border rounded-2xl shadow-2xl overflow-hidden">
-          {/* Title bar */}
           <div className="flex items-center gap-2 px-5 py-3.5 bg-muted/50 border-b border-border">
             <div className="flex gap-1.5">
               <span className="w-3 h-3 rounded-full bg-destructive" />
               <span className="w-3 h-3 rounded-full bg-primary" />
               <span className="w-3 h-3 rounded-full bg-success" />
             </div>
-            <span className="text-xs text-muted-foreground ml-2 font-semibold">Financial_Dashboard.xlsx</span>
+            <span className="text-xs text-muted-foreground ml-2 font-semibold">Cost_Analysis_Dashboard.xlsx</span>
             <span className="ml-auto text-xs bg-success/20 text-success px-2 py-0.5 rounded-full font-bold">Excel</span>
           </div>
 
           <div className="p-5">
-            <h3 className="font-bold text-sm mb-1">Monthly Financial Summary</h3>
-            <p className="text-xs text-muted-foreground mb-4">FY 2025 | Q1 Performance Report</p>
+            <h3 className="font-bold text-sm mb-1">Cost & Profitability Analysis</h3>
+            <p className="text-xs text-muted-foreground mb-4">FY 2025 | Quarterly Cost Report</p>
 
-            {/* KPI Cards with animated counters */}
             <div className="grid grid-cols-3 gap-3 mb-5">
               {[
-                { label: "Revenue", value: 24, prefix: "₹", suffix: "L", change: "+12%", up: true },
-                { label: "Net Profit", value: 58, prefix: "₹", suffix: "K", change: "+8%", up: true },
-                { label: "Growth", value: 24, prefix: "", suffix: "%", change: "+3%", up: true },
+                { label: "Cost Saved", value: 18, prefix: "₹", suffix: "L", change: "-12%", up: false },
+                { label: "Gross Margin", value: 42, prefix: "", suffix: "%", change: "+5%", up: true },
+                { label: "EBITDA", value: 28, prefix: "", suffix: "%", change: "+3%", up: true },
               ].map((kpi) => (
                 <motion.div
                   key={kpi.label}
@@ -195,16 +229,15 @@ const AnimatedDashboard = () => {
                     ) : (
                       <TrendingDown className="w-3 h-3 text-destructive" />
                     )}
-                    <span className="text-success">{kpi.change}</span>
+                    <span className={kpi.up ? "text-success" : "text-destructive"}>{kpi.change}</span>
                   </p>
                 </motion.div>
               ))}
             </div>
 
-            {/* Animated Charts */}
             <div className="grid grid-cols-2 gap-3 mb-4">
               <div className="border border-border rounded-xl p-3">
-                <p className="text-xs font-bold mb-2">Revenue Trend</p>
+                <p className="text-xs font-bold mb-2">Cost Trend (₹L)</p>
                 <div className="flex items-end gap-1.5 h-20">
                   {barData.map((bar, i) => (
                     <AnimatedBar key={i} height={bar.h} delay={0.3 + i * 0.15} color={bar.color} />
@@ -217,7 +250,7 @@ const AnimatedDashboard = () => {
                 </div>
               </div>
               <div className="border border-border rounded-xl p-3 flex flex-col items-center justify-center">
-                <p className="text-xs font-bold mb-2">Expense Split</p>
+                <p className="text-xs font-bold mb-2">Cost Allocation</p>
                 <motion.div
                   className="w-16 h-16 rounded-full border-4 golden-border flex items-center justify-center"
                   animate={{ rotate: [0, 360] }}
@@ -228,15 +261,14 @@ const AnimatedDashboard = () => {
               </div>
             </div>
 
-            {/* Animated Table */}
             <div className="border border-border rounded-xl overflow-hidden text-xs">
               <div className="grid grid-cols-4 bg-muted font-bold px-3 py-2.5 text-[11px] uppercase tracking-wider">
-                <span>Metric</span><span>Actual</span><span>Budget</span><span>Var%</span>
+                <span>Metric</span><span>Actual</span><span>Standard</span><span>Var%</span>
               </div>
               {[
-                { metric: "Revenue", actual: "₹24L", budget: "₹22L", v: "+9%", delay: 0.6 },
-                { metric: "COGS", actual: "₹12L", budget: "₹13L", v: "-8%", delay: 0.8 },
-                { metric: "Gross Profit", actual: "₹12L", budget: "₹9L", v: "+33%", delay: 1.0 },
+                { metric: "Material", actual: "₹8.2L", budget: "₹9L", v: "-9%", delay: 0.6 },
+                { metric: "Labour", actual: "₹3.1L", budget: "₹3.5L", v: "-11%", delay: 0.8 },
+                { metric: "Overhead", actual: "₹2.4L", budget: "₹2L", v: "+20%", delay: 1.0 },
               ].map((row) => (
                 <motion.div
                   key={row.metric}
@@ -248,7 +280,7 @@ const AnimatedDashboard = () => {
                   <span className="font-medium">{row.metric}</span>
                   <span>{row.actual}</span>
                   <span>{row.budget}</span>
-                  <span className={`font-bold ${row.v.startsWith("+") ? "text-success" : "text-destructive"}`}>
+                  <span className={`font-bold ${row.v.startsWith("-") ? "text-success" : "text-destructive"}`}>
                     {row.v}
                   </span>
                 </motion.div>
