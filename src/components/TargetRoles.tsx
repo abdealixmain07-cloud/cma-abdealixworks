@@ -5,8 +5,9 @@ const roles = [
   "Cost Accountant",
   "Financial Analyst",
   "FP&A Analyst",
-  "MIS / Reporting Analyst",
-  "Remote Finance & Reporting",
+  "Cost Controller",
+  "Financial Performance Analyst",
+  "Finance & Reporting",
 ];
 
 const TargetRoles = () => (

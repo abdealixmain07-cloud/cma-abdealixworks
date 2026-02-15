@@ -71,8 +71,11 @@ const Hero = () => (
 
           <p className="text-lg md:text-xl mt-4 mb-4 h-8"><TypingAnimation /></p>
 
-          <p className="text-muted-foreground mb-8 text-sm leading-relaxed border-l-2 border-primary pl-4 italic max-w-lg">
-            Transforming financial data into actionable insights — FP&A, cost analytics & Power BI for US, UK & Canada organizations.
+          <p className="text-muted-foreground mb-4 text-sm leading-relaxed border-l-2 border-primary pl-4 max-w-lg">
+            I help organizations improve profitability by analyzing cost structures, identifying financial inefficiencies, and building structured reporting systems that support better strategic and operational decisions.
+          </p>
+          <p className="text-muted-foreground mb-8 text-sm leading-relaxed border-l-2 border-primary/40 pl-4 max-w-lg">
+            With experience supporting ₹100Cr+ manufacturing businesses and international companies, I specialize in cost analysis, variance reporting, budgeting, and financial performance monitoring.
           </p>
 
           <div className="flex flex-wrap gap-3">
