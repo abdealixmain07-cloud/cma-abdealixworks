@@ -8,6 +8,7 @@ import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Portfolio from "@/components/Portfolio";
 import TargetRoles from "@/components/TargetRoles";
+import CostAnalysisApproach from "@/components/CostAnalysisApproach";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -24,6 +25,7 @@ const Index = () => {
       <Skills />
       <Portfolio />
       <TargetRoles />
+      <CostAnalysisApproach />
       <Contact />
       <Footer />
     </div>

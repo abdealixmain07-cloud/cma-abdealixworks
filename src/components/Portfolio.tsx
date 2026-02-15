@@ -6,26 +6,26 @@ import projectKPI from "@/assets/project-kpi-tracking.jpg";
 
 const projects = [
   {
+    img: projectAnalysis,
+    title: "Manufacturing Cost Structure Analysis",
+    desc: "Developed structured cost analysis improving cost visibility and financial evaluation for manufacturing operations.",
+    tags: ["Cost Analysis", "Manufacturing"],
+  },
+  {
     img: projectDashboard,
-    title: "Cost & Revenue Dashboard",
-    desc: "Excel-based consolidated dashboard tracking revenue, COGS, and gross margin for multi-entity SaaS startups using Power Query.",
-    tags: ["Excel", "Power Query", "SaaS"],
+    title: "Financial Performance Dashboard Development",
+    desc: "Built automated dashboard supporting financial monitoring and performance analysis.",
+    tags: ["Dashboard", "Power BI"],
   },
   {
     img: projectMIS,
-    title: "MIS & Variance Reporting",
-    desc: "Plan vs Actual variance analysis with budget tracking and rolling forecast templates for CFO-level reporting.",
-    tags: ["MIS", "Variance", "Budgeting"],
-  },
-  {
-    img: projectAnalysis,
-    title: "Raw Material Cost Analysis",
-    desc: "Cost models for ₹100Cr+ chemical manufacturing — department-wise material usage with monthly variance reports.",
-    tags: ["Cost Audit", "Manufacturing"],
+    title: "Cost Variance Analysis Framework",
+    desc: "Performed structured variance analysis supporting cost control and performance assessment.",
+    tags: ["Variance", "Cost Control"],
   },
   {
     img: projectKPI,
-    title: "KPI Performance Tracker",
+    title: "Financial KPI Reporting System",
     desc: "EBITDA, Burn Rate, Runway & Gross Margin tracking with automated formulas and executive summaries.",
     tags: ["KPI", "EBITDA", "Metrics"],
   },

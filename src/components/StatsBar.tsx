@@ -16,10 +16,10 @@ const AnimatedNumber = ({ target, prefix = "", suffix = "" }: { target: number; 
 };
 
 const stats = [
-  { value: 12, prefix: "", suffix: "+", label: "Cost Audits", sub: "Completed" },
-  { value: 70, prefix: "", suffix: "+", label: "GST Clients", sub: "100% On-Time" },
-  { value: 100, prefix: "₹", suffix: "Cr+", label: "Financial Data", sub: "Analyzed" },
-  { value: 30, prefix: "", suffix: "+", label: "Statutory Audits", sub: "Conducted" },
+  { value: 12, prefix: "", suffix: "+", label: "Assisted Cost Audit", sub: "Engagements" },
+  { value: 70, prefix: "", suffix: "+", label: "Business Entities", sub: "Supported for GST" },
+  { value: 100, prefix: "₹", suffix: "Cr+", label: "Manufacturing Cost", sub: "Analysis Exposure" },
+  { value: 30, prefix: "", suffix: "+", label: "Financial Reports &", sub: "Conducted Statutory Audits" },
 ];
 
 const StatsBar = () => (
