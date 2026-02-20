@@ -1,72 +1,65 @@
 import { motion } from "framer-motion";
-import { Calculator, BarChart3, LayoutDashboard, BookOpen } from "lucide-react";
+import { TrendingDown, BarChart3, FileText, TrendingUp, CircleDollarSign, Settings } from "lucide-react";
 
-const services = [
+const capabilities = [
   {
-    icon: Calculator,
-    title: "Cost Accounting & Audit",
-    desc: "Cost allocation, BOM variance analysis, and cost audit compliance for manufacturing sectors.",
-    highlight: true,
+    icon: TrendingDown,
+    title: "Cost Optimization",
+    desc: "Structured cost reviews and variance analysis to prevent margin leakage.",
   },
   {
     icon: BarChart3,
-    title: "FP&A & Budgeting",
-    desc: "Budget variance, rolling forecasts, and KPI dashboards — EBITDA, Gross Margin, Burn Rate.",
+    title: "Budget Monitoring & Control",
+    desc: "Monthly actual vs budget tracking with early deviation detection.",
   },
   {
-    icon: LayoutDashboard,
-    title: "Power BI & Excel Reporting",
-    desc: "Automated dashboards and multi-entity consolidation using Power BI and Power Query.",
+    icon: FileText,
+    title: "Financial Reporting",
+    desc: "Management-focused reporting aligned with compliance and clarity.",
   },
   {
-    icon: BookOpen,
-    title: "Bookkeeping & Compliance",
-    desc: "Month-end close, GST/tax filing, bank reconciliation, and AP management.",
+    icon: TrendingUp,
+    title: "Revenue & Performance Analysis",
+    desc: "Margin trends, unit economics, and revenue mix insights.",
+  },
+  {
+    icon: CircleDollarSign,
+    title: "Working Capital Efficiency",
+    desc: "Cash cycle discipline and spend optimization.",
+  },
+  {
+    icon: Settings,
+    title: "Process Efficiency",
+    desc: "Improving reporting workflows and reducing operational friction.",
   },
 ];
 
 const Services = () => (
-  <section id="services" className="py-20">
+  <section id="services" className="py-28 section-alt">
     <div className="container mx-auto px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-12"
+        className="mb-14"
       >
-        <span className="text-xs font-semibold tracking-widest uppercase golden-text">Services</span>
-        <h2 className="text-3xl md:text-4xl font-extrabold mt-2">What I Do</h2>
+        <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4">Capabilities</p>
+        <h2 className="text-3xl md:text-4xl">Strategic Finance Capabilities</h2>
       </motion.div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
-        {services.map((s, i) => (
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
+        {capabilities.map((c, i) => (
           <motion.div
-            key={s.title}
-            initial={{ opacity: 0, y: 30 }}
+            key={c.title}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            whileHover={{ y: -6 }}
-            className={`relative rounded-2xl p-6 transition-all duration-300 group text-center ${
-              s.highlight
-                ? "bg-primary text-primary-foreground shadow-xl shadow-primary/30 border-2 border-primary"
-                : "bg-card border border-border hover:shadow-xl hover:border-primary/30"
-            }`}
+            transition={{ delay: i * 0.06 }}
+            className="border border-border rounded-lg p-8 bg-card hover:border-foreground/20 transition-colors"
           >
-            {s.highlight && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-widest bg-primary-foreground text-primary px-3 py-0.5 rounded-full shadow">
-                Core
-              </div>
-            )}
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-colors ${
-              s.highlight ? "bg-primary-foreground/15" : "bg-primary/10 group-hover:bg-primary/20"
-            }`}>
-              <s.icon className={`w-7 h-7 ${s.highlight ? "text-primary-foreground" : "golden-text"}`} />
-            </div>
-            <h3 className="font-bold mb-2">{s.title}</h3>
-            <p className={`text-sm leading-relaxed ${s.highlight ? "text-primary-foreground/85" : "text-muted-foreground"}`}>
-              {s.desc}
-            </p>
+            <c.icon className="w-5 h-5 text-muted-foreground mb-5" strokeWidth={1.5} />
+            <h3 className="text-lg mb-2">{c.title}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
           </motion.div>
         ))}
       </div>
