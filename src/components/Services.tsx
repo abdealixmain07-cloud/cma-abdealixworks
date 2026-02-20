@@ -41,6 +41,7 @@ const Services = () => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
         className="mb-14"
       >
         <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4">Capabilities</p>
@@ -51,11 +52,11 @@ const Services = () => (
         {capabilities.map((c, i) => (
           <motion.div
             key={c.title}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.06 }}
-            className="border border-border rounded-lg p-8 bg-card hover:border-foreground/20 transition-colors"
+            transition={{ duration: 0.6, delay: i * 0.1 }}
+            className="border border-border rounded-lg p-8 bg-card transition-all duration-300 hover:shadow-md hover:shadow-foreground/5 hover:border-foreground/15 hover:-translate-y-0.5"
           >
             <c.icon className="w-5 h-5 text-muted-foreground mb-5" strokeWidth={1.5} />
             <h3 className="text-lg mb-2">{c.title}</h3>

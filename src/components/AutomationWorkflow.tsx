@@ -15,6 +15,24 @@ const impacts = [
   "Faster decision cycles",
 ];
 
+const workflowSteps = [
+  { step: "01", label: "Data Collection", detail: "Invoice & transaction capture" },
+  { step: "02", label: "AI Processing", detail: "Automated categorization & validation" },
+  { step: "03", label: "Review & Audit", detail: "Exception handling & quality check" },
+  { step: "04", label: "Reporting", detail: "Dashboard generation & distribution" },
+];
+
+/* Animated glowing dot that travels down the pipeline */
+const PipelineDot = ({ delay }: { delay: number }) => (
+  <motion.div
+    className="absolute left-[18px] w-1.5 h-1.5 rounded-full bg-accent/60"
+    initial={{ top: 0, opacity: 0 }}
+    animate={{ top: ["0%", "100%"], opacity: [0, 0.8, 0.8, 0] }}
+    transition={{ duration: 6, delay, repeat: Infinity, ease: "easeInOut" }}
+    style={{ filter: "blur(1px)" }}
+  />
+);
+
 const AutomationWorkflow = () => (
   <section id="automation" className="py-28">
     <div className="container mx-auto px-6">
@@ -24,6 +42,7 @@ const AutomationWorkflow = () => (
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
           <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4">Workflow</p>
           <h2 className="text-3xl md:text-4xl mb-8">Automation & Modern Workflow</h2>
@@ -39,7 +58,7 @@ const AutomationWorkflow = () => (
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
                 className="flex items-center gap-3"
               >
                 <app.icon className="w-4 h-4 text-muted-foreground flex-shrink-0" strokeWidth={1.5} />
@@ -51,7 +70,7 @@ const AutomationWorkflow = () => (
           <p className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground mb-3">Impact</p>
           <div className="flex flex-wrap gap-2">
             {impacts.map((item) => (
-              <span key={item} className="text-xs border border-border rounded-md px-3 py-1.5 text-muted-foreground">
+              <span key={item} className="text-xs border border-border rounded-md px-3 py-1.5 text-muted-foreground transition-colors duration-300 hover:border-foreground/20">
                 {item}
               </span>
             ))}
@@ -67,7 +86,7 @@ const AutomationWorkflow = () => (
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
           className="hidden lg:block"
         >
           <div className="border border-border rounded-lg p-8 bg-card">
@@ -76,27 +95,31 @@ const AutomationWorkflow = () => (
               <span className="text-xs font-medium tracking-wider uppercase text-muted-foreground">Workflow Pipeline</span>
             </div>
 
-            <div className="space-y-0">
-              {[
-                { step: "01", label: "Data Collection", detail: "Invoice & transaction capture" },
-                { step: "02", label: "AI Processing", detail: "Automated categorization & validation" },
-                { step: "03", label: "Review & Audit", detail: "Exception handling & quality check" },
-                { step: "04", label: "Reporting", detail: "Dashboard generation & distribution" },
-              ].map((item, i) => (
+            <div className="space-y-0 relative">
+              {/* Animated dots flowing down the pipeline */}
+              <PipelineDot delay={0} />
+              <PipelineDot delay={2} />
+              <PipelineDot delay={4} />
+
+              {workflowSteps.map((item, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
+                  transition={{ delay: 0.3 + i * 0.12, duration: 0.5 }}
                   className="relative pl-12 pb-8 last:pb-0"
                 >
                   {i < 3 && (
                     <div className="absolute left-[18px] top-8 w-px h-full bg-border" />
                   )}
-                  <div className="absolute left-0 top-0 w-9 h-9 rounded-md border border-border bg-secondary flex items-center justify-center">
+                  <motion.div
+                    className="absolute left-0 top-0 w-9 h-9 rounded-md border border-border bg-secondary flex items-center justify-center"
+                    whileHover={{ borderColor: "hsl(var(--accent))" }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <span className="text-xs font-semibold text-muted-foreground">{item.step}</span>
-                  </div>
+                  </motion.div>
                   <p className="text-sm font-medium">{item.label}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">{item.detail}</p>
                 </motion.div>
