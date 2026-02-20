@@ -35,6 +35,7 @@ const Portfolio = () => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
         className="mb-14"
       >
         <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4">Work</p>
@@ -45,15 +46,15 @@ const Portfolio = () => (
         {projects.map((p, i) => (
           <motion.div
             key={p.title}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className="bg-card border border-border rounded-lg p-8 hover:border-foreground/20 transition-colors group"
+            transition={{ duration: 0.6, delay: i * 0.1 }}
+            className="bg-card border border-border rounded-lg p-8 group transition-all duration-250 hover:scale-[1.02] hover:shadow-lg hover:shadow-foreground/5 hover:border-foreground/15"
           >
             <div className="flex items-start justify-between mb-4">
               <h3 className="text-lg">{p.title}</h3>
-              <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+              <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
 
             <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{p.impact}</p>

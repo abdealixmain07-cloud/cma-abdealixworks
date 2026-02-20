@@ -56,9 +56,66 @@ const AnimatedCounter = ({ target, prefix = "", suffix = "" }: { target: number;
   return <span>{display}</span>;
 };
 
+/* Subtle animated financial background — thin lines at 8% opacity */
+const FinancialBackground = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    {/* Animated line chart */}
+    <svg className="absolute top-1/4 left-0 w-full h-32 opacity-[0.07]" viewBox="0 0 400 100" fill="none" preserveAspectRatio="none">
+      <motion.polyline
+        points="0,80 50,65 100,72 150,45 200,55 250,30 300,40 350,20 400,35"
+        stroke="hsl(var(--foreground))"
+        strokeWidth="1.5"
+        fill="none"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 3, ease: "easeInOut" }}
+      />
+      <motion.polyline
+        points="0,80 50,65 100,72 150,45 200,55 250,30 300,40 350,20 400,35"
+        stroke="hsl(var(--foreground))"
+        strokeWidth="1.5"
+        fill="none"
+        initial={{ pathLength: 1, opacity: 0.7 }}
+        animate={{ pathLength: 1, opacity: [0.7, 0.3, 0.7] }}
+        transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
+      />
+    </svg>
+
+    {/* Animated bar chart */}
+    <svg className="absolute bottom-16 right-8 w-48 h-28 opacity-[0.06]" viewBox="0 0 160 80">
+      {[
+        { x: 10, h: 40 },
+        { x: 35, h: 55 },
+        { x: 60, h: 35 },
+        { x: 85, h: 65 },
+        { x: 110, h: 50 },
+        { x: 135, h: 72 },
+      ].map((bar, i) => (
+        <motion.rect
+          key={i}
+          x={bar.x}
+          width="14"
+          rx="2"
+          fill="hsl(var(--foreground))"
+          initial={{ y: 80, height: 0 }}
+          animate={{ y: 80 - bar.h, height: bar.h }}
+          transition={{ duration: 1.5, delay: 0.3 + i * 0.15, ease: "easeOut" }}
+        />
+      ))}
+    </svg>
+
+    {/* Floating grid dots */}
+    <div className="absolute inset-0 opacity-[0.03]" style={{
+      backgroundImage: "radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)",
+      backgroundSize: "32px 32px",
+    }} />
+  </div>
+);
+
 const Hero = () => (
-  <section id="home" className="min-h-screen flex items-center py-32">
-    <div className="container mx-auto px-6">
+  <section id="home" className="min-h-screen flex items-center py-32 relative">
+    <FinancialBackground />
+    <div className="container mx-auto px-6 relative z-10">
       <div className="grid lg:grid-cols-5 gap-16 items-center">
         {/* Left 60% */}
         <motion.div
@@ -86,14 +143,14 @@ const Hero = () => (
           <div className="flex flex-wrap gap-4">
             <a
               href="#portfolio"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-0.5"
             >
               View Selected Work <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="/Abdeali_Gangardiwala_Resume.pdf"
               download
-              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg text-sm font-medium hover:bg-secondary transition-colors"
+              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-secondary hover:border-foreground/20"
             >
               <Download className="w-4 h-4" /> Download Resume
             </a>
@@ -101,7 +158,7 @@ const Hero = () => (
               href="https://www.linkedin.com/in/abdeali-main"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg text-sm font-medium hover:bg-secondary transition-colors"
+              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-secondary hover:border-foreground/20"
             >
               <Linkedin className="w-4 h-4" /> Connect Professionally
             </a>
