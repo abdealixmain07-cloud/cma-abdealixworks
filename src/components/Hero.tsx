@@ -56,101 +56,87 @@ const AnimatedCounter = ({ target, prefix = "", suffix = "" }: { target: number;
   return <span>{display}</span>;
 };
 
-/* Subtle animated financial background — thin lines at 8% opacity */
-const FinancialBackground = () => (
+/* Subtle parallax grid background */
+const HeroBackground = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    {/* Animated line chart */}
-    <svg className="absolute top-1/4 left-0 w-full h-32 opacity-[0.07]" viewBox="0 0 400 100" fill="none" preserveAspectRatio="none">
+    {/* Radial glow behind portrait area */}
+    <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.06]"
+      style={{ background: "radial-gradient(circle, hsl(var(--accent)), transparent 70%)" }}
+    />
+    {/* Floating grid dots with parallax feel */}
+    <motion.div
+      className="absolute inset-0 opacity-[0.03]"
+      animate={{ y: [-5, 5, -5] }}
+      transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
+      style={{
+        backgroundImage: "radial-gradient(circle, hsl(var(--foreground)) 0.5px, transparent 0.5px)",
+        backgroundSize: "40px 40px",
+      }}
+    />
+    {/* Thin animated line chart */}
+    <svg className="absolute top-1/3 left-0 w-full h-24 opacity-[0.04]" viewBox="0 0 400 80" fill="none" preserveAspectRatio="none">
       <motion.polyline
-        points="0,80 50,65 100,72 150,45 200,55 250,30 300,40 350,20 400,35"
+        points="0,60 40,52 80,58 120,35 160,42 200,28 240,35 280,18 320,25 360,12 400,20"
         stroke="hsl(var(--foreground))"
-        strokeWidth="1.5"
+        strokeWidth="1"
         fill="none"
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         transition={{ duration: 3, ease: "easeInOut" }}
       />
-      <motion.polyline
-        points="0,80 50,65 100,72 150,45 200,55 250,30 300,40 350,20 400,35"
-        stroke="hsl(var(--foreground))"
-        strokeWidth="1.5"
-        fill="none"
-        initial={{ pathLength: 1, opacity: 0.7 }}
-        animate={{ pathLength: 1, opacity: [0.7, 0.3, 0.7] }}
-        transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
-      />
     </svg>
-
-    {/* Animated bar chart */}
-    <svg className="absolute bottom-16 right-8 w-48 h-28 opacity-[0.06]" viewBox="0 0 160 80">
-      {[
-        { x: 10, h: 40 },
-        { x: 35, h: 55 },
-        { x: 60, h: 35 },
-        { x: 85, h: 65 },
-        { x: 110, h: 50 },
-        { x: 135, h: 72 },
-      ].map((bar, i) => (
-        <motion.rect
-          key={i}
-          x={bar.x}
-          width="14"
-          rx="2"
-          fill="hsl(var(--foreground))"
-          initial={{ y: 80, height: 0 }}
-          animate={{ y: 80 - bar.h, height: bar.h }}
-          transition={{ duration: 1.5, delay: 0.3 + i * 0.15, ease: "easeOut" }}
-        />
-      ))}
-    </svg>
-
-    {/* Floating grid dots */}
-    <div className="absolute inset-0 opacity-[0.03]" style={{
-      backgroundImage: "radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)",
-      backgroundSize: "32px 32px",
-    }} />
   </div>
 );
 
+const staggerChildren = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } },
+};
+
 const Hero = () => (
-  <section id="home" className="min-h-screen flex items-center py-32 relative">
-    <FinancialBackground />
+  <section id="home" className="min-h-screen flex items-center pt-24 pb-32 relative">
+    <HeroBackground />
     <div className="container mx-auto px-6 relative z-10">
-      <div className="grid lg:grid-cols-5 gap-16 items-center">
+      <div className="grid lg:grid-cols-5 gap-20 items-center">
         {/* Left 60% */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={staggerChildren}
+          initial="hidden"
+          animate="visible"
           className="lg:col-span-3"
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl leading-[1.15] mb-4 tracking-tight">
+          <motion.h1 variants={fadeUp} className="text-5xl md:text-6xl lg:text-[64px] leading-[1.08] mb-5 tracking-tight">
             Abdeali Gangardiwala
-          </h1>
+          </motion.h1>
 
-          <p className="text-xl md:text-2xl mb-6 h-9">
+          <motion.p variants={fadeUp} className="text-xl md:text-2xl mb-6 h-9">
             <TypingAnimation />
-          </p>
+          </motion.p>
 
-          <p className="text-muted-foreground leading-relaxed max-w-xl mb-4">
+          <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed max-w-xl mb-4 text-base">
             Driving revenue clarity, cost discipline, and scalable financial growth through structured reporting and performance analytics.
-          </p>
+          </motion.p>
 
-          <p className="text-sm text-muted-foreground max-w-xl mb-10">
+          <motion.p variants={fadeUp} className="text-sm text-muted-foreground max-w-xl mb-12">
             Focused on cost optimization, budgeting rigor, and sustainable expansion.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-wrap gap-4">
+          <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
             <a
               href="#portfolio"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-card border border-accent/30 text-foreground px-7 py-3.5 rounded-md text-sm font-medium transition-all duration-300 hover:border-accent/60 hover:shadow-[0_0_20px_hsl(var(--accent)/0.1)] hover:-translate-y-[2px]"
             >
               View Selected Work <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="/Abdeali_Gangardiwala_Resume.pdf"
               download
-              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-secondary hover:border-foreground/20"
+              className="inline-flex items-center gap-2 border border-border text-foreground px-7 py-3.5 rounded-md text-sm font-medium transition-all duration-300 hover:border-muted-foreground/40 hover:-translate-y-[2px]"
             >
               <Download className="w-4 h-4" /> Download Resume
             </a>
@@ -158,22 +144,26 @@ const Hero = () => (
               href="https://www.linkedin.com/in/abdeali-main"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-secondary hover:border-foreground/20"
+              className="inline-flex items-center gap-2 border border-border text-foreground px-7 py-3.5 rounded-md text-sm font-medium transition-all duration-300 hover:border-muted-foreground/40 hover:-translate-y-[2px]"
             >
               <Linkedin className="w-4 h-4" /> Connect Professionally
             </a>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Right 40% */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
           className="lg:col-span-2 flex justify-center"
         >
           <div className="relative">
-            <div className="w-64 h-72 md:w-72 md:h-80 rounded-lg overflow-hidden border border-border shadow-sm">
+            {/* Subtle glow behind portrait */}
+            <div className="absolute inset-0 -m-8 rounded-md opacity-20"
+              style={{ background: "radial-gradient(circle, hsl(var(--accent) / 0.15), transparent 70%)" }}
+            />
+            <div className="w-64 h-72 md:w-72 md:h-80 rounded-md overflow-hidden border border-border shadow-2xl shadow-black/20">
               <img
                 src={profilePhoto}
                 alt="Abdeali Gangardiwala"
@@ -181,15 +171,15 @@ const Hero = () => (
               />
             </div>
 
-            {/* Floating KPI cards */}
+            {/* Refined rectangular KPI badges */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
-              className="absolute -left-16 top-8 bg-card border border-border rounded-lg px-4 py-3 shadow-sm hidden md:block"
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="absolute -left-20 top-8 bg-card border border-accent/20 rounded-md px-5 py-3 hidden md:block"
             >
-              <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">Cost Audits</p>
-              <p className="text-lg font-semibold">
+              <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] font-medium">Cost Audits</p>
+              <p className="text-lg font-medium mt-0.5">
                 <AnimatedCounter target={12} suffix="+" />
               </p>
             </motion.div>
@@ -197,11 +187,11 @@ const Hero = () => (
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8 }}
-              className="absolute -right-14 bottom-12 bg-card border border-border rounded-lg px-4 py-3 shadow-sm hidden md:block"
+              transition={{ delay: 1, duration: 0.5 }}
+              className="absolute -right-16 bottom-14 bg-card border border-accent/20 rounded-md px-5 py-3 hidden md:block"
             >
-              <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">Exposure</p>
-              <p className="text-lg font-semibold">
+              <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] font-medium">Exposure</p>
+              <p className="text-lg font-medium mt-0.5">
                 <AnimatedCounter target={100} prefix="₹" suffix="Cr+" />
               </p>
             </motion.div>
@@ -209,11 +199,11 @@ const Hero = () => (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 }}
-              className="absolute -bottom-6 left-4 bg-card border border-border rounded-lg px-4 py-3 shadow-sm hidden md:block"
+              transition={{ delay: 1.2, duration: 0.5 }}
+              className="absolute -bottom-8 left-2 bg-card border border-accent/20 rounded-md px-5 py-3 hidden md:block"
             >
-              <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">CMA Qualified</p>
-              <p className="text-xs font-medium text-accent">ICMAI 2025</p>
+              <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] font-medium">CMA Qualified</p>
+              <p className="text-xs font-medium text-accent mt-0.5">ICMAI 2025</p>
             </motion.div>
           </div>
         </motion.div>

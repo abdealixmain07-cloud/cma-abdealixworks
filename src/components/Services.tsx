@@ -35,20 +35,20 @@ const capabilities = [
 ];
 
 const Services = () => (
-  <section id="services" className="py-28 section-alt">
+  <section id="services" className="py-32 section-alt section-divider">
     <div className="container mx-auto px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="mb-14"
+        className="mb-16"
       >
-        <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4">Capabilities</p>
-        <h2 className="text-3xl md:text-4xl">Strategic Finance Capabilities</h2>
+        <p className="text-xs font-medium tracking-[0.25em] uppercase text-muted-foreground mb-6">Capabilities</p>
+        <h2 className="text-4xl md:text-[44px]">Strategic Finance Capabilities</h2>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl">
         {capabilities.map((c, i) => (
           <motion.div
             key={c.title}
@@ -56,10 +56,10 @@ const Services = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="border border-border rounded-lg p-8 bg-card transition-all duration-300 hover:shadow-md hover:shadow-foreground/5 hover:border-foreground/15 hover:-translate-y-0.5"
+            className="border border-border rounded-md p-8 bg-card transition-all duration-200 ease-in-out hover:shadow-[0_8px_30px_-12px_hsl(var(--accent)/0.15)] hover:border-accent/30 hover:-translate-y-1 group"
           >
-            <c.icon className="w-5 h-5 text-muted-foreground mb-5" strokeWidth={1.5} />
-            <h3 className="text-lg mb-2">{c.title}</h3>
+            <c.icon className="w-5 h-5 text-accent/60 mb-6 group-hover:text-accent transition-colors duration-200" strokeWidth={1.5} />
+            <h3 className="text-lg mb-3 tracking-normal" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500 }}>{c.title}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
           </motion.div>
         ))}

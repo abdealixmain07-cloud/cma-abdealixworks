@@ -20,34 +20,34 @@ const columns = [
 ];
 
 const Skills = () => (
-  <section id="skills" className="py-28">
+  <section id="skills" className="py-32 section-divider">
     <div className="container mx-auto px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-14"
+        className="mb-16"
       >
-        <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4">Expertise</p>
-        <h2 className="text-3xl md:text-4xl">Skills</h2>
+        <p className="text-xs font-medium tracking-[0.25em] uppercase text-muted-foreground mb-6">Expertise</p>
+        <h2 className="text-4xl md:text-[44px]">Skills</h2>
       </motion.div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 max-w-5xl">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 max-w-5xl">
         {columns.map((col, ci) => (
           <motion.div
             key={col.title}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: ci * 0.08 }}
+            transition={{ delay: ci * 0.08, duration: 0.5 }}
           >
-            <h3 className="text-sm font-semibold mb-5 tracking-wide" style={{ fontFamily: "'Inter', sans-serif" }}>
+            <h3 className="text-sm font-medium mb-6 tracking-wide text-foreground" style={{ fontFamily: "'Inter', sans-serif" }}>
               {col.title}
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {col.items.map((item) => (
-                <li key={item} className="text-sm text-muted-foreground flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-muted-foreground/40 flex-shrink-0" />
+                <li key={item} className="text-sm text-muted-foreground flex items-center gap-3">
+                  <span className="w-1 h-1 rounded-full bg-accent/50 flex-shrink-0" />
                   {item}
                 </li>
               ))}
@@ -60,10 +60,10 @@ const Skills = () => (
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="mt-14 flex flex-wrap gap-3 max-w-5xl"
+        className="mt-16 flex flex-wrap gap-4 max-w-5xl"
       >
-        <span className="text-xs font-medium border border-border rounded-md px-4 py-2">CMA (Cost and Management Accountant)</span>
-        <span className="text-xs font-medium border border-border rounded-md px-4 py-2">Financial Analyst</span>
+        <span className="text-xs font-medium border border-accent/25 text-accent rounded-md px-5 py-2.5">CMA (Cost and Management Accountant)</span>
+        <span className="text-xs font-medium border border-accent/25 text-accent rounded-md px-5 py-2.5">Financial Analyst</span>
       </motion.div>
     </div>
   </section>

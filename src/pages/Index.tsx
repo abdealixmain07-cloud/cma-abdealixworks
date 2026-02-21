@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background grain-overlay">
       <Navbar />
       <Hero />
       <About />
@@ -20,6 +20,15 @@ const Index = () => {
       <Skills />
       <Contact />
       <Footer />
+      {/* Mobile sticky CTA */}
+      <div className="mobile-sticky-cta md:hidden">
+        <a
+          href="#contact"
+          className="block w-full text-center bg-card border border-accent/40 text-foreground py-3 rounded-md text-sm font-medium transition-all duration-200 hover:border-accent"
+        >
+          Contact
+        </a>
+      </div>
     </div>
   );
 };
