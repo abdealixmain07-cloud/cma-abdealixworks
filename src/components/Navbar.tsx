@@ -16,13 +16,21 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("#home");
   const [dark, setDark] = useState(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") === "dark";
+      const stored = localStorage.getItem("theme");
+      // Default to dark (institutional look)
+      return stored ? stored === "dark" : true;
     }
-    return false;
+    return true;
   });
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark);
+    if (dark) {
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+    }
     localStorage.setItem("theme", dark ? "dark" : "light");
   }, [dark]);
 
@@ -53,28 +61,28 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-md border-b border-border" : "bg-transparent"
+        scrolled ? "bg-background/90 backdrop-blur-xl border-b border-border" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-6 py-5 flex items-center justify-between">
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, "#home")}
-          className="text-lg font-semibold tracking-tight"
-          style={{ fontFamily: "'DM Serif Display', serif" }}
+          className="text-lg font-medium tracking-tight"
+          style={{ fontFamily: "'Playfair Display', serif" }}
         >
           Abdeali<span className="text-accent">.</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className={`text-sm transition-colors ${
+              className={`text-[13px] tracking-wide transition-colors duration-200 relative ${
                 activeSection === link.href
-                  ? "text-foreground"
+                  ? "text-foreground nav-active-indicator"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -83,8 +91,8 @@ const Navbar = () => {
           ))}
           <button
             onClick={() => setDark(!dark)}
-            className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:bg-secondary transition-colors"
-            aria-label="Toggle dark mode"
+            className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:border-accent/30 transition-all duration-200"
+            aria-label="Toggle theme"
           >
             {dark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
           </button>
@@ -93,8 +101,8 @@ const Navbar = () => {
         <div className="md:hidden flex items-center gap-3">
           <button
             onClick={() => setDark(!dark)}
-            className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:bg-secondary transition-colors"
-            aria-label="Toggle dark mode"
+            className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:border-accent/30 transition-all duration-200"
+            aria-label="Toggle theme"
           >
             {dark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
           </button>
@@ -105,7 +113,7 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-background border-t border-border px-6 py-4 space-y-3">
+        <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-border px-6 py-5 space-y-4">
           {navLinks.map((link) => (
             <a
               key={link.href}
