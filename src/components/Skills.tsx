@@ -3,15 +3,15 @@ import { motion } from "framer-motion";
 const columns = [
   {
     title: "Finance & Accounting",
-    items: ["IND AS", "Budgeting & Cost Control", "Financial Reporting", "Working Capital Monitoring", "Variance Analysis"],
+    items: ["IND AS", "Budgeting & Cost Control", "Financial Reporting", "Working Capital Monitoring", "Variance Analysis", "Bookkeeping", "Ledger Management"],
   },
   {
-    title: "Financial Modelling & Valuation",
-    items: ["3-Statement Modelling", "DCF Valuation", "Scenario Analysis", "Forecasting"],
+    title: "Accounting Software",
+    items: ["QuickBooks", "Tally ERP", "Xero", "Zoho Books", "SAP"],
   },
   {
     title: "Reporting & Analytics",
-    items: ["Excel (Advanced)", "Power BI", "Dashboard Design", "Management Reporting"],
+    items: ["Excel (Advanced)", "Power BI", "Dashboard Design", "Management Reporting", "Balance Sheet & P&L"],
   },
   {
     title: "Automation & Tools",
