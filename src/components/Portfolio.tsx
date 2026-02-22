@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, X } from "lucide-react";
 import { useState } from "react";
-import projectPayroll from "@/assets/project-payroll-presentation.png";
 import projectPowerBI from "@/assets/project-powerbi-dashboard.png";
 import projectActualVsBudget from "@/assets/project-actual-vs-budget.png";
 import projectKPI from "@/assets/project-kpi-tracking.jpg";
+import projectBookkeeping from "@/assets/project-bookkeeping.jpg";
+import projectFinancialStatements from "@/assets/project-financial-statements.jpg";
 
 const projects = [
   {
@@ -22,11 +23,18 @@ const projects = [
     image: projectActualVsBudget,
   },
   {
-    title: "US Payroll Tax Presentation",
-    impact: "Improved payroll tax awareness and compliance understanding across teams.",
-    tools: "Gamma, Canva, Research & Analysis",
-    outcome: "Enabled colleagues to clearly understand US payroll tax structures, withholding obligations, and employer compliance requirements.",
-    image: projectPayroll,
+    title: "Month-to-Month Bookkeeping for International Clients",
+    impact: "Streamlined multi-currency bookkeeping across global entities.",
+    tools: "QuickBooks, Tally, Xero, Zoho Books",
+    outcome: "Accurate monthly close with reconciled ledgers across 3+ currencies, reducing close cycle by 40%.",
+    image: projectBookkeeping,
+  },
+  {
+    title: "Accurate Ledger, Balance Sheet & P&L Reporting",
+    impact: "Ensured financial statement accuracy and audit-readiness.",
+    tools: "QuickBooks, Tally, Xero, Zoho Books",
+    outcome: "Delivered clean, reconciled financial statements with 99.5% accuracy, enabling confident decision-making.",
+    image: projectFinancialStatements,
   },
   {
     title: "Power BI KPI Dashboard",

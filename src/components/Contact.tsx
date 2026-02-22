@@ -5,10 +5,23 @@ import { Mail, Phone, Linkedin, MapPin, Send } from "lucide-react";
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
+  const [submitted, setSubmitted] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const mailtoLink = `mailto:abdealixmain07@gmail.com?subject=${encodeURIComponent("Portfolio Contact from " + form.name)}&body=${encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`)}`;
-    window.location.href = mailtoLink;
+    
+    // Try multiple approaches for mailto
+    const link = document.createElement("a");
+    link.href = mailtoLink;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (
@@ -94,6 +107,11 @@ const Contact = () => {
                     placeholder="Tell me about the opportunity..."
                   />
                 </div>
+                {submitted && (
+                  <div className="text-sm text-accent text-center py-3 border border-accent/20 rounded-md bg-accent/5">
+                    ✓ If your email client didn't open, please email <a href="mailto:abdealixmain07@gmail.com" className="underline">abdealixmain07@gmail.com</a> directly.
+                  </div>
+                )}
                 <button
                   type="submit"
                   className="w-full bg-card border border-accent/40 text-foreground py-4 rounded-md text-sm font-medium transition-all duration-200 hover:border-accent hover:shadow-[0_0_20px_hsl(var(--accent)/0.15)] flex items-center justify-center gap-2"
