@@ -1,31 +1,39 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, X } from "lucide-react";
 import { useState } from "react";
+import projectPayroll from "@/assets/project-payroll-presentation.png";
+import projectPowerBI from "@/assets/project-powerbi-dashboard.png";
+import projectActualVsBudget from "@/assets/project-actual-vs-budget.png";
+import projectKPI from "@/assets/project-kpi-tracking.jpg";
 
 const projects = [
   {
-    title: "KPI & Dashboard Reporting",
+    title: "KPI & Dashboard Reporting (Excel)",
     impact: "Improved leadership visibility across revenue and cost metrics.",
     tools: "Advanced Excel, Power Query",
     outcome: "Centralized performance tracking enabling faster reviews.",
+    image: projectKPI,
   },
   {
     title: "Monthly Actual vs Budget Model",
     impact: "Strengthened cost discipline and spend visibility.",
     tools: "Excel financial modelling",
     outcome: "Early variance detection reducing unnecessary overspend.",
+    image: projectActualVsBudget,
   },
   {
-    title: "Strategic Finance Presentation",
-    impact: "Improved financial awareness across teams.",
-    tools: "Financial modelling, Gamma, Canva",
-    outcome: "Clear articulation of cost behavior and profitability drivers.",
+    title: "US Payroll Tax Presentation",
+    impact: "Improved payroll tax awareness and compliance understanding across teams.",
+    tools: "Gamma, Canva, Research & Analysis",
+    outcome: "Enabled colleagues to clearly understand US payroll tax structures, withholding obligations, and employer compliance requirements.",
+    image: projectPayroll,
   },
   {
     title: "Power BI KPI Dashboard",
     impact: "Executive-level performance visualization.",
     tools: "Power BI, Data modelling",
     outcome: "Real-time insights into revenue, margin, and expense trends.",
+    image: projectPowerBI,
   },
 ];
 
@@ -128,9 +136,13 @@ const Portfolio = () => {
                   </div>
                 </div>
 
-                {/* Placeholder for project image — user will upload */}
-                <div className="mt-10 border border-border rounded-md p-8 bg-secondary flex items-center justify-center min-h-[200px]">
-                  <p className="text-xs text-muted-foreground tracking-wider uppercase">Dashboard Image — Upload to Replace</p>
+                {/* Project image */}
+                <div className="mt-10 border border-border rounded-md overflow-hidden bg-secondary">
+                  <img
+                    src={projects[activeProject].image}
+                    alt={projects[activeProject].title}
+                    className="w-full h-auto object-contain"
+                  />
                 </div>
               </div>
             </motion.div>
