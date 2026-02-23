@@ -29,8 +29,8 @@ const capabilities = [
   },
   {
     icon: Settings,
-    title: "Process Efficiency",
-    desc: "Improving reporting workflows and reducing operational friction.",
+    title: "Investor-Ready Presentations",
+    desc: "Beautiful PowerPoint presentations with clear financial narratives for stakeholders and investors.",
   },
 ];
 

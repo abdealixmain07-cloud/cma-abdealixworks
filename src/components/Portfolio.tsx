@@ -5,7 +5,6 @@ import projectPowerBI from "@/assets/project-powerbi-dashboard.png";
 import projectActualVsBudget from "@/assets/project-actual-vs-budget.png";
 import projectKPI from "@/assets/project-kpi-tracking.jpg";
 import projectBookkeeping from "@/assets/project-bookkeeping.jpg";
-import projectFinancialStatements from "@/assets/project-financial-statements.jpg";
 
 const projects = [
   {
@@ -23,18 +22,11 @@ const projects = [
     image: projectActualVsBudget,
   },
   {
-    title: "Month-to-Month Bookkeeping for International Clients",
-    impact: "Streamlined multi-currency bookkeeping across global entities.",
+    title: "Bookkeeping, Ledger & Financial Statement Reporting",
+    impact: "End-to-end bookkeeping and financial statement accuracy for international clients.",
     tools: "QuickBooks, Tally, Xero, Zoho Books",
-    outcome: "Accurate monthly close with reconciled ledgers across 3+ currencies, reducing close cycle by 40%.",
+    outcome: "Delivered reconciled ledgers, balance sheets & P&L across 3+ currencies with 99.5% accuracy, reducing monthly close cycle by 40%.",
     image: projectBookkeeping,
-  },
-  {
-    title: "Accurate Ledger, Balance Sheet & P&L Reporting",
-    impact: "Ensured financial statement accuracy and audit-readiness.",
-    tools: "QuickBooks, Tally, Xero, Zoho Books",
-    outcome: "Delivered clean, reconciled financial statements with 99.5% accuracy, enabling confident decision-making.",
-    image: projectFinancialStatements,
   },
   {
     title: "Power BI KPI Dashboard",
