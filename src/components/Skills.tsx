@@ -7,11 +7,11 @@ const columns = [
   },
   {
     title: "Accounting Software",
-    items: ["QuickBooks", "Tally ERP", "Xero", "Zoho Books", "SAP"],
+    items: ["QuickBooks", "Tally ERP", "Xero", "Zoho Books"],
   },
   {
     title: "Reporting & Analytics",
-    items: ["Excel (Advanced)", "Power BI", "Dashboard Design", "Management Reporting", "Balance Sheet & P&L"],
+    items: ["Excel (Advanced)", "PowerPoint Presentations", "Power BI", "Dashboard Design", "Management Reporting", "Balance Sheet & P&L"],
   },
   {
     title: "Automation & Tools",
