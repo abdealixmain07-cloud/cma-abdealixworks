@@ -47,7 +47,7 @@ const Skills = () => (
             <ul className="space-y-3.5">
               {col.items.map((item) => (
                 <li key={item} className="text-sm text-muted-foreground flex items-center gap-3">
-                  <span className="w-1 h-1 rounded-full bg-accent/50 flex-shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent/40 flex-shrink-0" />
                   {item}
                 </li>
               ))}

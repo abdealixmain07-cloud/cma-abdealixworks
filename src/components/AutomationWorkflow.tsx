@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { Zap, FileCheck, Bell, ClipboardList, BarChart3 } from "lucide-react";
+import { Zap, FileCheck, Bell, ClipboardList, BarChart3, MousePointerClick } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const applications = [
@@ -23,7 +23,6 @@ const workflowSteps = [
   { step: "04", label: "Reporting", detail: "Dashboard generation & distribution" },
 ];
 
-/* Mini animated counter */
 const MiniCounter = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
   const count = useMotionValue(0);
   const rounded = useTransform(count, (v) => `${Math.round(v)}${suffix}`);
@@ -38,58 +37,67 @@ const MiniCounter = ({ target, suffix = "" }: { target: number; suffix?: string 
   return <span>{display}</span>;
 };
 
-/* Animated dashboard mockup */
 const AnimatedDashboard = () => {
   const [isAfter, setIsAfter] = useState(false);
+  const [hasClicked, setHasClicked] = useState(false);
 
   const beforeBars = [35, 42, 28, 50, 38, 45];
   const afterBars = [55, 68, 52, 72, 60, 75];
   const bars = isAfter ? afterBars : beforeBars;
 
+  const handleToggle = () => {
+    setIsAfter(!isAfter);
+    setHasClicked(true);
+  };
+
   return (
-    <div className="border border-border rounded-md p-6 bg-card">
+    <div className="border border-border rounded-lg p-6 bg-card shadow-sm">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <Zap className="w-4 h-4 text-accent" strokeWidth={1.5} />
           <span className="text-[10px] font-medium tracking-[0.15em] uppercase text-muted-foreground">Live Dashboard</span>
         </div>
-        <button
-          onClick={() => setIsAfter(!isAfter)}
-          className="text-[10px] font-medium tracking-wider uppercase px-3 py-1.5 rounded-md border border-border hover:border-accent/30 transition-all duration-200 text-muted-foreground hover:text-foreground"
-        >
-          {isAfter ? "After Automation" : "Before Automation"}
-        </button>
+        <div className="flex items-center gap-2">
+          {!hasClicked && (
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="flex items-center gap-1 text-accent"
+            >
+              <MousePointerClick className="w-3.5 h-3.5" />
+              <span className="text-[9px] font-medium tracking-wider uppercase">Click to toggle</span>
+            </motion.div>
+          )}
+          <button
+            onClick={handleToggle}
+            className="text-[10px] font-medium tracking-wider uppercase px-3 py-1.5 rounded-md border border-border hover:border-accent/50 transition-all duration-200 text-muted-foreground hover:text-foreground"
+          >
+            {isAfter ? "After Automation" : "Before Automation"}
+          </button>
+        </div>
       </div>
 
-      {/* KPI row */}
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="border border-border rounded-md p-3 bg-secondary">
+        <div className="border border-border rounded-lg p-3 bg-secondary">
           <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Efficiency</p>
-          <p className="text-sm font-medium mt-1 text-foreground">
-            {isAfter ? "92%" : "64%"}
-          </p>
+          <p className="text-sm font-medium mt-1 text-foreground">{isAfter ? "92%" : "64%"}</p>
         </div>
-        <div className="border border-border rounded-md p-3 bg-secondary">
+        <div className="border border-border rounded-lg p-3 bg-secondary">
           <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Errors</p>
-          <p className="text-sm font-medium mt-1 text-foreground">
-            {isAfter ? "2%" : "12%"}
-          </p>
+          <p className="text-sm font-medium mt-1 text-foreground">{isAfter ? "2%" : "12%"}</p>
         </div>
-        <div className="border border-border rounded-md p-3 bg-secondary">
+        <div className="border border-border rounded-lg p-3 bg-secondary">
           <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Cycle Time</p>
-          <p className="text-sm font-medium mt-1 text-foreground">
-            {isAfter ? "1.2d" : "4.5d"}
-          </p>
+          <p className="text-sm font-medium mt-1 text-foreground">{isAfter ? "1.2d" : "4.5d"}</p>
         </div>
       </div>
 
-      {/* Bar chart */}
       <div className="h-28 flex items-end gap-2 mb-4">
         {bars.map((h, i) => (
           <motion.div
             key={i}
             className="flex-1 rounded-sm"
-            style={{ background: isAfter ? "hsl(var(--accent) / 0.6)" : "hsl(var(--muted-foreground) / 0.25)" }}
+            style={{ background: isAfter ? "hsl(36 50% 48% / 0.5)" : "hsl(220 10% 46% / 0.2)" }}
             initial={false}
             animate={{ height: `${h}%` }}
             transition={{ duration: 0.6, ease: "easeInOut", delay: i * 0.05 }}
@@ -97,11 +105,10 @@ const AnimatedDashboard = () => {
         ))}
       </div>
 
-      {/* Line chart */}
       <svg className="w-full h-12 opacity-60" viewBox="0 0 200 40" fill="none">
         <motion.polyline
           points={isAfter ? "0,35 30,28 60,22 90,18 120,14 150,10 180,8 200,5" : "0,20 30,25 60,18 90,28 120,22 150,30 180,24 200,26"}
-          stroke="hsl(var(--accent))"
+          stroke="hsl(36 50% 48%)"
           strokeWidth="1.5"
           fill="none"
           initial={{ pathLength: 0 }}
@@ -114,7 +121,6 @@ const AnimatedDashboard = () => {
   );
 };
 
-/* Glowing pipeline dot */
 const PipelineDot = ({ delay }: { delay: number }) => (
   <motion.div
     className="absolute left-[18px] w-1.5 h-1.5 rounded-full bg-accent/50"
@@ -129,7 +135,6 @@ const AutomationWorkflow = () => (
   <section id="automation" className="py-32 section-divider">
     <div className="container mx-auto px-6">
       <div className="grid lg:grid-cols-2 gap-20 items-start max-w-5xl">
-        {/* Left: Text */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -153,8 +158,8 @@ const AutomationWorkflow = () => (
                 transition={{ delay: i * 0.08, duration: 0.5 }}
                 className="flex items-center gap-4"
               >
-                <app.icon className="w-4 h-4 text-accent/60 flex-shrink-0" strokeWidth={1.5} />
-                <span className="text-sm">{app.text}</span>
+                <app.icon className="w-4 h-4 text-accent/70 flex-shrink-0" strokeWidth={1.5} />
+                <span className="text-sm text-foreground">{app.text}</span>
               </motion.div>
             ))}
           </div>
@@ -162,7 +167,7 @@ const AutomationWorkflow = () => (
           <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4">Impact</p>
           <div className="flex flex-wrap gap-3">
             {impacts.map((item) => (
-              <span key={item} className="text-xs border border-border rounded-md px-4 py-2 text-muted-foreground transition-all duration-200 hover:border-accent/30 hover:text-foreground">
+              <span key={item} className="text-xs border border-border rounded-md px-4 py-2 text-muted-foreground transition-all duration-200 hover:border-accent/40 hover:text-foreground">
                 {item}
               </span>
             ))}
@@ -173,7 +178,6 @@ const AutomationWorkflow = () => (
           </p>
         </motion.div>
 
-        {/* Right: Animated Dashboard + Pipeline */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -183,8 +187,7 @@ const AutomationWorkflow = () => (
         >
           <AnimatedDashboard />
 
-          {/* Workflow Pipeline */}
-          <div className="border border-border rounded-md p-6 bg-card">
+          <div className="border border-border rounded-lg p-6 bg-card shadow-sm">
             <span className="text-[10px] font-medium tracking-[0.15em] uppercase text-muted-foreground">Pipeline</span>
 
             <div className="space-y-0 relative mt-5">
@@ -204,10 +207,10 @@ const AutomationWorkflow = () => (
                   {i < 3 && (
                     <div className="absolute left-[18px] top-8 w-px h-full bg-border" />
                   )}
-                  <div className="absolute left-0 top-0 w-9 h-9 rounded-md border border-border bg-secondary flex items-center justify-center">
+                  <div className="absolute left-0 top-0 w-9 h-9 rounded-lg border border-border bg-secondary flex items-center justify-center">
                     <span className="text-[10px] font-semibold text-muted-foreground">{item.step}</span>
                   </div>
-                  <p className="text-sm font-medium">{item.label}</p>
+                  <p className="text-sm font-medium text-foreground">{item.label}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">{item.detail}</p>
                 </motion.div>
               ))}

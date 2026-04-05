@@ -20,11 +20,10 @@ const Index = () => {
       <Skills />
       <Contact />
       <Footer />
-      {/* Mobile sticky CTA */}
       <div className="mobile-sticky-cta md:hidden">
         <a
           href="#contact"
-          className="block w-full text-center bg-card border border-accent/40 text-foreground py-3 rounded-md text-sm font-medium transition-all duration-200 hover:border-accent"
+          className="block w-full text-center bg-foreground text-background py-3 rounded-lg text-sm font-medium transition-all duration-200 hover:shadow-lg"
         >
           Contact
         </a>

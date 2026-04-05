@@ -56,10 +56,10 @@ const Services = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="border border-border rounded-md p-8 bg-card transition-all duration-200 ease-in-out hover:shadow-[0_8px_30px_-12px_hsl(var(--accent)/0.15)] hover:border-accent/30 hover:-translate-y-1 group"
+            className="border border-border rounded-lg p-8 bg-card transition-all duration-200 ease-in-out hover:shadow-lg hover:border-accent/30 hover:-translate-y-1 group"
           >
             <c.icon className="w-5 h-5 text-accent/60 mb-6 group-hover:text-accent transition-colors duration-200" strokeWidth={1.5} />
-            <h3 className="text-lg mb-3 tracking-normal" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500 }}>{c.title}</h3>
+            <h3 className="text-lg mb-3 tracking-normal text-foreground" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500 }}>{c.title}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
           </motion.div>
         ))}

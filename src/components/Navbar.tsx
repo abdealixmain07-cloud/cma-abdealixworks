@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -14,25 +14,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("#home");
-  const [dark, setDark] = useState(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("theme");
-      // Default to dark (institutional look)
-      return stored ? stored === "dark" : true;
-    }
-    return true;
-  });
-
-  useEffect(() => {
-    if (dark) {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-    }
-    localStorage.setItem("theme", dark ? "dark" : "light");
-  }, [dark]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,14 +42,14 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/90 backdrop-blur-xl border-b border-border" : "bg-transparent"
+        scrolled ? "bg-background/95 backdrop-blur-xl border-b border-border shadow-sm" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 py-5 flex items-center justify-between">
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, "#home")}
-          className="text-lg font-medium tracking-tight"
+          className="text-lg font-medium tracking-tight text-foreground"
           style={{ fontFamily: "'Playfair Display', serif" }}
         >
           Abdeali<span className="text-accent">.</span>
@@ -89,23 +70,9 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <button
-            onClick={() => setDark(!dark)}
-            className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:border-accent/30 transition-all duration-200"
-            aria-label="Toggle theme"
-          >
-            {dark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-          </button>
         </div>
 
-        <div className="md:hidden flex items-center gap-3">
-          <button
-            onClick={() => setDark(!dark)}
-            className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:border-accent/30 transition-all duration-200"
-            aria-label="Toggle theme"
-          >
-            {dark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-          </button>
+        <div className="md:hidden">
           <button className="text-foreground" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -113,7 +80,7 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-border px-6 py-5 space-y-4">
+        <div className="md:hidden bg-background/98 backdrop-blur-xl border-t border-border px-6 py-5 space-y-4">
           {navLinks.map((link) => (
             <a
               key={link.href}
