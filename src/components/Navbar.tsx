@@ -3,10 +3,11 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Capabilities", href: "#services" },
+  { label: "What I Do", href: "#services" },
+  { label: "Tools", href: "#tools" },
   { label: "Projects", href: "#portfolio" },
-  { label: "Skills", href: "#skills" },
+  { label: "Case Study", href: "#casestudy" },
+  { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -55,7 +56,7 @@ const Navbar = () => {
           Abdeali<span className="text-accent">.</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.href}
