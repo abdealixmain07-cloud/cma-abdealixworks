@@ -10,7 +10,7 @@ const Footer = () => (
         <a href="https://www.linkedin.com/in/abdeali-main" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-accent transition-colors duration-200">
           <Linkedin className="w-4 h-4" />
         </a>
-        <a href="mailto:abdealixmain07@gmail.com" className="text-muted-foreground hover:text-accent transition-colors duration-200">
+        <a href="mailto:abdealixwork03@gmail.com" className="text-muted-foreground hover:text-accent transition-colors duration-200">
           <Mail className="w-4 h-4" />
         </a>
       </div>

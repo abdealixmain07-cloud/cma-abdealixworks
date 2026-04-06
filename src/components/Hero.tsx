@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const PROFILE_PHOTO = "https://i.postimg.cc/T3Zq2kq4/Chat-GPT-Image-Mar-27-2026-12-12-20-PM.png";
 
-const typingRoles = ["Cost & Management Accountant", "Financial Analyst", "FP&A Specialist"];
+const typingRoles = ["FP&A Analyst", "Cost Optimization Specialist", "Financial Strategist"];
 
 const TypingAnimation = () => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -57,6 +57,99 @@ const AnimatedCounter = ({ target, prefix = "", suffix = "" }: { target: number;
   return <span>{display}</span>;
 };
 
+const HeroDashboard = () => {
+  const [hoveredBar, setHoveredBar] = useState<number | null>(null);
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+  const revenueData = [42, 55, 48, 65, 58, 72];
+  const costData = [38, 42, 35, 45, 40, 48];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+      className="bg-card border border-border rounded-xl p-6 shadow-lg"
+    >
+      <div className="flex items-center justify-between mb-5">
+        <div>
+          <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-muted-foreground">Financial Overview</p>
+          <p className="text-sm font-medium text-foreground mt-1">Multi-Entity Performance</p>
+        </div>
+        <div className="flex gap-4 text-[10px] text-muted-foreground">
+          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-accent" /> Revenue</span>
+          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-muted-foreground/30" /> Cost</span>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-3 mb-5">
+        {[
+          { label: "Entities", value: "8+", color: "text-foreground" },
+          { label: "Reporting ↓", value: "70%", color: "text-accent" },
+          { label: "Accuracy", value: "99.5%", color: "text-foreground" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="bg-secondary border border-border rounded-lg p-3 text-center">
+            <p className="text-[9px] text-muted-foreground uppercase tracking-wider">{kpi.label}</p>
+            <motion.p
+              className={`text-lg font-semibold mt-1 ${kpi.color}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              {kpi.value}
+            </motion.p>
+          </div>
+        ))}
+      </div>
+
+      <div className="h-32 flex items-end gap-2">
+        {months.map((m, i) => (
+          <div key={m} className="flex-1 flex flex-col items-center gap-1"
+            onMouseEnter={() => setHoveredBar(i)}
+            onMouseLeave={() => setHoveredBar(null)}
+          >
+            <div className="w-full flex gap-0.5 items-end h-24">
+              <motion.div
+                className="flex-1 rounded-sm bg-accent/60"
+                initial={{ height: 0 }}
+                animate={{ height: `${revenueData[i]}%`, opacity: hoveredBar === i ? 1 : 0.7 }}
+                transition={{ duration: 0.8, delay: 0.6 + i * 0.08 }}
+              />
+              <motion.div
+                className="flex-1 rounded-sm bg-muted-foreground/20"
+                initial={{ height: 0 }}
+                animate={{ height: `${costData[i]}%`, opacity: hoveredBar === i ? 0.5 : 0.3 }}
+                transition={{ duration: 0.8, delay: 0.7 + i * 0.08 }}
+              />
+            </div>
+            <span className="text-[9px] text-muted-foreground">{m}</span>
+          </div>
+        ))}
+      </div>
+
+      <svg className="w-full h-10 mt-3" viewBox="0 0 200 30" fill="none">
+        <motion.polyline
+          points="0,25 30,20 60,22 90,15 120,12 150,8 180,10 200,5"
+          stroke="hsl(36 50% 48%)"
+          strokeWidth="1.5"
+          fill="none"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2.5, ease: "easeInOut", delay: 0.8 }}
+        />
+        <motion.polyline
+          points="0,28 30,26 60,24 90,22 120,20 150,18 180,16 200,14"
+          stroke="hsl(220 10% 46% / 0.3)"
+          strokeWidth="1"
+          fill="none"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2.5, ease: "easeInOut", delay: 1 }}
+        />
+      </svg>
+    </motion.div>
+  );
+};
+
 const HeroBackground = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.04]"
@@ -71,17 +164,6 @@ const HeroBackground = () => (
         backgroundSize: "40px 40px",
       }}
     />
-    <svg className="absolute top-1/3 left-0 w-full h-24 opacity-[0.03]" viewBox="0 0 400 80" fill="none" preserveAspectRatio="none">
-      <motion.polyline
-        points="0,60 40,52 80,58 120,35 160,42 200,28 240,35 280,18 320,25 360,12 400,20"
-        stroke="hsl(220 30% 12%)"
-        strokeWidth="1"
-        fill="none"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 3, ease: "easeInOut" }}
-      />
-    </svg>
   </div>
 );
 
@@ -96,43 +178,59 @@ const fadeUp = {
 };
 
 const Hero = () => (
-  <section id="home" className="min-h-screen flex items-center pt-24 pb-32 relative">
+  <section id="home" className="min-h-screen flex items-center pt-24 pb-20 relative">
     <HeroBackground />
     <div className="container mx-auto px-6 relative z-10">
-      <div className="grid lg:grid-cols-5 gap-20 items-center">
+      <div className="grid lg:grid-cols-2 gap-16 items-center">
+        {/* Left: Text */}
         <motion.div
           variants={staggerChildren}
           initial="hidden"
           animate="visible"
-          className="lg:col-span-3"
         >
-          <motion.h1 variants={fadeUp} className="text-5xl md:text-6xl lg:text-[64px] leading-[1.08] mb-5 tracking-tight">
-            Abdeali Gangardiwala
-          </motion.h1>
+          {/* Profile photo - mobile and desktop */}
+          <motion.div variants={fadeUp} className="flex items-center gap-4 mb-8">
+            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-accent/30 shadow-md">
+              <img src={PROFILE_PHOTO} alt="Abdeali Gangardiwala" className="w-full h-full object-cover" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-foreground">Abdeali Gangardiwala</p>
+              <p className="text-xs text-muted-foreground">CMA Qualified · ICMAI 2025</p>
+            </div>
+          </motion.div>
 
-          <motion.p variants={fadeUp} className="text-xl md:text-2xl mb-6 h-9">
+          <motion.p variants={fadeUp} className="text-xl md:text-2xl mb-4 h-9">
             <TypingAnimation />
           </motion.p>
 
-          <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed max-w-xl mb-4 text-base">
-            Driving revenue clarity, cost discipline, and scalable financial growth through structured reporting and performance analytics.
-          </motion.p>
+          <motion.h1 variants={fadeUp} className="text-3xl md:text-4xl lg:text-[42px] leading-[1.15] mb-6 tracking-tight">
+            I help businesses make smarter financial decisions through real-time dashboards, forecasting models, and data-driven insights.
+          </motion.h1>
 
-          <motion.p variants={fadeUp} className="text-sm text-muted-foreground max-w-xl mb-12">
-            Focused on cost optimization, budgeting rigor, and sustainable expansion.
-          </motion.p>
+          <motion.div variants={fadeUp} className="space-y-2.5 mb-10">
+            {[
+              "Managed 8+ global entities (US, UK, Israel, Canada)",
+              "Reduced reporting time by 70%",
+              "Built KPI dashboards used for leadership decisions",
+            ].map((item) => (
+              <div key={item} className="flex items-start gap-2.5">
+                <span className="text-accent mt-0.5 text-sm">✔</span>
+                <span className="text-sm text-muted-foreground">{item}</span>
+              </div>
+            ))}
+          </motion.div>
 
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
+          <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
             <a
               href="#portfolio"
-              className="inline-flex items-center gap-2 bg-foreground text-background px-7 py-3.5 rounded-md text-sm font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-[2px]"
+              className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-md text-sm font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-[2px]"
             >
-              View Selected Work <ArrowRight className="w-4 h-4" />
+              View My Work <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="/Abdeali_Gangardiwala_Resume.pdf"
               download
-              className="inline-flex items-center gap-2 border border-border text-foreground px-7 py-3.5 rounded-md text-sm font-medium transition-all duration-300 hover:border-accent hover:-translate-y-[2px]"
+              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-md text-sm font-medium transition-all duration-300 hover:border-accent hover:-translate-y-[2px]"
             >
               <Download className="w-4 h-4" /> Download Resume
             </a>
@@ -140,67 +238,40 @@ const Hero = () => (
               href="https://www.linkedin.com/in/abdeali-main"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-border text-foreground px-7 py-3.5 rounded-md text-sm font-medium transition-all duration-300 hover:border-accent hover:-translate-y-[2px]"
+              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-md text-sm font-medium transition-all duration-300 hover:border-accent hover:-translate-y-[2px]"
             >
-              <Linkedin className="w-4 h-4" /> Connect Professionally
+              <Linkedin className="w-4 h-4" />
             </a>
           </motion.div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="lg:col-span-2 flex justify-center"
-        >
-          <div className="relative">
-            <div className="absolute inset-0 -m-8 rounded-md opacity-15"
-              style={{ background: "radial-gradient(circle, hsl(36 50% 48% / 0.2), transparent 70%)" }}
-            />
-            <div className="w-64 h-72 md:w-72 md:h-80 rounded-lg overflow-hidden border border-border shadow-xl">
-              <img
-                src={PROFILE_PHOTO}
-                alt="Abdeali Gangardiwala"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute -left-20 top-8 bg-card border border-border rounded-lg px-5 py-3 shadow-md hidden md:block"
-            >
-              <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] font-medium">Cost Audits</p>
-              <p className="text-lg font-medium mt-0.5 text-foreground">
-                <AnimatedCounter target={12} suffix="+" />
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1, duration: 0.5 }}
-              className="absolute -right-16 bottom-14 bg-card border border-border rounded-lg px-5 py-3 shadow-md hidden md:block"
-            >
-              <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] font-medium">Exposure</p>
-              <p className="text-lg font-medium mt-0.5 text-foreground">
-                <AnimatedCounter target={100} prefix="₹" suffix="Cr+" />
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.5 }}
-              className="absolute -bottom-8 left-2 bg-card border border-border rounded-lg px-5 py-3 shadow-md hidden md:block"
-            >
-              <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] font-medium">CMA Qualified</p>
-              <p className="text-xs font-medium text-accent mt-0.5">ICMAI 2025</p>
-            </motion.div>
-          </div>
-        </motion.div>
+        {/* Right: Interactive Dashboard */}
+        <div className="hidden lg:block">
+          <HeroDashboard />
+        </div>
       </div>
+
+      {/* KPI Counter Strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
+        className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl"
+      >
+        {[
+          { label: "Reporting Time ↓", target: 70, suffix: "%" },
+          { label: "Entities Managed", target: 8, suffix: "+" },
+          { label: "Transactions Processed", target: 3000, suffix: "+" },
+          { label: "Reporting Accuracy", target: 99, suffix: ".5%" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="text-center md:text-left">
+            <p className="text-2xl md:text-3xl font-semibold text-foreground" style={{ fontFamily: "'Inter', sans-serif" }}>
+              <AnimatedCounter target={kpi.target} suffix={kpi.suffix} />
+            </p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mt-1 font-medium">{kpi.label}</p>
+          </div>
+        ))}
+      </motion.div>
     </div>
   </section>
 );
