@@ -86,9 +86,9 @@ const CaseStudy = () => (
           <div>
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-[0.15em] mb-3" style={{ fontFamily: "'Inter', sans-serif" }}>What I'd Improve Next</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li className="flex items-start gap-2"><span className="text-accent/50">•</span>Add predictive forecasting using Python</li>
               <li className="flex items-start gap-2"><span className="text-accent/50">•</span>Integrate live database connections</li>
               <li className="flex items-start gap-2"><span className="text-accent/50">•</span>Build CFO-level executive summary dashboards</li>
+              <li className="flex items-start gap-2"><span className="text-accent/50">•</span>Add automated anomaly detection in expense trends</li>
             </ul>
           </div>
         </motion.div>
