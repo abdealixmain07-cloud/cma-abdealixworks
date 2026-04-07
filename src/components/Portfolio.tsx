@@ -14,7 +14,7 @@ const projects = [
     impact: "Structured cost discipline through systematic budget tracking and early variance detection.",
     tools: "Excel Financial Modelling",
     outcome: "Reduced unnecessary overspend through proactive deviation alerts.",
-    image: "https://i.postimg.cc/JH0gJzvL/Screenshot-2026-04-03-163147.png",
+    image: "https://i.postimg.cc/JH0gJzvL/Screenshot-2026-04-03-163147.png?dl=1",
     metrics: "40% faster close cycle",
   },
   {
@@ -22,7 +22,7 @@ const projects = [
     impact: "End-to-end bookkeeping and financial statement accuracy for international clients across 3+ currencies.",
     tools: "QuickBooks, Tally, Xero, Zoho Books",
     outcome: "Delivered reconciled ledgers, balance sheets & P&L with 99.5% accuracy.",
-    image: "https://i.ibb.co/gBnpdnb/bookkeeping.png",
+    image: "https://i.ibb.co/gBnpdnb/bookkeeping.png?dl=1",
     metrics: "3+ currencies managed",
   },
   {
