@@ -14,7 +14,7 @@ const projects = [
     impact: "Structured cost discipline through systematic budget tracking and early variance detection.",
     tools: "Excel Financial Modelling",
     outcome: "Reduced unnecessary overspend through proactive deviation alerts.",
-    image: "https://i.postimg.cc/JH0gJzvL/Screenshot-2026-04-03-163147.png",
+    image: "https://i.postimg.cc/y1wYScgX/Screenshot-2026-02-20-144023-1.png",
     metrics: "40% faster close cycle",
   },
   {
@@ -47,6 +47,7 @@ const Portfolio = () => (
       >
         <p className="text-xs font-medium tracking-[0.25em] uppercase text-muted-foreground mb-4">Work</p>
         <h2 className="text-4xl md:text-[44px]">Selected Projects</h2>
+        <p className="text-sm text-muted-foreground mt-4 max-w-xl">Built for real clients — demo numbers shown for confidentiality.</p>
       </motion.div>
 
       <div className="space-y-20 max-w-5xl">
