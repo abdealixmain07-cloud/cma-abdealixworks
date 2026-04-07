@@ -14,7 +14,7 @@ const projects = [
     impact: "Structured cost discipline through systematic budget tracking and early variance detection.",
     tools: "Excel Financial Modelling",
     outcome: "Reduced unnecessary overspend through proactive deviation alerts.",
-    image: "https://i.postimg.cc/JH0gJzvL/Screenshot-2026-04-03-163147.png?dl=1",
+    image: "https://i.postimg.cc/JH0gJzvL/Screenshot-2026-04-03-163147.png",
     metrics: "40% faster close cycle",
   },
   {
