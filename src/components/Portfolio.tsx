@@ -22,7 +22,7 @@ const projects = [
     impact: "End-to-end bookkeeping and financial statement accuracy for international clients across 3+ currencies.",
     tools: "QuickBooks, Tally, Xero, Zoho Books",
     outcome: "Delivered reconciled ledgers, balance sheets & P&L with 99.5% accuracy.",
-    image: "https://i.ibb.co/gBnpdnb/bookkeeping.png?dl=1",
+    image: "https://i.ibb.co/5f7yk7X/Screenshot-2026-04-03-163147.png",
     metrics: "3+ currencies managed",
   },
   {
