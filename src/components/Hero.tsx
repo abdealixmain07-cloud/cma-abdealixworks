@@ -2,9 +2,9 @@ import { ArrowRight, Download, Linkedin } from "lucide-react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const PROFILE_PHOTO = "https://i.postimg.cc/T3Zq2kq4/Chat-GPT-Image-Mar-27-2026-12-12-20-PM.png";
+const PROFILE_PHOTO = "https://i.postimg.cc/3kFDnFqX/Chat-GPT-Image-Mar-27-2026-12-12-20-PM.png";
 
-const typingRoles = ["FP&A Analyst", "Cost Optimization Specialist", "Financial Strategist"];
+const typingRoles = ["Cost Accountant", "Financial Analyst", "FP&A Specialist"];
 
 const TypingAnimation = () => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -14,7 +14,6 @@ const TypingAnimation = () => {
   useEffect(() => {
     const current = typingRoles[roleIndex];
     const speed = isDeleting ? 40 : 80;
-
     if (!isDeleting && text === current) {
       const pause = setTimeout(() => setIsDeleting(true), 2000);
       return () => clearTimeout(pause);
@@ -24,7 +23,6 @@ const TypingAnimation = () => {
       setRoleIndex((prev) => (prev + 1) % typingRoles.length);
       return;
     }
-
     const timer = setTimeout(() => {
       setText(isDeleting ? current.slice(0, text.length - 1) : current.slice(0, text.length + 1));
     }, speed);
@@ -43,10 +41,10 @@ const TypingAnimation = () => {
   );
 };
 
-const AnimatedCounter = ({ target, prefix = "", suffix = "" }: { target: number; prefix?: string; suffix?: string }) => {
+const AnimatedCounter = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
   const count = useMotionValue(0);
-  const rounded = useTransform(count, (v) => `${prefix}${Math.round(v).toLocaleString()}${suffix}`);
-  const [display, setDisplay] = useState(`${prefix}0${suffix}`);
+  const rounded = useTransform(count, (v) => `${Math.round(v).toLocaleString()}${suffix}`);
+  const [display, setDisplay] = useState(`0${suffix}`);
 
   useEffect(() => {
     const controls = animate(count, target, { duration: 2, ease: "easeOut" });
@@ -68,12 +66,12 @@ const HeroDashboard = () => {
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="bg-card border border-border rounded-xl p-6 shadow-lg"
+      className="bg-card border border-border rounded-2xl p-6 shadow-xl shadow-accent/5"
     >
       <div className="flex items-center justify-between mb-5">
         <div>
-          <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-muted-foreground">Financial Overview</p>
-          <p className="text-sm font-medium text-foreground mt-1">Multi-Entity Performance</p>
+          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-muted-foreground">Financial Overview</p>
+          <p className="text-sm font-semibold text-foreground mt-1">Multi-Entity Performance</p>
         </div>
         <div className="flex gap-4 text-[10px] text-muted-foreground">
           <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-accent" /> Revenue</span>
@@ -87,10 +85,10 @@ const HeroDashboard = () => {
           { label: "Reporting ↓", value: "70%", color: "text-accent" },
           { label: "Accuracy", value: "99.5%", color: "text-foreground" },
         ].map((kpi) => (
-          <div key={kpi.label} className="bg-secondary border border-border rounded-lg p-3 text-center">
+          <div key={kpi.label} className="bg-secondary/60 border border-border rounded-xl p-3 text-center">
             <p className="text-[9px] text-muted-foreground uppercase tracking-wider">{kpi.label}</p>
             <motion.p
-              className={`text-lg font-semibold mt-1 ${kpi.color}`}
+              className={`text-lg font-bold mt-1 ${kpi.color}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
@@ -109,13 +107,13 @@ const HeroDashboard = () => {
           >
             <div className="w-full flex gap-0.5 items-end h-24">
               <motion.div
-                className="flex-1 rounded-sm bg-accent/60"
+                className="flex-1 rounded-sm bg-accent/50"
                 initial={{ height: 0 }}
                 animate={{ height: `${revenueData[i]}%`, opacity: hoveredBar === i ? 1 : 0.7 }}
                 transition={{ duration: 0.8, delay: 0.6 + i * 0.08 }}
               />
               <motion.div
-                className="flex-1 rounded-sm bg-muted-foreground/20"
+                className="flex-1 rounded-sm bg-muted-foreground/15"
                 initial={{ height: 0 }}
                 animate={{ height: `${costData[i]}%`, opacity: hoveredBar === i ? 0.5 : 0.3 }}
                 transition={{ duration: 0.8, delay: 0.7 + i * 0.08 }}
@@ -129,7 +127,7 @@ const HeroDashboard = () => {
       <svg className="w-full h-10 mt-3" viewBox="0 0 200 30" fill="none">
         <motion.polyline
           points="0,25 30,20 60,22 90,15 120,12 150,8 180,10 200,5"
-          stroke="hsl(36 50% 48%)"
+          stroke="hsl(217 91% 60%)"
           strokeWidth="1.5"
           fill="none"
           initial={{ pathLength: 0 }}
@@ -150,23 +148,6 @@ const HeroDashboard = () => {
   );
 };
 
-const HeroBackground = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.04]"
-      style={{ background: "radial-gradient(circle, hsl(36 50% 48%), transparent 70%)" }}
-    />
-    <motion.div
-      className="absolute inset-0 opacity-[0.02]"
-      animate={{ y: [-5, 5, -5] }}
-      transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
-      style={{
-        backgroundImage: "radial-gradient(circle, hsl(220 30% 12%) 0.5px, transparent 0.5px)",
-        backgroundSize: "40px 40px",
-      }}
-    />
-  </div>
-);
-
 const staggerChildren = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.12 } },
@@ -177,60 +158,68 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } },
 };
 
+const credibilityBadges = [
+  "CMA Qualified (ICMAI)",
+  "8+ International Clients",
+  "70% Faster Reporting",
+  "3,000+ Transactions Reclassified",
+];
+
 const Hero = () => (
-  <section id="home" className="min-h-screen flex items-center pt-24 pb-20 relative">
-    <HeroBackground />
+  <section id="home" className="min-h-screen flex items-center pt-24 pb-20 relative overflow-hidden">
+    {/* Subtle background */}
+    <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.04]"
+        style={{ background: "radial-gradient(circle, hsl(217 91% 60%), transparent 70%)" }}
+      />
+    </div>
+
     <div className="container mx-auto px-6 relative z-10">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
-        {/* Left: Text */}
-        <motion.div
-          variants={staggerChildren}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Profile photo - mobile and desktop */}
+        <motion.div variants={staggerChildren} initial="hidden" animate="visible">
+          {/* Profile */}
           <motion.div variants={fadeUp} className="flex items-center gap-4 mb-8">
-            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-accent/30 shadow-md">
+            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-accent/20 shadow-lg">
               <img src={PROFILE_PHOTO} alt="Abdeali Gangardiwala" className="w-full h-full object-cover" />
             </div>
             <div>
-              <p className="text-sm font-medium text-foreground">Abdeali Gangardiwala</p>
-              <p className="text-xs text-muted-foreground">CMA Qualified · ICMAI 2025</p>
+              <p className="text-sm font-semibold text-foreground">Abdeali Gangardiwala</p>
+              <p className="text-xs text-muted-foreground">CMA Qualified · ICMAI</p>
             </div>
           </motion.div>
 
-          <motion.p variants={fadeUp} className="text-xl md:text-2xl mb-4 h-9">
+          <motion.p variants={fadeUp} className="text-xl md:text-2xl mb-3 h-9 font-semibold">
             <TypingAnimation />
           </motion.p>
 
-          <motion.h1 variants={fadeUp} className="text-3xl md:text-4xl lg:text-[42px] leading-[1.15] mb-6 tracking-tight">
-            I help businesses make smarter financial decisions through real-time dashboards, forecasting models, and data-driven insights.
+          <motion.h1 variants={fadeUp} className="text-3xl md:text-4xl lg:text-[40px] leading-[1.15] mb-4 tracking-tight">
+            Financial Analyst | CMA
           </motion.h1>
 
-          <motion.div variants={fadeUp} className="space-y-2.5 mb-10">
-            {[
-              "Managed 8+ global entities (US, UK, Israel, Canada)",
-              "Reduced reporting time by 70%",
-              "Built KPI dashboards used for leadership decisions",
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-2.5">
-                <span className="text-accent mt-0.5 text-sm">✔</span>
-                <span className="text-sm text-muted-foreground">{item}</span>
-              </div>
+          <motion.p variants={fadeUp} className="text-base text-muted-foreground mb-6 max-w-lg leading-relaxed">
+            I manage end-to-end financial reporting, build dynamic forecasting models, and transform complex financial data into clear, decision-ready insights across multi-entity international businesses.
+          </motion.p>
+
+          {/* Credibility badges */}
+          <motion.div variants={fadeUp} className="flex flex-wrap gap-2 mb-8">
+            {credibilityBadges.map((badge) => (
+              <span key={badge} className="text-xs font-medium bg-accent/8 text-accent border border-accent/15 px-3 py-1.5 rounded-full">
+                {badge}
+              </span>
             ))}
           </motion.div>
 
           <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
             <a
               href="#portfolio"
-              className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-md text-sm font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-[2px]"
+              className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-[1px]"
             >
-              View My Work <ArrowRight className="w-4 h-4" />
+              View Projects <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="/Abdeali_Gangardiwala_Resume.pdf"
               download
-              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-md text-sm font-medium transition-all duration-300 hover:border-accent hover:-translate-y-[2px]"
+              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:border-accent hover:-translate-y-[1px]"
             >
               <Download className="w-4 h-4" /> Download Resume
             </a>
@@ -238,14 +227,13 @@ const Hero = () => (
               href="https://www.linkedin.com/in/abdeali-main"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-md text-sm font-medium transition-all duration-300 hover:border-accent hover:-translate-y-[2px]"
+              className="inline-flex items-center gap-2 border border-border text-foreground px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:border-accent hover:-translate-y-[1px]"
             >
               <Linkedin className="w-4 h-4" />
             </a>
           </motion.div>
         </motion.div>
 
-        {/* Right: Interactive Dashboard */}
         <div className="hidden lg:block">
           <HeroDashboard />
         </div>
@@ -265,10 +253,10 @@ const Hero = () => (
           { label: "Reporting Accuracy", target: 99, suffix: ".5%" },
         ].map((kpi) => (
           <div key={kpi.label} className="text-center md:text-left">
-            <p className="text-2xl md:text-3xl font-semibold text-foreground" style={{ fontFamily: "'Inter', sans-serif" }}>
+            <p className="text-2xl md:text-3xl font-bold text-foreground">
               <AnimatedCounter target={kpi.target} suffix={kpi.suffix} />
             </p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mt-1 font-medium">{kpi.label}</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mt-1 font-semibold">{kpi.label}</p>
           </div>
         ))}
       </motion.div>

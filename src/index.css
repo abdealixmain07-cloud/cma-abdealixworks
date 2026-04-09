@@ -2,51 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 40 33% 98%;
-    --foreground: 220 30% 12%;
+    --background: 220 20% 97%;
+    --foreground: 220 40% 13%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 30% 12%;
+    --card-foreground: 220 40% 13%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 30% 12%;
+    --popover-foreground: 220 40% 13%;
 
-    --primary: 220 30% 12%;
-    --primary-foreground: 40 33% 98%;
+    --primary: 220 40% 13%;
+    --primary-foreground: 220 20% 97%;
 
-    --secondary: 37 25% 95%;
-    --secondary-foreground: 220 30% 12%;
+    --secondary: 220 15% 94%;
+    --secondary-foreground: 220 40% 13%;
 
-    --muted: 37 18% 93%;
+    --muted: 220 12% 91%;
     --muted-foreground: 220 10% 46%;
 
-    --accent: 36 50% 48%;
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 37 20% 88%;
-    --input: 37 20% 88%;
-    --ring: 36 50% 48%;
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 217 91% 60%;
 
     --radius: 0.5rem;
 
     --success: 142 70% 45%;
     --success-foreground: 0 0% 100%;
 
-    --sidebar-background: 40 33% 98%;
-    --sidebar-foreground: 220 30% 12%;
-    --sidebar-primary: 220 30% 12%;
-    --sidebar-primary-foreground: 40 33% 98%;
-    --sidebar-accent: 37 18% 93%;
-    --sidebar-accent-foreground: 220 30% 12%;
-    --sidebar-border: 37 20% 88%;
-    --sidebar-ring: 36 50% 48%;
+    --navy: 220 40% 13%;
+    --navy-light: 220 30% 20%;
+
+    --sidebar-background: 220 20% 97%;
+    --sidebar-foreground: 220 40% 13%;
+    --sidebar-primary: 220 40% 13%;
+    --sidebar-primary-foreground: 220 20% 97%;
+    --sidebar-accent: 220 12% 91%;
+    --sidebar-accent-foreground: 220 40% 13%;
+    --sidebar-border: 220 15% 90%;
+    --sidebar-ring: 217 91% 60%;
   }
 }
 
@@ -62,15 +65,15 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 17px;
+    font-weight: 400;
+    font-size: 16px;
     line-height: 1.7;
   }
 
   h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
-    letter-spacing: 0.3px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     color: hsl(var(--foreground));
   }
 
@@ -79,7 +82,11 @@
   }
 
   h2 {
-    line-height: 1.2;
+    line-height: 1.15;
+  }
+
+  h3 {
+    font-weight: 600;
   }
 }
 
@@ -93,7 +100,7 @@
   }
 }
 
-/* Grain texture overlay */
+/* Subtle grain overlay */
 .grain-overlay::before {
   content: "";
   position: fixed;
@@ -103,11 +110,11 @@
   height: 100%;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.018;
+  opacity: 0.012;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
 }
 
-/* Executive link underline animation */
+/* Link underline animation */
 a.link-animate {
   position: relative;
 }
@@ -128,10 +135,10 @@ a.link-animate:hover::after {
   transform-origin: left;
 }
 
-/* Premium form focus */
+/* Form focus */
 input:focus, textarea:focus {
   border-color: hsl(var(--accent)) !important;
-  box-shadow: 0 0 0 1px hsl(var(--accent) / 0.2) !important;
+  box-shadow: 0 0 0 2px hsl(var(--accent) / 0.1) !important;
 }
 
 /* Nav active indicator */
@@ -144,8 +151,9 @@ input:focus, textarea:focus {
   bottom: -4px;
   left: 0;
   width: 100%;
-  height: 1.5px;
+  height: 2px;
   background: hsl(var(--accent));
+  border-radius: 1px;
 }
 
 /* Mobile sticky CTA */
@@ -161,7 +169,7 @@ input:focus, textarea:focus {
   border-top: 1px solid hsl(var(--border));
 }
 
-/* Reduce motion on mobile for performance */
+/* Reduce motion on mobile */
 @media (max-width: 768px) {
   *, *::before, *::after {
     animation-duration: 0.3s !important;
