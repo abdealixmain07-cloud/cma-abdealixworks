@@ -2,21 +2,32 @@ import { motion } from "framer-motion";
 
 const timeline = [
   {
-    role: "Financial Analyst",
-    company: "Ascendancy Business Solutions",
+    role: "Financial Reporting Analyst – FP&A",
+    company: "Ascendancy Consultants & Advisors Pvt. Ltd.",
     period: "Current",
-    metrics: ["8+ global entities managed", "70% faster reporting", "KPI dashboards for leadership", "Multi-currency reconciliation"],
+    metrics: [
+      "Managed end-to-end month-end close for 8+ international clients",
+      "Built dashboards tracking EBITDA, burn rate, and runway, reducing reporting time by 70%",
+      "Developed 3-scenario forecasting models for strategic planning",
+      "Corrected 3,000+ transaction misclassifications, improving reporting accuracy",
+      "Led ERP migration with 100% reconciliation accuracy",
+    ],
   },
   {
-    role: "Articleship Training",
-    company: "CMA Practical Training",
-    period: "2022 – 2024",
-    metrics: ["12+ cost audits completed", "₹100Cr+ financial exposure", "GST/HST compliance", "Stock & concurrent audits"],
+    role: "Article Assistant – Cost Audit",
+    company: "S.S. Puranik & Associates",
+    period: "2024 – 2025",
+    metrics: [
+      "Built cost models for INR 100+ Cr manufacturing clients",
+      "Supported tariff determination for power sector entities",
+      "Managed GST & TDS compliance for 70+ clients",
+      "Conducted audits across manufacturing and trading entities",
+    ],
   },
 ];
 
 const Experience = () => (
-  <section id="experience" className="py-28 section-alt section-divider">
+  <section id="experience" className="py-24 section-alt section-divider">
     <div className="container mx-auto px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -25,8 +36,8 @@ const Experience = () => (
         transition={{ duration: 0.6 }}
         className="mb-14"
       >
-        <p className="text-xs font-medium tracking-[0.25em] uppercase text-muted-foreground mb-4">Career</p>
-        <h2 className="text-4xl md:text-[44px]">Experience</h2>
+        <p className="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-3">Career</p>
+        <h2 className="text-3xl md:text-4xl">Experience</h2>
       </motion.div>
 
       <div className="max-w-3xl space-y-0 relative">
@@ -46,19 +57,19 @@ const Experience = () => (
             </div>
 
             <div className="flex flex-wrap items-baseline gap-3 mb-1">
-              <h3 className="text-lg text-foreground" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>{item.role}</h3>
-              <span className="text-xs text-accent font-medium">{item.period}</span>
+              <h3 className="text-lg text-foreground font-semibold">{item.role}</h3>
+              <span className="text-xs text-accent font-semibold">{item.period}</span>
             </div>
             <p className="text-sm text-muted-foreground mb-4">{item.company}</p>
 
-            <div className="grid grid-cols-2 gap-2">
+            <ul className="space-y-2">
               {item.metrics.map((m) => (
-                <div key={m} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <span className="text-accent/60 mt-0.5 text-xs">▸</span>
+                <li key={m} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <span className="text-accent/50 mt-0.5 text-xs">→</span>
                   <span>{m}</span>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </motion.div>
         ))}
       </div>

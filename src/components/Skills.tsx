@@ -2,25 +2,37 @@ import { motion } from "framer-motion";
 
 const columns = [
   {
-    title: "Finance & Accounting",
-    items: ["IND AS", "Budgeting & Cost Control", "Financial Reporting", "Working Capital Monitoring", "Variance Analysis", "Bookkeeping", "Ledger Management"],
+    title: "Core Finance Skills",
+    items: [
+      "Financial Reporting & Close",
+      "FP&A & Forecasting",
+      "Financial Modelling (DCF, 3-Statement, LBO basics)",
+      "Cost Analysis & Margin Optimization",
+    ],
   },
   {
-    title: "Accounting Software",
-    items: ["QuickBooks", "Tally ERP", "Xero", "Zoho Books"],
+    title: "Tools & Systems",
+    items: [
+      "Excel (Advanced, Power Query, VBA)",
+      "PowerPoint Presentations",
+      "Power BI",
+      "QuickBooks, Xero, Zoho, Tally",
+      "SAP (Basic)",
+    ],
   },
   {
-    title: "Reporting & Analytics",
-    items: ["Excel (Advanced)", "PowerPoint Presentations", "Power BI", "Dashboard Design", "Management Reporting", "Balance Sheet & P&L"],
-  },
-  {
-    title: "Automation & Tools",
-    items: ["ChatGPT", "Claude", "NotebookLM", "Canva", "Gamma"],
+    title: "Analytical Strengths",
+    items: [
+      "Variance Analysis",
+      "Scenario Modeling",
+      "KPI Design",
+      "Financial Data Structuring",
+    ],
   },
 ];
 
 const Skills = () => (
-  <section id="skills" className="py-32 section-divider">
+  <section id="skills" className="py-24 section-alt section-divider">
     <div className="container mx-auto px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -28,11 +40,11 @@ const Skills = () => (
         viewport={{ once: true }}
         className="mb-16"
       >
-        <p className="text-xs font-medium tracking-[0.25em] uppercase text-muted-foreground mb-6">Expertise</p>
-        <h2 className="text-4xl md:text-[44px]">Skills</h2>
+        <p className="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-3">Expertise</p>
+        <h2 className="text-3xl md:text-4xl">Skills</h2>
       </motion.div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 max-w-5xl">
+      <div className="grid sm:grid-cols-3 gap-12 max-w-4xl">
         {columns.map((col, ci) => (
           <motion.div
             key={col.title}
@@ -41,10 +53,10 @@ const Skills = () => (
             viewport={{ once: true }}
             transition={{ delay: ci * 0.08, duration: 0.5 }}
           >
-            <h3 className="text-sm font-medium mb-6 tracking-wide text-foreground" style={{ fontFamily: "'Inter', sans-serif" }}>
+            <h3 className="text-sm font-semibold mb-6 tracking-wide text-foreground">
               {col.title}
             </h3>
-            <ul className="space-y-3.5">
+            <ul className="space-y-3">
               {col.items.map((item) => (
                 <li key={item} className="text-sm text-muted-foreground flex items-center gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent/40 flex-shrink-0" />
@@ -60,10 +72,10 @@ const Skills = () => (
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="mt-16 flex flex-wrap gap-4 max-w-5xl"
+        className="mt-14 flex flex-wrap gap-3 max-w-4xl"
       >
-        <span className="text-xs font-medium border border-accent/25 text-accent rounded-md px-5 py-2.5">CMA (Cost and Management Accountant)</span>
-        <span className="text-xs font-medium border border-accent/25 text-accent rounded-md px-5 py-2.5">Financial Analyst</span>
+        <span className="text-xs font-semibold border border-accent/20 text-accent rounded-lg px-4 py-2">CMA (Cost and Management Accountant)</span>
+        <span className="text-xs font-semibold border border-accent/20 text-accent rounded-lg px-4 py-2">Financial Analyst</span>
       </motion.div>
     </div>
   </section>

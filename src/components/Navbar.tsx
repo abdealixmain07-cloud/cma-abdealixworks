@@ -4,10 +4,10 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "What I Do", href: "#services" },
-  { label: "Tools", href: "#tools" },
   { label: "Projects", href: "#portfolio" },
-  { label: "Case Study", href: "#casestudy" },
+  { label: "Analysis", href: "#analysis" },
   { label: "Experience", href: "#experience" },
+  { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -50,8 +50,7 @@ const Navbar = () => {
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, "#home")}
-          className="text-lg font-medium tracking-tight text-foreground"
-          style={{ fontFamily: "'Playfair Display', serif" }}
+          className="text-lg font-bold tracking-tight text-foreground"
         >
           Abdeali<span className="text-accent">.</span>
         </a>
@@ -62,7 +61,7 @@ const Navbar = () => {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className={`text-[13px] tracking-wide transition-colors duration-200 relative ${
+              className={`text-[13px] font-medium tracking-wide transition-colors duration-200 relative ${
                 activeSection === link.href
                   ? "text-foreground nav-active-indicator"
                   : "text-muted-foreground hover:text-foreground"
@@ -87,7 +86,7 @@ const Navbar = () => {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className={`block text-sm ${
+              className={`block text-sm font-medium ${
                 activeSection === link.href ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               }`}
             >
