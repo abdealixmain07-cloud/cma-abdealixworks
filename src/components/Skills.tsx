@@ -17,7 +17,6 @@ const columns = [
       "PowerPoint Presentations",
       "Power BI",
       "QuickBooks, Xero, Zoho, Tally",
-      "SAP (Basic)",
     ],
   },
   {

@@ -35,7 +35,7 @@ const projects = [
     depth: "15+ KPIs tracked across revenue, cost, and operational metrics.",
     impact: "Improved visibility into performance metrics. Enabled data-driven management decisions.",
     tools: "Advanced Excel, Power Query",
-    image: "https://i.postimg.cc/dhyb4D1t/Screenshot-2026-02-20-142709-1.png",
+    image: "https://i.postimg.cc/dhyb4D1t/Screenshot-2026-02-20-142709.png",
   },
   {
     title: "Financial Reporting & Automation System",
