@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const PROFILE_PHOTO = "https://i.postimg.cc/3kFDnFqX/Chat-GPT-Image-Mar-27-2026-12-12-20-PM.png";
 
-const typingRoles = ["Cost Accountant", "Financial Analyst", "FP&A Specialist"];
+const typingRoles = ["Financial Reporting Analyst", "Financial Analyst", "FP&A Specialist"];
 
 const TypingAnimation = () => {
   const [roleIndex, setRoleIndex] = useState(0);
