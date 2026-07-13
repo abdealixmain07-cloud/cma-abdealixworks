@@ -1,10 +1,11 @@
 import { ArrowRight, Download, Linkedin } from "lucide-react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
+import profilePhoto from "@/assets/profile.png";
 
-const PROFILE_PHOTO = "https://i.postimg.cc/3kFDnFqX/Chat-GPT-Image-Mar-27-2026-12-12-20-PM.png";
+const PROFILE_PHOTO = profilePhoto;
 
-const typingRoles = ["Financial Reporting Analyst", "Financial Analyst", "FP&A Specialist"];
+const typingRoles = ["Financial Reporting Analyst", "FP&A Professional", "UAE Accounting & Compliance"];
 
 const TypingAnimation = () => {
   const [roleIndex, setRoleIndex] = useState(0);
