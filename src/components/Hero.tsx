@@ -1,9 +1,9 @@
 import { ArrowRight, Download, Linkedin } from "lucide-react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
-import profilePhoto from "@/assets/profile.png";
+import profilePhoto from "@/assets/profile.png.asset.json";
 
-const PROFILE_PHOTO = profilePhoto;
+const PROFILE_PHOTO = profilePhoto.url;
 
 const typingRoles = ["Financial Reporting Analyst", "FP&A Professional", "UAE Accounting & Compliance"];
 
