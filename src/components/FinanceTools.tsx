@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Calculator, Flame, Target } from "lucide-react";
+import { Calculator, Flame, Target, TrendingUp, Wallet } from "lucide-react";
 
 const ProfitMarginCalc = () => {
   const [revenue, setRevenue] = useState("");
