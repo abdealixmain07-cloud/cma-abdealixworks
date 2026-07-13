@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import WhatIDo from "@/components/WhatIDo";
+import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
 import InvestmentAnalysis from "@/components/InvestmentAnalysis";
 import CaseStudy from "@/components/CaseStudy";
