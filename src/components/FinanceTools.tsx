@@ -121,10 +121,77 @@ const BreakevenCalc = () => {
   );
 };
 
+const ROICalc = () => {
+  const [gain, setGain] = useState("");
+  const [invest, setInvest] = useState("");
+  const g = parseFloat(gain) || 0;
+  const i = parseFloat(invest) || 0;
+  const roi = i > 0 ? ((g - i) / i) * 100 : 0;
+  return (
+    <div className="space-y-4">
+      <div>
+        <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider block mb-1.5">Investment</label>
+        <input type="number" value={invest} onChange={(e) => setInvest(e.target.value)} placeholder="50,000"
+          className="w-full px-4 py-2.5 rounded-lg border border-input bg-secondary text-sm text-foreground focus:outline-none" />
+      </div>
+      <div>
+        <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider block mb-1.5">Return</label>
+        <input type="number" value={gain} onChange={(e) => setGain(e.target.value)} placeholder="75,000"
+          className="w-full px-4 py-2.5 rounded-lg border border-input bg-secondary text-sm text-foreground focus:outline-none" />
+      </div>
+      {i > 0 && (
+        <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="pt-3 border-t border-border">
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">ROI</span>
+            <span className={`font-semibold text-lg ${roi >= 0 ? "text-accent" : "text-destructive"}`}>{roi.toFixed(1)}%</span>
+          </div>
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
+const WorkingCapitalCalc = () => {
+  const [ca, setCa] = useState("");
+  const [cl, setCl] = useState("");
+  const a = parseFloat(ca) || 0;
+  const l = parseFloat(cl) || 0;
+  const wc = a - l;
+  const ratio = l > 0 ? a / l : 0;
+  return (
+    <div className="space-y-4">
+      <div>
+        <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider block mb-1.5">Current Assets</label>
+        <input type="number" value={ca} onChange={(e) => setCa(e.target.value)} placeholder="300,000"
+          className="w-full px-4 py-2.5 rounded-lg border border-input bg-secondary text-sm text-foreground focus:outline-none" />
+      </div>
+      <div>
+        <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider block mb-1.5">Current Liabilities</label>
+        <input type="number" value={cl} onChange={(e) => setCl(e.target.value)} placeholder="180,000"
+          className="w-full px-4 py-2.5 rounded-lg border border-input bg-secondary text-sm text-foreground focus:outline-none" />
+      </div>
+      {l > 0 && (
+        <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="pt-3 border-t border-border space-y-2">
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Working Capital</span>
+            <span className={`font-semibold ${wc >= 0 ? "text-foreground" : "text-destructive"}`}>${wc.toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Current Ratio</span>
+            <span className={`font-semibold text-lg ${ratio >= 1.5 ? "text-accent" : "text-destructive"}`}>{ratio.toFixed(2)}</span>
+          </div>
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
 const tools = [
-  { id: "margin", label: "Profit Margin", icon: Calculator, component: ProfitMarginCalc },
+  { id: "margin", label: "Margin", icon: Calculator, component: ProfitMarginCalc },
   { id: "burn", label: "Burn Rate", icon: Flame, component: BurnRateCalc },
   { id: "breakeven", label: "Break-even", icon: Target, component: BreakevenCalc },
+  { id: "roi", label: "ROI", icon: TrendingUp, component: ROICalc },
+  { id: "wc", label: "Working Cap", icon: Wallet, component: WorkingCapitalCalc },
 ];
 
 const FinanceTools = () => {
