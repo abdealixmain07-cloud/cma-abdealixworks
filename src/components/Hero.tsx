@@ -162,8 +162,8 @@ const fadeUp = {
 const credibilityBadges = [
   "CMA Qualified (ICMAI)",
   "8+ International Clients",
+  "UAE Accounting & Compliance",
   "70% Faster Reporting",
-  "3,000+ Transactions Reclassified",
 ];
 
 const Hero = () => (
