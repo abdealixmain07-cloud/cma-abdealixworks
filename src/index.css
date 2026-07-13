@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,50 +6,50 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 40% 13%;
+    --background: 0 0% 100%;
+    --foreground: 220 20% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 40% 13%;
+    --card-foreground: 220 20% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 40% 13%;
+    --popover-foreground: 220 20% 12%;
 
-    --primary: 220 40% 13%;
-    --primary-foreground: 220 20% 97%;
+    --primary: 220 20% 12%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 15% 94%;
-    --secondary-foreground: 220 40% 13%;
+    --secondary: 30 15% 97%;
+    --secondary-foreground: 220 20% 12%;
 
-    --muted: 220 12% 91%;
-    --muted-foreground: 220 10% 46%;
+    --muted: 30 10% 95%;
+    --muted-foreground: 220 8% 45%;
 
-    --accent: 217 91% 60%;
+    --accent: 22 100% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 217 91% 60%;
+    --border: 30 10% 90%;
+    --input: 30 10% 90%;
+    --ring: 22 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --success: 142 70% 45%;
     --success-foreground: 0 0% 100%;
 
-    --navy: 220 40% 13%;
-    --navy-light: 220 30% 20%;
+    --navy: 220 20% 12%;
+    --navy-light: 220 15% 22%;
 
-    --sidebar-background: 220 20% 97%;
-    --sidebar-foreground: 220 40% 13%;
-    --sidebar-primary: 220 40% 13%;
-    --sidebar-primary-foreground: 220 20% 97%;
-    --sidebar-accent: 220 12% 91%;
-    --sidebar-accent-foreground: 220 40% 13%;
-    --sidebar-border: 220 15% 90%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 20% 12%;
+    --sidebar-primary: 220 20% 12%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 30 10% 95%;
+    --sidebar-accent-foreground: 220 20% 12%;
+    --sidebar-border: 30 10% 90%;
+    --sidebar-ring: 22 100% 50%;
   }
 }
 
@@ -71,7 +71,7 @@
   }
 
   h1, h2, h3 {
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
     color: hsl(var(--foreground));
