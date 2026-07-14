@@ -196,47 +196,69 @@ const tools = [
 
 const FinanceTools = () => {
   const [active, setActive] = useState("margin");
-  const ActiveComponent = tools.find((t) => t.id === active)!.component;
+  const ActiveTool = tools.find((t) => t.id === active)!;
+  const ActiveComponent = ActiveTool.component;
 
   return (
-    <section id="tools" className="py-28 section-alt section-divider">
+    <section id="tools" className="py-24 section-alt section-divider">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
+          transition={{ duration: 0.5 }}
+          className="mb-10 text-center max-w-2xl mx-auto"
         >
-          <p className="text-xs font-medium tracking-[0.25em] uppercase text-muted-foreground mb-4">Interactive</p>
-          <h2 className="text-4xl md:text-[44px] mb-3">Try My Financial Tools</h2>
-          <p className="text-muted-foreground text-base max-w-lg">Quick financial calculators built with the same analytical rigor I bring to every engagement.</p>
+          <p className="text-xs font-medium tracking-[0.25em] uppercase text-muted-foreground mb-3">Interactive</p>
+          <h2 className="text-3xl md:text-[38px] mb-3">Financial Tools — Try Live</h2>
+          <p className="text-muted-foreground text-sm">Quick calculators built with the same analytical rigor I bring to every engagement.</p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1, duration: 0.6 }}
-          className="max-w-md"
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx-auto"
         >
-          <div className="bg-card border border-border rounded-xl overflow-hidden shadow-sm">
-            <div className="flex border-b border-border">
-              {tools.map((t) => (
-                <button
-                  key={t.id}
-                  onClick={() => setActive(t.id)}
-                  className={`flex-1 flex items-center justify-center gap-2 py-3.5 text-xs font-medium uppercase tracking-wider transition-all duration-200 ${
-                    active === t.id ? "text-foreground bg-secondary border-b-2 border-accent" : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <t.icon className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">{t.label}</span>
-                </button>
-              ))}
-            </div>
-            <div className="p-6">
+          {/* Tool selector chips */}
+          <div className="flex flex-wrap justify-center gap-2 mb-6">
+            {tools.map((t) => (
+              <button
+                key={t.id}
+                onClick={() => setActive(t.id)}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-medium transition-all duration-200 ${
+                  active === t.id
+                    ? "bg-foreground text-background border-foreground shadow-sm"
+                    : "bg-card text-muted-foreground border-border hover:border-accent hover:text-foreground"
+                }`}
+              >
+                <t.icon className="w-3.5 h-3.5" />
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Card */}
+          <div className="grid md:grid-cols-5 gap-0 bg-card border border-border rounded-2xl overflow-hidden shadow-sm">
+            <div className="md:col-span-3 p-6 md:p-8">
+              <div className="flex items-center gap-2 mb-5">
+                <ActiveTool.icon className="w-4 h-4 text-accent" />
+                <p className="text-xs font-semibold tracking-wider uppercase text-foreground">{ActiveTool.label} Calculator</p>
+              </div>
               <ActiveComponent />
+            </div>
+            <div className="hidden md:flex md:col-span-2 bg-secondary/60 border-l border-border p-8 flex-col justify-between">
+              <div>
+                <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-muted-foreground mb-3">Why it matters</p>
+                <p className="text-sm text-foreground leading-relaxed">
+                  Every model I build is grounded in the same fundamentals — clean inputs, transparent logic, and decision-ready outputs.
+                </p>
+              </div>
+              <div className="mt-6 pt-6 border-t border-border">
+                <p className="text-3xl font-bold text-foreground">{tools.length}</p>
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1 font-semibold">Live Calculators</p>
+              </div>
             </div>
           </div>
         </motion.div>

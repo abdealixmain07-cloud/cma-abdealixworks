@@ -1,9 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import ToolMarquee from "@/components/ToolMarquee";
 import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
-import InvestmentAnalysis from "@/components/InvestmentAnalysis";
-import CaseStudy from "@/components/CaseStudy";
 import Experience from "@/components/Experience";
 import AutomationWorkflow from "@/components/AutomationWorkflow";
 import Skills from "@/components/Skills";
@@ -17,10 +16,9 @@ const Index = () => {
     <div className="min-h-screen bg-background grain-overlay">
       <Navbar />
       <Hero />
+      <ToolMarquee />
       <Services />
       <Portfolio />
-      <InvestmentAnalysis />
-      <CaseStudy />
       <Experience />
       <AutomationWorkflow />
       <Skills />

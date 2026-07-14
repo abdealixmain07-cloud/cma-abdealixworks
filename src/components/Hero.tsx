@@ -5,7 +5,7 @@ import profilePhoto from "@/assets/profile.png.asset.json";
 
 const PROFILE_PHOTO = profilePhoto.url;
 
-const typingRoles = ["Financial Reporting Analyst", "FP&A Professional", "UAE Accounting & Compliance"];
+const typingRoles = ["Financial Reporting Analyst", "FP&A Professional", "Cost & Management Accountant"];
 
 const TypingAnimation = () => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -162,7 +162,7 @@ const fadeUp = {
 const credibilityBadges = [
   "CMA Qualified (ICMAI)",
   "8+ International Clients",
-  "UAE Accounting & Compliance",
+  "Multi-Entity Reporting",
   "70% Faster Reporting",
 ];
 
