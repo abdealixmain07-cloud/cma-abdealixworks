@@ -5,7 +5,7 @@ import profilePhoto from "@/assets/profile.png.asset.json";
 
 const PROFILE_PHOTO = profilePhoto.url;
 
-const typingRoles = ["Financial Reporting Analyst", "FP&A Professional", "UAE Accounting & Compliance"];
+const typingRoles = ["Financial Reporting Analyst", "FP&A Professional", "Cost & Management Accountant"];
 
 const TypingAnimation = () => {
   const [roleIndex, setRoleIndex] = useState(0);
