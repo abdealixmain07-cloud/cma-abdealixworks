@@ -183,3 +183,25 @@ input:focus, textarea:focus {
     transition: none !important;
   }
 }
+
+/* Tool marquee — smooth CSS-driven scroll (mobile-safe) */
+@keyframes marquee-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  animation: marquee-scroll 40s linear infinite !important;
+  transition: none !important;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+@media (max-width: 768px) {
+  .marquee-track { animation-duration: 28s !important; }
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none !important; }
+}
