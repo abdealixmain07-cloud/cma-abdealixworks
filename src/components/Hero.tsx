@@ -168,11 +168,64 @@ const credibilityBadges = [
 
 const Hero = () => (
   <section id="home" className="min-h-screen flex items-center pt-24 pb-20 relative overflow-hidden">
-    {/* Subtle background */}
-    <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.04]"
+    {/* Animated finance grid backdrop */}
+    <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+      {/* Drifting grid */}
+      <div className="hero-grid absolute inset-0 opacity-[0.35]" />
+      {/* Faint line-chart pattern */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.08]" viewBox="0 0 1200 800" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="heroLine" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stopColor="hsl(217 91% 60%)" stopOpacity="0" />
+            <stop offset="50%" stopColor="hsl(217 91% 60%)" stopOpacity="1" />
+            <stop offset="100%" stopColor="hsl(217 91% 60%)" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <motion.path
+          d="M0,520 C120,480 200,560 320,500 C440,440 520,540 640,470 C760,400 860,500 980,420 C1080,360 1140,410 1200,380"
+          stroke="url(#heroLine)"
+          strokeWidth="1.5"
+          fill="none"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 3, ease: "easeInOut" }}
+        />
+        <motion.path
+          d="M0,620 C160,600 260,660 400,610 C540,560 640,640 780,590 C920,540 1020,600 1200,560"
+          stroke="hsl(220 15% 40%)"
+          strokeOpacity="0.5"
+          strokeWidth="1"
+          fill="none"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 3.4, ease: "easeInOut", delay: 0.3 }}
+        />
+        {/* Candlestick strip */}
+        {Array.from({ length: 22 }).map((_, i) => {
+          const x = 40 + i * 52;
+          const h = 18 + ((i * 37) % 46);
+          const y = 700 - h / 2;
+          const up = i % 2 === 0;
+          return (
+            <motion.g
+              key={i}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 + i * 0.04, duration: 0.5 }}
+            >
+              <line x1={x} y1={y - 10} x2={x} y2={y + h + 10} stroke={up ? "hsl(150 60% 40%)" : "hsl(0 60% 50%)"} strokeWidth="1" />
+              <rect x={x - 4} y={y} width="8" height={h} fill={up ? "hsl(150 60% 40%)" : "hsl(0 60% 50%)"} />
+            </motion.g>
+          );
+        })}
+      </svg>
+      {/* Soft radial glow */}
+      <div
+        className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.05]"
         style={{ background: "radial-gradient(circle, hsl(217 91% 60%), transparent 70%)" }}
       />
+      {/* Fade edges */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
     </div>
 
     <div className="container mx-auto px-6 relative z-10">

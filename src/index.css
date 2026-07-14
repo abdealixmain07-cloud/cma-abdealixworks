@@ -205,3 +205,24 @@ input:focus, textarea:focus {
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none !important; }
 }
+
+/* Hero animated finance grid backdrop */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, hsl(220 15% 55% / 0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(220 15% 55% / 0.18) 1px, transparent 1px);
+  background-size: 44px 44px;
+  animation: hero-grid-drift 24s linear infinite;
+  mask-image: radial-gradient(ellipse at center, black 55%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 55%, transparent 100%);
+}
+@keyframes hero-grid-drift {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 44px 44px, 44px 44px; }
+}
+@media (max-width: 768px) {
+  .hero-grid { animation-duration: 32s !important; opacity: 0.22 !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-grid { animation: none !important; }
+}
