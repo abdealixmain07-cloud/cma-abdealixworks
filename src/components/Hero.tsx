@@ -162,7 +162,7 @@ const fadeUp = {
 const credibilityBadges = [
   "CMA Qualified (ICMAI)",
   "8+ International Clients",
-  "UAE Accounting & Compliance",
+  "Multi-Entity Reporting",
   "70% Faster Reporting",
 ];
 
