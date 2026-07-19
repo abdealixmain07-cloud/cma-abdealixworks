@@ -2,29 +2,27 @@ import { useState } from "react";
 
 type Tool = { name: string; icon: string; fallbacks?: string[] };
 
-// Iconify "logos" collection = full-color brand SVGs, highly reliable CDN.
-// Fallbacks use jsdelivr's simple-icons mirror, then a letter-tile in <ToolLogo/>.
 const iconify = (slug: string) => `https://api.iconify.design/logos/${slug}.svg`;
-const simple = (slug: string, color: string) =>
+const iconifyRaw = (path: string) => `https://api.iconify.design/${path}.svg`;
+const simple = (slug: string) =>
   `https://cdn.jsdelivr.net/npm/simple-icons@11/icons/${slug}.svg`;
 
 const tools: Tool[] = [
-  { name: "Excel",         icon: iconify("microsoft-excel"),      fallbacks: [simple("microsoftexcel", "217346")] },
-  { name: "PowerPoint",    icon: iconify("microsoft-powerpoint"), fallbacks: [simple("microsoftpowerpoint", "B7472A")] },
-  { name: "Word",          icon: iconify("microsoft-word"),       fallbacks: [simple("microsoftword", "2B579A")] },
-  { name: "Power BI",      icon: iconify("microsoft-power-bi"),   fallbacks: [simple("powerbi", "F2C811")] },
-  { name: "Outlook",       icon: iconify("microsoft-outlook"),    fallbacks: [simple("microsoftoutlook", "0078D4")] },
-  { name: "QuickBooks",    icon: iconify("quickbooks"),           fallbacks: [simple("quickbooks", "2CA01C")] },
-  { name: "Xero",          icon: iconify("xero"),                 fallbacks: [simple("xero", "13B5EA")] },
-  { name: "Zoho",          icon: iconify("zoho"),                 fallbacks: [simple("zoho", "E42527")] },
+  { name: "Excel",         icon: iconify("microsoft-excel"),      fallbacks: [simple("microsoftexcel")] },
+  { name: "PowerPoint",    icon: iconify("microsoft-powerpoint"), fallbacks: [simple("microsoftpowerpoint")] },
+  { name: "Word",          icon: iconify("microsoft-word"),       fallbacks: [simple("microsoftword")] },
+  { name: "Power BI",      icon: iconify("microsoft-power-bi"),   fallbacks: [simple("powerbi")] },
+  { name: "Outlook",       icon: iconify("microsoft-outlook"),    fallbacks: [simple("microsoftoutlook")] },
+  { name: "SQL",           icon: iconifyRaw("vscode-icons/file-type-sql"), fallbacks: [iconify("mysql"), simple("mysql")] },
+  { name: "QuickBooks",    icon: iconify("quickbooks"),           fallbacks: [simple("quickbooks")] },
+  { name: "Xero",          icon: iconify("xero"),                 fallbacks: [simple("xero")] },
+  { name: "Zoho",          icon: iconify("zoho"),                 fallbacks: [simple("zoho")] },
   { name: "Tally ERP",     icon: iconify("tally"),                fallbacks: [] },
-  { name: "SAP Concur",    icon: iconify("sap"),                  fallbacks: [] },
-  { name: "Google Sheets", icon: iconify("google-sheets"),        fallbacks: [simple("googlesheets", "0F9D58")] },
-  { name: "Google Drive",  icon: iconify("google-drive"),         fallbacks: [simple("googledrive", "4285F4")] },
-  { name: "Notion",        icon: iconify("notion-icon"),          fallbacks: [simple("notion", "000000")] },
-  { name: "Slack",         icon: iconify("slack-icon"),           fallbacks: [simple("slack", "4A154B")] },
-  { name: "Canva",         icon: iconify("canva"),                fallbacks: [simple("canva", "00C4CC")] },
-  { name: "Zapier",        icon: iconify("zapier-icon"),          fallbacks: [simple("zapier", "FF4A00")] },
+  { name: "Google Sheets", icon: iconify("google-sheets"),        fallbacks: [simple("googlesheets")] },
+  { name: "Google Drive",  icon: iconify("google-drive"),         fallbacks: [simple("googledrive")] },
+  { name: "Notion",        icon: iconify("notion-icon"),          fallbacks: [simple("notion")] },
+  { name: "Slack",         icon: iconify("slack-icon"),           fallbacks: [simple("slack")] },
+  { name: "Canva",         icon: iconify("canva"),                fallbacks: [simple("canva")] },
 ];
 
 const ToolLogo = ({ tool }: { tool: Tool }) => {
