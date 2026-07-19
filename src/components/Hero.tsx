@@ -2,10 +2,15 @@ import { ArrowRight, Download, Linkedin } from "lucide-react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
 import profilePhoto from "@/assets/profile.png.asset.json";
+import skyline from "@/assets/mumbai-skyline.jpg";
 
 const PROFILE_PHOTO = profilePhoto.url;
 
-const typingRoles = ["Financial Reporting Analyst", "FP&A Professional", "Cost & Management Accountant"];
+const typingRoles = [
+  "Financial Reporting Analyst",
+  "FP&A Professional",
+  "Cost & Management Accountant",
+];
 
 const TypingAnimation = () => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -56,107 +61,14 @@ const AnimatedCounter = ({ target, suffix = "" }: { target: number; suffix?: str
   return <span>{display}</span>;
 };
 
-const HeroDashboard = () => {
-  const [hoveredBar, setHoveredBar] = useState<number | null>(null);
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
-  const revenueData = [42, 55, 48, 65, 58, 72];
-  const costData = [38, 42, 35, 45, 40, 48];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.4 }}
-      className="bg-card border border-border rounded-2xl p-6 shadow-xl shadow-accent/5"
-    >
-      <div className="flex items-center justify-between mb-5">
-        <div>
-          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-muted-foreground">Financial Overview</p>
-          <p className="text-sm font-semibold text-foreground mt-1">Multi-Entity Performance</p>
-        </div>
-        <div className="flex gap-4 text-[10px] text-muted-foreground">
-          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-accent" /> Revenue</span>
-          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-muted-foreground/30" /> Cost</span>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-3 gap-3 mb-5">
-        {[
-          { label: "Entities", value: "8+", color: "text-foreground" },
-          { label: "Reporting ↓", value: "70%", color: "text-accent" },
-          { label: "Accuracy", value: "99.5%", color: "text-foreground" },
-        ].map((kpi) => (
-          <div key={kpi.label} className="bg-secondary/60 border border-border rounded-xl p-3 text-center">
-            <p className="text-[9px] text-muted-foreground uppercase tracking-wider">{kpi.label}</p>
-            <motion.p
-              className={`text-lg font-bold mt-1 ${kpi.color}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-            >
-              {kpi.value}
-            </motion.p>
-          </div>
-        ))}
-      </div>
-
-      <div className="h-32 flex items-end gap-2">
-        {months.map((m, i) => (
-          <div key={m} className="flex-1 flex flex-col items-center gap-1"
-            onMouseEnter={() => setHoveredBar(i)}
-            onMouseLeave={() => setHoveredBar(null)}
-          >
-            <div className="w-full flex gap-0.5 items-end h-24">
-              <motion.div
-                className="flex-1 rounded-sm bg-accent/50"
-                initial={{ height: 0 }}
-                animate={{ height: `${revenueData[i]}%`, opacity: hoveredBar === i ? 1 : 0.7 }}
-                transition={{ duration: 0.8, delay: 0.6 + i * 0.08 }}
-              />
-              <motion.div
-                className="flex-1 rounded-sm bg-muted-foreground/15"
-                initial={{ height: 0 }}
-                animate={{ height: `${costData[i]}%`, opacity: hoveredBar === i ? 0.5 : 0.3 }}
-                transition={{ duration: 0.8, delay: 0.7 + i * 0.08 }}
-              />
-            </div>
-            <span className="text-[9px] text-muted-foreground">{m}</span>
-          </div>
-        ))}
-      </div>
-
-      <svg className="w-full h-10 mt-3" viewBox="0 0 200 30" fill="none">
-        <motion.polyline
-          points="0,25 30,20 60,22 90,15 120,12 150,8 180,10 200,5"
-          stroke="hsl(217 91% 60%)"
-          strokeWidth="1.5"
-          fill="none"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2.5, ease: "easeInOut", delay: 0.8 }}
-        />
-        <motion.polyline
-          points="0,28 30,26 60,24 90,22 120,20 150,18 180,16 200,14"
-          stroke="hsl(220 10% 46% / 0.3)"
-          strokeWidth="1"
-          fill="none"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2.5, ease: "easeInOut", delay: 1 }}
-        />
-      </svg>
-    </motion.div>
-  );
-};
-
 const staggerChildren = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] as const } },
 };
 
 const credibilityBadges = [
@@ -166,104 +78,103 @@ const credibilityBadges = [
   "70% Faster Reporting",
 ];
 
+const kpis = [
+  { label: "Reporting Time ↓", target: 70, suffix: "%" },
+  { label: "Entities Managed", target: 8, suffix: "+" },
+  { label: "Transactions", target: 3000, suffix: "+" },
+  { label: "Accuracy", target: 99, suffix: ".5%" },
+];
+
 const Hero = () => (
-  <section id="home" className="min-h-screen flex items-center pt-24 pb-20 relative overflow-hidden">
-    {/* Animated finance grid backdrop */}
-    <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-      {/* Drifting grid */}
-      <div className="hero-grid absolute inset-0 opacity-[0.35]" />
-      {/* Faint line-chart pattern */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.08]" viewBox="0 0 1200 800" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="heroLine" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stopColor="hsl(217 91% 60%)" stopOpacity="0" />
-            <stop offset="50%" stopColor="hsl(217 91% 60%)" stopOpacity="1" />
-            <stop offset="100%" stopColor="hsl(217 91% 60%)" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        <motion.path
-          d="M0,520 C120,480 200,560 320,500 C440,440 520,540 640,470 C760,400 860,500 980,420 C1080,360 1140,410 1200,380"
-          stroke="url(#heroLine)"
-          strokeWidth="1.5"
-          fill="none"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 3, ease: "easeInOut" }}
-        />
-        <motion.path
-          d="M0,620 C160,600 260,660 400,610 C540,560 640,640 780,590 C920,540 1020,600 1200,560"
-          stroke="hsl(220 15% 40%)"
-          strokeOpacity="0.5"
-          strokeWidth="1"
-          fill="none"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 3.4, ease: "easeInOut", delay: 0.3 }}
-        />
-        {/* Candlestick strip */}
-        {Array.from({ length: 22 }).map((_, i) => {
-          const x = 40 + i * 52;
-          const h = 18 + ((i * 37) % 46);
-          const y = 700 - h / 2;
-          const up = i % 2 === 0;
-          return (
-            <motion.g
-              key={i}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 + i * 0.04, duration: 0.5 }}
-            >
-              <line x1={x} y1={y - 10} x2={x} y2={y + h + 10} stroke={up ? "hsl(150 60% 40%)" : "hsl(0 60% 50%)"} strokeWidth="1" />
-              <rect x={x - 4} y={y} width="8" height={h} fill={up ? "hsl(150 60% 40%)" : "hsl(0 60% 50%)"} />
-            </motion.g>
-          );
-        })}
-      </svg>
-      {/* Soft radial glow */}
-      <div
-        className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.05]"
-        style={{ background: "radial-gradient(circle, hsl(217 91% 60%), transparent 70%)" }}
+  <section id="home" className="relative min-h-screen flex items-center pt-28 pb-24 overflow-hidden isolate">
+    {/* Skyline backdrop */}
+    <div className="absolute inset-0 -z-10">
+      <img
+        src={skyline}
+        alt=""
+        aria-hidden
+        fetchPriority="high"
+        decoding="async"
+        width={1920}
+        height={1088}
+        className="w-full h-full object-cover object-center"
       />
-      {/* Fade edges */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
+      {/* Layered wash so text stays readable in light-mode */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background/95" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(220_20%_12%/0.15),transparent_60%)]" />
+      {/* Subtle drifting grid on top */}
+      <div className="hero-grid absolute inset-0 opacity-[0.25]" />
     </div>
 
-    <div className="container mx-auto px-6 relative z-10">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <motion.div variants={staggerChildren} initial="hidden" animate="visible">
-          {/* Profile */}
-          <motion.div variants={fadeUp} className="flex items-center gap-4 mb-8">
-            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-accent/20 shadow-lg">
-              <img src={PROFILE_PHOTO} alt="Abdeali Gangardiwala" className="w-full h-full object-cover" />
+    <div className="container mx-auto px-5 md:px-6 relative">
+      <motion.div
+        variants={staggerChildren}
+        initial="hidden"
+        animate="visible"
+        className="max-w-4xl mx-auto text-center"
+      >
+        {/* Large centered portrait with glass ring */}
+        <motion.div variants={fadeUp} className="flex justify-center mb-7 md:mb-9">
+          <div className="relative">
+            {/* Glow ring */}
+            <div className="absolute -inset-3 rounded-full bg-gradient-to-tr from-accent/40 via-accent/10 to-transparent blur-2xl" aria-hidden />
+            <div className="relative w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden ring-4 ring-background/70 shadow-[0_20px_60px_-15px_rgba(10,31,68,0.35)] backdrop-blur">
+              <img
+                src={PROFILE_PHOTO}
+                alt="Abdeali Gangardiwala"
+                width={416}
+                height={416}
+                fetchPriority="high"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
             </div>
-            <div>
-              <p className="text-sm font-semibold text-foreground">Abdeali Gangardiwala</p>
-              <p className="text-xs text-muted-foreground">CMA Qualified · ICMAI</p>
-            </div>
-          </motion.div>
+            {/* Floating verification chip */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.5 }}
+              className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap bg-background/90 backdrop-blur-md border border-border shadow-md rounded-full px-3 py-1 text-[10px] font-semibold text-foreground"
+            >
+              <span className="text-accent">●</span> CMA · ICMAI Qualified
+            </motion.div>
+          </div>
+        </motion.div>
 
-          <motion.p variants={fadeUp} className="text-xl md:text-2xl mb-3 h-9 font-semibold">
+        {/* Glassmorphism content panel */}
+        <motion.div
+          variants={fadeUp}
+          className="mx-auto max-w-3xl rounded-3xl bg-background/55 backdrop-blur-xl border border-border/70 shadow-[0_30px_80px_-30px_rgba(10,31,68,0.25)] px-6 md:px-10 py-8 md:py-10"
+        >
+          <p className="text-[10px] md:text-xs font-semibold tracking-[0.28em] uppercase text-muted-foreground mb-3">
+            Abdeali Gangardiwala
+          </p>
+
+          <h1 className="text-3xl md:text-5xl lg:text-[52px] leading-[1.08] tracking-tight mb-4">
+            Financial Analyst <span className="text-muted-foreground">|</span> CMA
+          </h1>
+
+          <p className="text-lg md:text-xl font-semibold mb-5 min-h-[1.6em]">
             <TypingAnimation />
-          </motion.p>
+          </p>
 
-          <motion.h1 variants={fadeUp} className="text-3xl md:text-4xl lg:text-[40px] leading-[1.15] mb-4 tracking-tight">
-            Financial Analyst | CMA
-          </motion.h1>
-
-          <motion.p variants={fadeUp} className="text-base text-muted-foreground mb-6 max-w-lg leading-relaxed">
-            I manage end-to-end financial reporting, build dynamic forecasting models, and transform complex financial data into clear, decision-ready insights across multi-entity international businesses.
-          </motion.p>
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-6">
+            End-to-end financial reporting, dynamic forecasting, and clear, decision-ready insights across multi-entity international businesses.
+          </p>
 
           {/* Credibility badges */}
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-2 mb-8">
+          <div className="flex flex-wrap justify-center gap-2 mb-7">
             {credibilityBadges.map((badge) => (
-              <span key={badge} className="text-xs font-medium bg-accent/8 text-accent border border-accent/15 px-3 py-1.5 rounded-full">
+              <span
+                key={badge}
+                className="text-[11px] md:text-xs font-medium bg-accent/10 text-accent border border-accent/20 px-3 py-1.5 rounded-full backdrop-blur"
+              >
                 {badge}
               </span>
             ))}
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             <a
               href="#portfolio"
               className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-[1px]"
@@ -273,7 +184,7 @@ const Hero = () => (
             <a
               href="/Abdeali_Gangardiwala_Resume.pdf"
               download
-              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:border-accent hover:-translate-y-[1px]"
+              className="inline-flex items-center gap-2 bg-background/70 backdrop-blur border border-border text-foreground px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:border-accent hover:-translate-y-[1px]"
             >
               <Download className="w-4 h-4" /> Download Resume
             </a>
@@ -281,38 +192,32 @@ const Hero = () => (
               href="https://www.linkedin.com/in/abdeali-main"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-border text-foreground px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:border-accent hover:-translate-y-[1px]"
+              aria-label="LinkedIn"
+              className="inline-flex items-center gap-2 bg-background/70 backdrop-blur border border-border text-foreground px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:border-accent hover:-translate-y-[1px]"
             >
               <Linkedin className="w-4 h-4" />
             </a>
-          </motion.div>
+          </div>
         </motion.div>
 
-        <div className="hidden lg:block">
-          <HeroDashboard />
-        </div>
-      </div>
-
-      {/* KPI Counter Strip */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl"
-      >
-        {[
-          { label: "Reporting Time ↓", target: 70, suffix: "%" },
-          { label: "Entities Managed", target: 8, suffix: "+" },
-          { label: "Transactions Processed", target: 3000, suffix: "+" },
-          { label: "Reporting Accuracy", target: 99, suffix: ".5%" },
-        ].map((kpi) => (
-          <div key={kpi.label} className="text-center md:text-left">
-            <p className="text-2xl md:text-3xl font-bold text-foreground">
-              <AnimatedCounter target={kpi.target} suffix={kpi.suffix} />
-            </p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mt-1 font-semibold">{kpi.label}</p>
+        {/* KPI strip inside a second glass card */}
+        <motion.div
+          variants={fadeUp}
+          className="mt-8 md:mt-10 mx-auto max-w-3xl rounded-2xl bg-background/50 backdrop-blur-xl border border-border/60 shadow-md px-4 md:px-8 py-5 md:py-6"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {kpis.map((kpi) => (
+              <div key={kpi.label} className="text-center">
+                <p className="text-2xl md:text-3xl font-bold text-foreground">
+                  <AnimatedCounter target={kpi.target} suffix={kpi.suffix} />
+                </p>
+                <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mt-1 font-semibold">
+                  {kpi.label}
+                </p>
+              </div>
+            ))}
           </div>
-        ))}
+        </motion.div>
       </motion.div>
     </div>
   </section>
