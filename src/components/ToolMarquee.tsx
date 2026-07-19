@@ -1,43 +1,60 @@
 import { useState } from "react";
 
-type Tool = { name: string; logo: string; fallback?: string };
+type Tool = { name: string; icon: string; fallbacks?: string[] };
+
+// Iconify "logos" collection = full-color brand SVGs, highly reliable CDN.
+// Fallbacks use jsdelivr's simple-icons mirror, then a letter-tile in <ToolLogo/>.
+const iconify = (slug: string) => `https://api.iconify.design/logos/${slug}.svg`;
+const simple = (slug: string, color: string) =>
+  `https://cdn.jsdelivr.net/npm/simple-icons@11/icons/${slug}.svg`;
 
 const tools: Tool[] = [
-  { name: "Excel", logo: "https://cdn.simpleicons.org/microsoftexcel/217346" },
-  { name: "PowerPoint", logo: "https://cdn.simpleicons.org/microsoftpowerpoint/B7472A" },
-  { name: "Word", logo: "https://cdn.simpleicons.org/microsoftword/2B579A" },
-  { name: "Power BI", logo: "https://cdn.simpleicons.org/powerbi/F2C811" },
-  { name: "QuickBooks", logo: "https://cdn.simpleicons.org/quickbooks/2CA01C" },
-  { name: "Xero", logo: "https://cdn.simpleicons.org/xero/13B5EA" },
-  { name: "Zoho Books", logo: "https://cdn.simpleicons.org/zoho/E42527" },
-  { name: "Tally ERP", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Tally_Solutions_logo.svg/512px-Tally_Solutions_logo.svg.png" },
-  { name: "Google Sheets", logo: "https://cdn.simpleicons.org/googlesheets/0F9D58" },
-  { name: "Google Drive", logo: "https://cdn.simpleicons.org/googledrive/4285F4" },
-  { name: "Notion", logo: "https://cdn.simpleicons.org/notion/000000" },
-  { name: "Slack", logo: "https://cdn.simpleicons.org/slack/4A154B" },
-  { name: "Outlook", logo: "https://cdn.simpleicons.org/microsoftoutlook/0078D4" },
-  { name: "Canva", logo: "https://cdn.simpleicons.org/canva/00C4CC" },
+  { name: "Excel",         icon: iconify("microsoft-excel"),      fallbacks: [simple("microsoftexcel", "217346")] },
+  { name: "PowerPoint",    icon: iconify("microsoft-powerpoint"), fallbacks: [simple("microsoftpowerpoint", "B7472A")] },
+  { name: "Word",          icon: iconify("microsoft-word"),       fallbacks: [simple("microsoftword", "2B579A")] },
+  { name: "Power BI",      icon: iconify("microsoft-power-bi"),   fallbacks: [simple("powerbi", "F2C811")] },
+  { name: "Outlook",       icon: iconify("microsoft-outlook"),    fallbacks: [simple("microsoftoutlook", "0078D4")] },
+  { name: "QuickBooks",    icon: iconify("quickbooks"),           fallbacks: [simple("quickbooks", "2CA01C")] },
+  { name: "Xero",          icon: iconify("xero"),                 fallbacks: [simple("xero", "13B5EA")] },
+  { name: "Zoho",          icon: iconify("zoho"),                 fallbacks: [simple("zoho", "E42527")] },
+  { name: "Tally ERP",     icon: iconify("tally"),                fallbacks: [] },
+  { name: "SAP Concur",    icon: iconify("sap"),                  fallbacks: [] },
+  { name: "Google Sheets", icon: iconify("google-sheets"),        fallbacks: [simple("googlesheets", "0F9D58")] },
+  { name: "Google Drive",  icon: iconify("google-drive"),         fallbacks: [simple("googledrive", "4285F4")] },
+  { name: "Notion",        icon: iconify("notion-icon"),          fallbacks: [simple("notion", "000000")] },
+  { name: "Slack",         icon: iconify("slack-icon"),           fallbacks: [simple("slack", "4A154B")] },
+  { name: "Canva",         icon: iconify("canva"),                fallbacks: [simple("canva", "00C4CC")] },
+  { name: "Zapier",        icon: iconify("zapier-icon"),          fallbacks: [simple("zapier", "FF4A00")] },
 ];
 
 const ToolLogo = ({ tool }: { tool: Tool }) => {
-  const [errored, setErrored] = useState(false);
+  const [srcIdx, setSrcIdx] = useState(0);
+  const [failed, setFailed] = useState(false);
+  const sources = [tool.icon, ...(tool.fallbacks ?? [])];
+  const src = sources[srcIdx];
+
   return (
-    <div className="flex items-center gap-3 opacity-75 hover:opacity-100 transition-opacity">
-      {!errored ? (
+    <div className="flex items-center gap-3 opacity-80 hover:opacity-100 transition-opacity">
+      {!failed ? (
         <img
-          src={tool.logo}
+          src={src}
           alt={tool.name}
           className="w-8 h-8 object-contain"
           loading="lazy"
+          decoding="async"
           onError={() => {
             // eslint-disable-next-line no-console
-            console.warn(`[ToolMarquee] logo failed to load: ${tool.name} (${tool.logo})`);
-            setErrored(true);
+            console.warn(`[ToolMarquee] logo failed (${tool.name}): ${src}`);
+            if (srcIdx < sources.length - 1) setSrcIdx(srcIdx + 1);
+            else setFailed(true);
           }}
         />
       ) : (
-        <div className="w-8 h-8 rounded-md bg-accent/10 border border-accent/20 flex items-center justify-center text-[10px] font-bold text-accent">
-          {tool.name.slice(0, 2).toUpperCase()}
+        <div
+          className="w-8 h-8 rounded-md bg-accent/15 border border-accent/25 flex items-center justify-center text-[10px] font-bold text-accent"
+          aria-label={tool.name}
+        >
+          {tool.name.replace(/[^A-Za-z]/g, "").slice(0, 2).toUpperCase()}
         </div>
       )}
       <span className="text-sm font-medium text-muted-foreground whitespace-nowrap">
@@ -47,8 +64,11 @@ const ToolLogo = ({ tool }: { tool: Tool }) => {
   );
 };
 
-const Row = () => (
-  <div className="flex items-center gap-10 md:gap-14 shrink-0 px-5 md:px-7">
+const Row = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
+  <div
+    className="flex items-center gap-8 md:gap-14 shrink-0 px-4 md:px-7"
+    aria-hidden={ariaHidden || undefined}
+  >
     {tools.map((t) => (
       <ToolLogo key={t.name} tool={t} />
     ))}
@@ -65,7 +85,7 @@ const ToolMarquee = () => (
     <div className="marquee-mask relative w-full overflow-hidden">
       <div className="marquee-track flex w-max will-change-transform">
         <Row />
-        <Row />
+        <Row ariaHidden />
       </div>
     </div>
   </section>
