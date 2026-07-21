@@ -45,11 +45,11 @@ const Contact = () => {
           height={1200}
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/78 to-background/95" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,hsl(var(--background)/0.6)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/45 to-background/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,hsl(var(--background)/0.45)_100%)]" />
       </div>
 
-      <div className="container mx-auto px-5 md:px-6 relative">
+      <div className="container mx-auto px-5 md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ const Contact = () => {
           className="max-w-3xl mx-auto"
         >
           {/* Main glass card */}
-          <div className="relative rounded-3xl bg-background/50 backdrop-blur-2xl border border-border/70 shadow-[0_40px_100px_-30px_rgba(10,31,68,0.35)] p-8 md:p-12 text-center">
+          <div className="relative z-10 rounded-3xl bg-background/35 backdrop-blur-md border border-white/40 shadow-[0_40px_100px_-30px_rgba(10,31,68,0.45)] p-8 md:p-12 text-center">
             <p className="text-xs font-semibold tracking-[0.28em] uppercase text-accent mb-3">Get In Touch</p>
             <h2 className="text-3xl md:text-5xl mb-4 leading-tight">Let's Build Something Meaningful.</h2>
             <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
