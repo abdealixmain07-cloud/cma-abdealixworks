@@ -155,11 +155,13 @@ const Portfolio = () => {
               >
                 <button
                   id={buttonId}
+                  ref={(el) => (triggerRefs.current[i] = el)}
                   type="button"
                   onClick={() => setOpenIdx(isOpen ? null : i)}
+                  onKeyDown={(e) => onTriggerKeyDown(e, i)}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
-                  className="w-full flex items-center gap-4 md:gap-6 p-5 md:p-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 rounded-2xl"
+                  className="w-full flex items-center gap-4 md:gap-6 p-5 md:p-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
                 >
                   <span className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-foreground text-background flex items-center justify-center text-xs font-bold flex-shrink-0">
                     0{i + 1}
