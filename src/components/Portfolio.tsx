@@ -73,6 +73,43 @@ const cardVariants = {
 
 const Portfolio = () => {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  const focusTrigger = (i: number) => {
+    const n = projects.length;
+    const idx = ((i % n) + n) % n;
+    triggerRefs.current[idx]?.focus();
+  };
+
+  const onTriggerKeyDown = (e: KeyboardEvent<HTMLButtonElement>, i: number) => {
+    switch (e.key) {
+      case "ArrowDown":
+      case "ArrowRight":
+        e.preventDefault();
+        focusTrigger(i + 1);
+        break;
+      case "ArrowUp":
+      case "ArrowLeft":
+        e.preventDefault();
+        focusTrigger(i - 1);
+        break;
+      case "Home":
+        e.preventDefault();
+        focusTrigger(0);
+        break;
+      case "End":
+        e.preventDefault();
+        focusTrigger(projects.length - 1);
+        break;
+      case "Escape":
+        if (openIdx !== null) {
+          e.preventDefault();
+          setOpenIdx(null);
+        }
+        break;
+    }
+  };
+
 
   return (
     <section id="portfolio" className="relative py-24 section-divider overflow-hidden">
