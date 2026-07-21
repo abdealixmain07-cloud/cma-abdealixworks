@@ -1,20 +1,11 @@
-import { ArrowRight, Download, Linkedin, ImageIcon } from "lucide-react";
+import { ArrowRight, Download, Linkedin } from "lucide-react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
 import profilePhoto from "@/assets/profile.png.asset.json";
 import bgMumbai from "@/assets/mumbai-skyline.jpg";
-import bgDubai from "@/assets/hero-bg-dubai.jpg";
-import bgAbstract from "@/assets/hero-bg-abstract.jpg";
 
 const PROFILE_PHOTO = profilePhoto.url;
 
-const backgrounds = [
-  { id: "mumbai",   label: "Mumbai · BKC",     src: bgMumbai,   swatch: "linear-gradient(135deg,#0a1f44,#e8a866)" },
-  { id: "dubai",    label: "Dubai · Golden",   src: bgDubai,    swatch: "linear-gradient(135deg,#ff9a3c,#0a1f44)" },
-  { id: "abstract", label: "Abstract Charts",  src: bgAbstract, swatch: "linear-gradient(135deg,#f5efe4,#0a1f44)" },
-] as const;
-
-type BgId = typeof backgrounds[number]["id"];
 
 const typingRoles = [
   "Financial Reporting Analyst",
@@ -95,58 +86,25 @@ const kpis = [
 ];
 
 const Hero = () => {
-  const [bgId, setBgId] = useState<BgId>(() => {
-    if (typeof window === "undefined") return "mumbai";
-    const stored = window.localStorage.getItem("hero-bg") as BgId | null;
-    return (stored && backgrounds.some((b) => b.id === stored)) ? stored : "mumbai";
-  });
-
-  useEffect(() => {
-    if (typeof window !== "undefined") window.localStorage.setItem("hero-bg", bgId);
-  }, [bgId]);
-
-  const active = backgrounds.find((b) => b.id === bgId) ?? backgrounds[0];
-
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-28 pb-24 overflow-hidden isolate">
-      {/* Skyline backdrop with crossfade */}
+      {/* Skyline backdrop */}
       <div className="absolute inset-0 -z-10">
-        {backgrounds.map((b) => (
-          <img
-            key={b.id}
-            src={b.src}
-            alt=""
-            aria-hidden
-            fetchPriority={b.id === active.id ? "high" : "low"}
-            decoding="async"
-            width={1920}
-            height={1088}
-            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ${b.id === active.id ? "opacity-100" : "opacity-0"}`}
-          />
-        ))}
+        <img
+          src={bgMumbai}
+          alt=""
+          aria-hidden
+          fetchPriority="high"
+          decoding="async"
+          width={1920}
+          height={1088}
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background/95" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(220_20%_12%/0.15),transparent_60%)]" />
         <div className="hero-grid absolute inset-0 opacity-[0.22]" />
       </div>
 
-      {/* Theme switcher */}
-      <div className="absolute top-24 right-4 md:right-8 z-20">
-        <div className="flex items-center gap-1.5 bg-background/70 backdrop-blur-xl border border-border/70 rounded-full px-2 py-1.5 shadow-md">
-          <ImageIcon className="w-3.5 h-3.5 text-muted-foreground ml-1.5" aria-hidden />
-          {backgrounds.map((b) => (
-            <button
-              key={b.id}
-              type="button"
-              onClick={() => setBgId(b.id)}
-              aria-label={`Background: ${b.label}`}
-              aria-pressed={b.id === active.id}
-              title={b.label}
-              className={`w-6 h-6 rounded-full border transition-all duration-200 ${b.id === active.id ? "border-accent scale-110 ring-2 ring-accent/30" : "border-border hover:scale-105"}`}
-              style={{ backgroundImage: b.swatch }}
-            />
-          ))}
-        </div>
-      </div>
 
       <div className="container mx-auto px-5 md:px-6 relative">
         <div className="max-w-4xl mx-auto text-center">
