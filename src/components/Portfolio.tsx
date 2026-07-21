@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, KeyboardEvent } from "react";
 import { TrendingUp, Sparkles, Plus, Minus } from "lucide-react";
 
 
