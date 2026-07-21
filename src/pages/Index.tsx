@@ -10,6 +10,7 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FinanceTools from "@/components/FinanceTools";
+import MotionToggle from "@/components/MotionToggle";
 
 const Index = () => {
   return (
