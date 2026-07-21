@@ -27,6 +27,7 @@ const Index = () => {
       <About />
       <Contact />
       <Footer />
+      <MotionToggle />
       <div className="mobile-sticky-cta md:hidden">
         <a
           href="#contact"
