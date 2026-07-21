@@ -71,141 +71,160 @@ const cardVariants = {
   }),
 };
 
-const Portfolio = () => (
-  <section id="portfolio" className="relative py-24 section-divider overflow-hidden">
-    {/* Subtle animated bg orbs */}
-    <div className="absolute inset-0 pointer-events-none" aria-hidden>
-      <motion.div
-        className="absolute -top-32 -left-24 w-[420px] h-[420px] rounded-full opacity-[0.08]"
-        style={{ background: "radial-gradient(circle, hsl(var(--accent)), transparent 70%)" }}
-        animate={{ x: [0, 40, 0], y: [0, 20, 0] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-0 right-0 w-[520px] h-[520px] rounded-full opacity-[0.06]"
-        style={{ background: "radial-gradient(circle, hsl(220 20% 12%), transparent 70%)" }}
-        animate={{ x: [0, -30, 0], y: [0, -20, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-      />
-    </div>
+const Portfolio = () => {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
-    <div className="container mx-auto px-6 relative">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.6 }}
-        className="mb-16 max-w-2xl"
-      >
-        <p className="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-3 flex items-center gap-2">
-          <Sparkles className="w-3 h-3" /> Work
-        </p>
-        <h2 className="text-3xl md:text-4xl">Selected Projects</h2>
-        <p className="text-sm text-muted-foreground mt-3">
-          Built for real clients — demo numbers shown for confidentiality.
-        </p>
-      </motion.div>
-
-      <div className="space-y-16 max-w-5xl">
-        {projects.map((p, i) => (
-          <motion.article
-            key={p.title}
-            custom={i}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            whileHover={{ y: -4 }}
-            className="group relative grid md:grid-cols-2 gap-10 items-start bg-card/80 backdrop-blur border border-border rounded-2xl p-6 md:p-8 hover:shadow-2xl hover:border-accent/25 hover:shadow-accent/5 transition-all duration-500"
-          >
-            {/* Number badge */}
-            <div className="absolute -top-4 -left-4 md:-left-6 w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center text-xs font-bold shadow-lg">
-              0{i + 1}
-            </div>
-
-            {/* Image side */}
-            <div className={`${i % 2 === 1 ? "md:order-2" : ""} relative`}>
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.4 }}
-                className="relative rounded-xl overflow-hidden border border-border shadow-md bg-secondary/30"
-              >
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.04]"
-                  loading="lazy"
-                />
-                {/* Metric chip overlay */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 + i * 0.05, duration: 0.5 }}
-                  className="absolute top-3 right-3 bg-background/95 backdrop-blur-md border border-accent/30 rounded-xl px-3 py-2 shadow-lg"
-                >
-                  <div className="flex items-center gap-1.5">
-                    <TrendingUp className="w-3.5 h-3.5 text-accent" />
-                    <span className="text-lg font-bold text-foreground leading-none">{p.metric}</span>
-                  </div>
-                  <p className="text-[9px] uppercase tracking-wider text-muted-foreground mt-1 font-semibold">
-                    {p.metricLabel}
-                  </p>
-                </motion.div>
-              </motion.div>
-            </div>
-
-            {/* Content side */}
-            <div className={`${i % 2 === 1 ? "md:order-1" : ""}`}>
-              <h3 className="text-lg text-foreground font-semibold mb-3 leading-snug flex items-start gap-2">
-                <span>{p.title}</span>
-                <ArrowUpRight className="w-5 h-5 text-accent flex-shrink-0 mt-0.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-              </h3>
-
-              <div className="mb-4">
-                <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground mb-1.5">Business Problem</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">{p.problem}</p>
-              </div>
-
-              <div className="mb-4">
-                <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground mb-1.5">What I Built</p>
-                <ul className="space-y-1">
-                  {p.solution.map((s, si) => (
-                    <motion.li
-                      key={s}
-                      initial={{ opacity: 0, x: -8 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + si * 0.1, duration: 0.4 }}
-                      className="flex items-start gap-2 text-sm text-muted-foreground"
-                    >
-                      <span className="text-accent mt-0.5">→</span>
-                      <span>{s}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
-
-              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{p.depth}</p>
-
-              <div className="flex gap-3 text-sm mb-3 border-l-2 border-accent pl-3">
-                <span className="text-muted-foreground font-semibold w-16 flex-shrink-0">Impact</span>
-                <span className="text-foreground">{p.impact}</span>
-              </div>
-
-              <div className="flex flex-wrap gap-1.5 mt-3">
-                {p.tools.split(", ").map((tool) => (
-                  <span key={tool} className="text-[11px] border border-border rounded-md px-2.5 py-1 text-muted-foreground bg-secondary/50">
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.article>
-        ))}
+  return (
+    <section id="portfolio" className="relative py-24 section-divider overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <motion.div
+          className="absolute -top-32 -left-24 w-[420px] h-[420px] rounded-full opacity-[0.08]"
+          style={{ background: "radial-gradient(circle, hsl(var(--accent)), transparent 70%)" }}
+          animate={{ x: [0, 40, 0], y: [0, 20, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
       </div>
-    </div>
-  </section>
-);
+
+      <div className="container mx-auto px-6 relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 max-w-2xl"
+        >
+          <p className="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-3 flex items-center gap-2">
+            <Sparkles className="w-3 h-3" /> Work
+          </p>
+          <h2 className="text-3xl md:text-4xl">Selected Projects</h2>
+          <p className="text-sm text-muted-foreground mt-3">
+            Built for real clients — demo numbers shown for confidentiality. Click any project to expand.
+          </p>
+        </motion.div>
+
+        <div className="max-w-4xl space-y-3">
+          {projects.map((p, i) => {
+            const isOpen = openIdx === i;
+            const panelId = `project-panel-${i}`;
+            const buttonId = `project-trigger-${i}`;
+            return (
+              <motion.article
+                key={p.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.06, duration: 0.5 }}
+                className={`group border border-border rounded-2xl bg-card/80 backdrop-blur overflow-hidden transition-all duration-300 ${isOpen ? "shadow-xl border-accent/30" : "hover:border-accent/25 hover:shadow-md"}`}
+              >
+                <button
+                  id={buttonId}
+                  type="button"
+                  onClick={() => setOpenIdx(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
+                  className="w-full flex items-center gap-4 md:gap-6 p-5 md:p-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 rounded-2xl"
+                >
+                  <span className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-foreground text-background flex items-center justify-center text-xs font-bold flex-shrink-0">
+                    0{i + 1}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-sm md:text-base text-foreground font-semibold leading-snug">
+                      {p.title}
+                    </h3>
+                    <p className="text-[11px] md:text-xs text-muted-foreground mt-1 truncate">{p.tools}</p>
+                  </div>
+                  <div className="hidden sm:flex items-center gap-1.5 bg-accent/10 border border-accent/25 rounded-lg px-2.5 py-1.5 flex-shrink-0">
+                    <TrendingUp className="w-3.5 h-3.5 text-accent" />
+                    <span className="text-sm font-bold text-foreground leading-none">{p.metric}</span>
+                  </div>
+                  <span
+                    aria-hidden
+                    className={`w-9 h-9 rounded-full border border-border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isOpen ? "bg-accent text-accent-foreground border-accent rotate-180" : "text-foreground group-hover:border-accent/50"}`}
+                  >
+                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                  </span>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={buttonId}
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid md:grid-cols-2 gap-8 p-6 md:p-8 pt-2 md:pt-4 border-t border-border/60">
+                        <div className="relative rounded-xl overflow-hidden border border-border shadow-sm bg-secondary/30">
+                          <img
+                            src={p.image}
+                            alt={p.title}
+                            className="w-full h-auto object-contain"
+                            loading="lazy"
+                          />
+                          <div className="absolute top-3 right-3 bg-background/95 backdrop-blur-md border border-accent/30 rounded-xl px-3 py-2 shadow-lg">
+                            <div className="flex items-center gap-1.5">
+                              <TrendingUp className="w-3.5 h-3.5 text-accent" />
+                              <span className="text-lg font-bold text-foreground leading-none">{p.metric}</span>
+                            </div>
+                            <p className="text-[9px] uppercase tracking-wider text-muted-foreground mt-1 font-semibold">
+                              {p.metricLabel}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div className="mb-4">
+                            <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground mb-1.5">Business Problem</p>
+                            <p className="text-sm text-muted-foreground leading-relaxed">{p.problem}</p>
+                          </div>
+
+                          <div className="mb-4">
+                            <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground mb-1.5">What I Built</p>
+                            <ul className="space-y-1">
+                              {p.solution.map((s) => (
+                                <li key={s} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                  <span className="text-accent mt-0.5">→</span>
+                                  <span>{s}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{p.depth}</p>
+
+                          <div className="flex gap-3 text-sm mb-3 border-l-2 border-accent pl-3">
+                            <span className="text-muted-foreground font-semibold w-16 flex-shrink-0">Impact</span>
+                            <span className="text-foreground">{p.impact}</span>
+                          </div>
+
+                          <div className="flex flex-wrap gap-1.5 mt-3">
+                            {p.tools.split(", ").map((tool) => (
+                              <span key={tool} className="text-[11px] border border-border rounded-md px-2.5 py-1 text-muted-foreground bg-secondary/50">
+                                {tool}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// silence unused var warning for ArrowUpRight
+void ArrowUpRight;
 
 export default Portfolio;
+
