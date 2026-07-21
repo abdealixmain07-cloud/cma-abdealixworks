@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, KeyboardEvent } from "react";
 import { TrendingUp, Sparkles, Plus, Minus } from "lucide-react";
 
 
@@ -73,6 +73,43 @@ const cardVariants = {
 
 const Portfolio = () => {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  const focusTrigger = (i: number) => {
+    const n = projects.length;
+    const idx = ((i % n) + n) % n;
+    triggerRefs.current[idx]?.focus();
+  };
+
+  const onTriggerKeyDown = (e: KeyboardEvent<HTMLButtonElement>, i: number) => {
+    switch (e.key) {
+      case "ArrowDown":
+      case "ArrowRight":
+        e.preventDefault();
+        focusTrigger(i + 1);
+        break;
+      case "ArrowUp":
+      case "ArrowLeft":
+        e.preventDefault();
+        focusTrigger(i - 1);
+        break;
+      case "Home":
+        e.preventDefault();
+        focusTrigger(0);
+        break;
+      case "End":
+        e.preventDefault();
+        focusTrigger(projects.length - 1);
+        break;
+      case "Escape":
+        if (openIdx !== null) {
+          e.preventDefault();
+          setOpenIdx(null);
+        }
+        break;
+    }
+  };
+
 
   return (
     <section id="portfolio" className="relative py-24 section-divider overflow-hidden">
@@ -118,11 +155,13 @@ const Portfolio = () => {
               >
                 <button
                   id={buttonId}
+                  ref={(el) => (triggerRefs.current[i] = el)}
                   type="button"
                   onClick={() => setOpenIdx(isOpen ? null : i)}
+                  onKeyDown={(e) => onTriggerKeyDown(e, i)}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
-                  className="w-full flex items-center gap-4 md:gap-6 p-5 md:p-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 rounded-2xl"
+                  className="w-full flex items-center gap-4 md:gap-6 p-5 md:p-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
                 >
                   <span className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-foreground text-background flex items-center justify-center text-xs font-bold flex-shrink-0">
                     0{i + 1}

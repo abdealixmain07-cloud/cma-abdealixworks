@@ -10,6 +10,7 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FinanceTools from "@/components/FinanceTools";
+import MotionToggle from "@/components/MotionToggle";
 
 const Index = () => {
   return (
@@ -26,6 +27,7 @@ const Index = () => {
       <About />
       <Contact />
       <Footer />
+      <MotionToggle />
       <div className="mobile-sticky-cta md:hidden">
         <a
           href="#contact"

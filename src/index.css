@@ -184,26 +184,50 @@ input:focus, textarea:focus {
   }
 }
 
+/* User-controlled reduced motion (toggle) */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+html.reduce-motion .marquee-track {
+  animation: none !important;
+  transform: none !important;
+}
+
 /* Tool marquee — smooth CSS-driven scroll (mobile-safe) */
 @keyframes marquee-scroll {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+@-webkit-keyframes marquee-scroll {
+  0%   { -webkit-transform: translate3d(0, 0, 0); }
+  100% { -webkit-transform: translate3d(-50%, 0, 0); }
 }
 .marquee-track {
-  animation: marquee-scroll 40s linear infinite !important;
+  -webkit-animation: marquee-scroll 40s linear infinite;
+  animation: marquee-scroll 40s linear infinite;
   transition: none !important;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  min-width: max-content;
 }
 @media (max-width: 768px) {
-  .marquee-track { animation-duration: 28s !important; }
+  .marquee-track {
+    -webkit-animation-duration: 26s;
+    animation-duration: 26s;
+  }
 }
 .marquee-mask {
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none !important; }
+  .marquee-track { animation: none !important; -webkit-animation: none !important; }
 }
 
 /* Hero animated finance grid backdrop */
