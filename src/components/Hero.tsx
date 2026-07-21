@@ -1,20 +1,11 @@
-import { ArrowRight, Download, Linkedin, ImageIcon } from "lucide-react";
+import { ArrowRight, Download, Linkedin } from "lucide-react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
 import profilePhoto from "@/assets/profile.png.asset.json";
 import bgMumbai from "@/assets/mumbai-skyline.jpg";
-import bgDubai from "@/assets/hero-bg-dubai.jpg";
-import bgAbstract from "@/assets/hero-bg-abstract.jpg";
 
 const PROFILE_PHOTO = profilePhoto.url;
 
-const backgrounds = [
-  { id: "mumbai",   label: "Mumbai · BKC",     src: bgMumbai,   swatch: "linear-gradient(135deg,#0a1f44,#e8a866)" },
-  { id: "dubai",    label: "Dubai · Golden",   src: bgDubai,    swatch: "linear-gradient(135deg,#ff9a3c,#0a1f44)" },
-  { id: "abstract", label: "Abstract Charts",  src: bgAbstract, swatch: "linear-gradient(135deg,#f5efe4,#0a1f44)" },
-] as const;
-
-type BgId = typeof backgrounds[number]["id"];
 
 const typingRoles = [
   "Financial Reporting Analyst",
