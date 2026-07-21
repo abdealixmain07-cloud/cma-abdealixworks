@@ -1,5 +1,7 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight, TrendingUp, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { ArrowUpRight, TrendingUp, Sparkles, Plus, Minus } from "lucide-react";
+
 
 const projects = [
   {
