@@ -223,8 +223,6 @@ const Portfolio = () => {
   );
 };
 
-// silence unused var warning for ArrowUpRight
-void ArrowUpRight;
-
 export default Portfolio;
+
 
