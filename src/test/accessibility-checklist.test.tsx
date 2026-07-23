@@ -1,8 +1,67 @@
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { describe, expect, it, beforeEach } from "vitest";
+import type { ReactNode } from "react";
+import { createRoot, type Root } from "react-dom/client";
+import { act } from "react-dom/test-utils";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import Portfolio from "@/components/Portfolio";
 import ToolMarquee from "@/components/ToolMarquee";
 import MotionToggle, { applyReducedMotion } from "@/components/MotionToggle";
+
+let root: Root | null = null;
+let container: HTMLDivElement | null = null;
+
+const render = (node: ReactNode) => {
+  container = document.createElement("div");
+  document.body.appendChild(container);
+  root = createRoot(container);
+  act(() => {
+    root?.render(node);
+  });
+  return container;
+};
+
+const cleanup = () => {
+  act(() => {
+    root?.unmount();
+  });
+  container?.remove();
+  root = null;
+  container = null;
+};
+
+const click = (element: Element) => {
+  act(() => {
+    element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+  });
+};
+
+const keyDown = (element: Element, key: string) => {
+  act(() => {
+    element.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true }));
+  });
+};
+
+const nextFrame = async () => {
+  await act(async () => {
+    await new Promise((resolve) => window.setTimeout(resolve, 5));
+  });
+};
+
+const triggerButtons = () =>
+  Array.from(document.querySelectorAll<HTMLButtonElement>('button[id^="project-trigger-"]'));
+
+const triggerByName = (name: RegExp) => {
+  const button = triggerButtons().find((item) => name.test(item.getAttribute("aria-label") ?? ""));
+  if (!button) throw new Error(`Could not find trigger ${name}`);
+  return button;
+};
+
+const buttonByName = (name: RegExp) => {
+  const button = Array.from(document.querySelectorAll<HTMLButtonElement>("button")).find((item) =>
+    name.test(item.getAttribute("aria-label") ?? item.textContent ?? "")
+  );
+  if (!button) throw new Error(`Could not find button ${name}`);
+  return button;
+};
 
 const mockMatchMedia = (matches: boolean) => {
   Object.defineProperty(window, "matchMedia", {
@@ -20,11 +79,15 @@ const mockMatchMedia = (matches: boolean) => {
   });
 };
 
+afterEach(() => {
+  cleanup();
+});
+
 describe("accessibility checklist: Portfolio accordion", () => {
   it("keeps aria-expanded and aria-controls aligned with visible panels", () => {
     render(<Portfolio />);
 
-    const triggers = screen.getAllByRole("button", { name: /expand project/i });
+    const triggers = triggerButtons();
     expect(triggers).toHaveLength(4);
 
     triggers.forEach((trigger, index) => {
@@ -33,7 +96,7 @@ describe("accessibility checklist: Portfolio accordion", () => {
       expect(document.getElementById(`project-panel-${index}`)).not.toBeInTheDocument();
     });
 
-    fireEvent.click(triggers[0]);
+    click(triggers[0]);
     expect(triggers[0]).toHaveAttribute("aria-expanded", "true");
     expect(document.getElementById("project-panel-0")).toHaveAttribute("role", "region");
   });
@@ -41,43 +104,41 @@ describe("accessibility checklist: Portfolio accordion", () => {
   it("supports Arrow, Home, End, and Escape keyboard behavior without trapping focus", async () => {
     render(<Portfolio />);
 
-    const firstTrigger = screen.getByRole("button", { name: /expand project 1/i });
+    const firstTrigger = triggerByName(/expand project 1/i);
     firstTrigger.focus();
 
-    fireEvent.keyDown(firstTrigger, { key: "ArrowDown" });
-    expect(screen.getByRole("button", { name: /expand project 2/i })).toHaveFocus();
+    keyDown(firstTrigger, "ArrowDown");
+    expect(triggerByName(/expand project 2/i)).toHaveFocus();
 
-    fireEvent.keyDown(document.activeElement as Element, { key: "End" });
-    expect(screen.getByRole("button", { name: /expand project 4/i })).toHaveFocus();
+    keyDown(document.activeElement as Element, "End");
+    expect(triggerByName(/expand project 4/i)).toHaveFocus();
 
-    fireEvent.keyDown(document.activeElement as Element, { key: "Home" });
+    keyDown(document.activeElement as Element, "Home");
     expect(firstTrigger).toHaveFocus();
 
-    fireEvent.click(firstTrigger);
-    const openTrigger = screen.getByRole("button", { name: /collapse project 1/i });
+    click(firstTrigger);
+    const openTrigger = triggerByName(/collapse project 1/i);
     const panel = document.getElementById(openTrigger.getAttribute("aria-controls") ?? "");
     expect(panel).toBeInTheDocument();
 
-    fireEvent.keyDown(panel as HTMLElement, { key: "Escape" });
+    keyDown(panel as HTMLElement, "Escape");
+    await nextFrame();
 
-    await waitFor(() => {
-      expect(screen.getByRole("button", { name: /expand project 1/i })).toHaveFocus();
-    });
+    expect(triggerByName(/expand project 1/i)).toHaveFocus();
   });
 
   it("returns focus to the exact trigger when a panel is collapsed from inside", async () => {
     render(<Portfolio />);
 
-    const secondTrigger = screen.getByRole("button", { name: /expand project 2/i });
-    fireEvent.click(secondTrigger);
+    const secondTrigger = triggerByName(/expand project 2/i);
+    click(secondTrigger);
 
-    const closeButton = screen.getByRole("button", { name: /collapse open project/i });
+    const closeButton = buttonByName(/collapse open project/i);
     closeButton.focus();
-    fireEvent.click(closeButton);
+    click(closeButton);
+    await nextFrame();
 
-    await waitFor(() => {
-      expect(screen.getByRole("button", { name: /expand project 2/i })).toHaveFocus();
-    });
+    expect(triggerByName(/expand project 2/i)).toHaveFocus();
   });
 });
 
@@ -85,22 +146,25 @@ describe("accessibility checklist: tool marquee", () => {
   it("has a labelled region and exposes one accessible logo list while hiding the duplicate animation row", () => {
     render(<ToolMarquee />);
 
-    const region = screen.getByRole("region", { name: /tools & software/i });
-    const logoList = within(region).getByRole("list", { name: /software logos/i });
+    const region = document.querySelector<HTMLElement>('section[role="region"][aria-labelledby="tools-marquee-title"]');
+    expect(region).toBeInTheDocument();
+    expect(document.getElementById("tools-marquee-title")?.textContent).toMatch(/tools & software/i);
+
+    const logoList = region?.querySelector<HTMLUListElement>('ul[aria-label="Software logos"]');
     expect(logoList).toBeInTheDocument();
 
     ["Excel", "PowerPoint", "Word", "Power BI", "SQL", "QuickBooks", "Tally ERP", "Canva"].forEach((tool) => {
-      expect(within(logoList).getByRole("img", { name: tool })).toBeInTheDocument();
+      expect(logoList?.querySelector(`img[alt="${tool}"]`)).toBeInTheDocument();
     });
 
-    expect(region.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
+    expect(region?.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
   });
 
   it("does not add focusable items to mobile tab order", () => {
     render(<ToolMarquee />);
 
-    const region = screen.getByRole("region", { name: /tools & software/i });
-    const focusable = region.querySelectorAll(
+    const region = document.querySelector<HTMLElement>('section[role="region"][aria-labelledby="tools-marquee-title"]');
+    const focusable = region?.querySelectorAll(
       'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
     );
 
@@ -118,13 +182,12 @@ describe("reduced motion preference", () => {
   it("auto-enables reduced motion from system preference until the toggle overrides it", async () => {
     mockMatchMedia(true);
     render(<MotionToggle />);
+    await nextFrame();
 
-    await waitFor(() => {
-      expect(document.documentElement).toHaveClass("reduce-motion");
-      expect(screen.getByRole("button", { name: /enable animations/i })).toHaveAttribute("aria-pressed", "true");
-    });
+    expect(document.documentElement).toHaveClass("reduce-motion");
+    expect(buttonByName(/enable animations/i)).toHaveAttribute("aria-pressed", "true");
 
-    fireEvent.click(screen.getByRole("button", { name: /enable animations/i }));
+    click(buttonByName(/enable animations/i));
 
     expect(localStorage.getItem("reduced-motion")).toBe("false");
     expect(document.documentElement).not.toHaveClass("reduce-motion");
@@ -133,9 +196,8 @@ describe("reduced motion preference", () => {
   it("persists Motion On/Off choice in localStorage across page loads", async () => {
     localStorage.setItem("reduced-motion", "true");
     render(<MotionToggle />);
+    await nextFrame();
 
-    await waitFor(() => {
-      expect(screen.getByRole("button", { name: /enable animations/i })).toHaveAttribute("aria-pressed", "true");
-    });
+    expect(buttonByName(/enable animations/i)).toHaveAttribute("aria-pressed", "true");
   });
 });

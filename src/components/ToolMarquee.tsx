@@ -77,7 +77,7 @@ const Row = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
 );
 
 const ToolMarquee = () => (
-  <section aria-labelledby="tools-marquee-title" className="py-12 md:py-14 border-y border-border bg-secondary/40 overflow-hidden">
+  <section role="region" aria-labelledby="tools-marquee-title" className="py-12 md:py-14 border-y border-border bg-secondary/40 overflow-hidden">
     <div className="container mx-auto px-6 mb-6">
       <h2 id="tools-marquee-title" className="text-[10px] font-semibold tracking-[0.25em] uppercase text-muted-foreground text-center">
         Tools & Software I Work With
