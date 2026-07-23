@@ -1,6 +1,5 @@
-import type { ReactNode } from "react";
+import { act, type ReactNode } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { act } from "react-dom/test-utils";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import Portfolio from "@/components/Portfolio";
 import ToolMarquee from "@/components/ToolMarquee";
