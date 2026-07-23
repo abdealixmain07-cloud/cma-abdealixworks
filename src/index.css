@@ -169,10 +169,9 @@ input:focus, textarea:focus {
   border-top: 1px solid hsl(var(--border));
 }
 
-/* Reduce motion on mobile */
+/* Keep mobile transitions short without breaking long-running marquee loops */
 @media (max-width: 768px) {
-  *, *::before, *::after {
-    animation-duration: 0.3s !important;
+  *:not(.marquee-track):not(.marquee-track *) {
     transition-duration: 0.2s !important;
   }
 }
@@ -215,11 +214,22 @@ html.reduce-motion .marquee-track {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   min-width: max-content;
+  width: max-content;
+  overflow: visible;
+}
+.marquee-row,
+.tool-logo {
+  flex: 0 0 auto;
+  min-width: max-content;
 }
 @media (max-width: 768px) {
   .marquee-track {
-    -webkit-animation-duration: 26s;
-    animation-duration: 26s;
+    -webkit-animation-duration: 52s !important;
+    animation-duration: 52s !important;
+  }
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
   }
 }
 .marquee-mask {
