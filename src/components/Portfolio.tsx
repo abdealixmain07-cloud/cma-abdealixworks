@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useRef, KeyboardEvent } from "react";
+import { useEffect, useState, useRef, KeyboardEvent } from "react";
 import { TrendingUp, Sparkles, Plus, Minus } from "lucide-react";
 
 
@@ -74,6 +74,16 @@ const cardVariants = {
 const Portfolio = () => {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const returnFocusToRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (openIdx !== null || returnFocusToRef.current === null) return;
+    const indexToFocus = returnFocusToRef.current;
+    returnFocusToRef.current = null;
+    requestAnimationFrame(() => {
+      triggerRefs.current[indexToFocus]?.focus({ preventScroll: true });
+    });
+  }, [openIdx]);
 
   const focusTrigger = (i: number) => {
     const n = projects.length;
@@ -104,10 +114,31 @@ const Portfolio = () => {
       case "Escape":
         if (openIdx !== null) {
           e.preventDefault();
-          setOpenIdx(null);
+          collapseProject(openIdx);
         }
         break;
     }
+  };
+
+  const collapseProject = (i: number) => {
+    returnFocusToRef.current = i;
+    setOpenIdx((current) => (current === i ? null : current));
+  };
+
+  const toggleProject = (i: number) => {
+    if (openIdx === i) {
+      collapseProject(i);
+      return;
+    }
+
+    returnFocusToRef.current = null;
+    setOpenIdx(i);
+  };
+
+  const onPanelKeyDown = (e: KeyboardEvent<HTMLDivElement>, i: number) => {
+    if (e.key !== "Escape") return;
+    e.preventDefault();
+    collapseProject(i);
   };
 
 
@@ -155,12 +186,15 @@ const Portfolio = () => {
               >
                 <button
                   id={buttonId}
-                  ref={(el) => (triggerRefs.current[i] = el)}
+                  ref={(el) => {
+                    triggerRefs.current[i] = el;
+                  }}
                   type="button"
-                  onClick={() => setOpenIdx(isOpen ? null : i)}
+                  onClick={() => toggleProject(i)}
                   onKeyDown={(e) => onTriggerKeyDown(e, i)}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
+                  aria-label={`${isOpen ? "Collapse" : "Expand"} project ${i + 1}: ${p.title}`}
                   className="w-full flex items-center gap-4 md:gap-6 p-5 md:p-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
                 >
                   <span className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-foreground text-background flex items-center justify-center text-xs font-bold flex-shrink-0">
@@ -190,6 +224,7 @@ const Portfolio = () => {
                       id={panelId}
                       role="region"
                       aria-labelledby={buttonId}
+                      onKeyDown={(e) => onPanelKeyDown(e, i)}
                       key="content"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
@@ -217,6 +252,17 @@ const Portfolio = () => {
                         </div>
 
                         <div>
+                          <div className="mb-4 flex justify-end">
+                            <button
+                              type="button"
+                              onClick={() => collapseProject(i)}
+                              aria-label={`Collapse open project: ${p.title}`}
+                              className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border bg-background/80 px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:border-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+                            >
+                              <Minus className="h-3.5 w-3.5" aria-hidden />
+                              Collapse
+                            </button>
+                          </div>
                           <div className="mb-4">
                             <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground mb-1.5">Business Problem</p>
                             <p className="text-sm text-muted-foreground leading-relaxed">{p.problem}</p>

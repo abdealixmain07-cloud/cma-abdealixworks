@@ -100,10 +100,8 @@ const Hero = () => {
           height={1088}
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-[hsl(220_25%_10%/0.72)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220_30%_8%/0.65)] via-[hsl(220_25%_12%/0.55)] to-[hsl(220_30%_8%/0.85)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(22_100%_50%/0.12),transparent_60%)]" />
-        <div className="hero-grid absolute inset-0 opacity-[0.18]" />
+        <div className="absolute inset-0 bg-[hsl(220_30%_8%/0.58)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220_30%_8%/0.52)] via-[hsl(220_28%_10%/0.42)] to-[hsl(220_30%_8%/0.74)]" />
       </div>
 
 

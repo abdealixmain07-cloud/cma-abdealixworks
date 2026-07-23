@@ -13,11 +13,20 @@ const MotionToggle = () => {
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const stored = localStorage.getItem(STORAGE_KEY);
-    const prefers = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const initial = stored ? stored === "true" : prefers;
+    const initial = stored !== null ? stored === "true" : mediaQuery.matches;
     setReduced(initial);
     applyReducedMotion(initial);
+
+    const syncSystemPreference = (event: MediaQueryListEvent) => {
+      if (localStorage.getItem(STORAGE_KEY) !== null) return;
+      setReduced(event.matches);
+      applyReducedMotion(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", syncSystemPreference);
+    return () => mediaQuery.removeEventListener("change", syncSystemPreference);
   }, []);
 
   const toggle = () => {

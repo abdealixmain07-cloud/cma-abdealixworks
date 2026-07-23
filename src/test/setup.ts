@@ -13,3 +13,8 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: () => {},
   }),
 });
+
+Object.defineProperty(window, "requestAnimationFrame", {
+  writable: true,
+  value: (callback: FrameRequestCallback) => window.setTimeout(callback, 0),
+});
