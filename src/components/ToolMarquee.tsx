@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type Tool = { name: string; icon: string; fallbacks?: string[] };
 
@@ -76,20 +76,60 @@ const Row = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
   </ul>
 );
 
-const ToolMarquee = () => (
-  <section role="region" aria-labelledby="tools-marquee-title" className="py-12 md:py-14 border-y border-border bg-secondary/40 overflow-hidden">
-    <div className="container mx-auto px-6 mb-6">
-      <h2 id="tools-marquee-title" className="text-[10px] font-semibold tracking-[0.25em] uppercase text-muted-foreground text-center">
-        Tools & Software I Work With
-      </h2>
-    </div>
-    <div className="marquee-mask relative w-full overflow-hidden" aria-label="Continuously scrolling software tools">
-      <div className="marquee-track flex w-max will-change-transform">
-        <Row />
-        <Row ariaHidden />
+const ToolMarquee = () => {
+  const [paused, setPaused] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const pause = () => setPaused(true);
+  const resume = () => setPaused(false);
+  const toggle = () => setPaused((p) => !p);
+
+  return (
+    <section
+      role="region"
+      aria-labelledby="tools-marquee-title"
+      className="py-12 md:py-14 border-y border-border bg-secondary/40 overflow-hidden"
+    >
+      <div className="container mx-auto px-6 mb-6 flex items-center justify-center gap-4">
+        <h2
+          id="tools-marquee-title"
+          className="text-[10px] font-semibold tracking-[0.25em] uppercase text-muted-foreground text-center"
+        >
+          Tools & Software I Work With
+        </h2>
+        <button
+          type="button"
+          onClick={toggle}
+          aria-pressed={paused}
+          aria-controls="tools-marquee-track"
+          className="text-[10px] font-semibold tracking-[0.15em] uppercase px-2.5 py-1 rounded-full border border-border bg-background/70 text-foreground hover:border-accent/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 transition-colors"
+        >
+          {paused ? "Play" : "Pause"}
+        </button>
       </div>
-    </div>
-  </section>
-);
+      <div
+        className="marquee-mask relative w-full overflow-hidden"
+        onMouseEnter={pause}
+        onMouseLeave={resume}
+        onFocusCapture={pause}
+        onBlurCapture={resume}
+        onTouchStart={pause}
+        onTouchEnd={resume}
+      >
+        <div
+          ref={trackRef}
+          id="tools-marquee-track"
+          className={`marquee-track flex w-max will-change-transform ${paused ? "is-paused" : ""}`}
+        >
+          <Row />
+          <Row ariaHidden />
+        </div>
+      </div>
+      <p role="status" aria-live="polite" className="sr-only">
+        {paused ? "Tools marquee paused" : "Tools marquee scrolling"}
+      </p>
+    </section>
+  );
+};
 
 export default ToolMarquee;

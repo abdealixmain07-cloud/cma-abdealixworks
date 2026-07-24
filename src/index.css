@@ -217,6 +217,10 @@ html.reduce-motion .marquee-track {
   width: max-content;
   overflow: visible;
 }
+.marquee-track.is-paused {
+  -webkit-animation-play-state: paused !important;
+  animation-play-state: paused !important;
+}
 .marquee-row,
 .tool-logo {
   flex: 0 0 auto;
