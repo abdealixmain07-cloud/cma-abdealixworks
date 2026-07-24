@@ -264,3 +264,28 @@ html.reduce-motion .marquee-track {
 @media (prefers-reduced-motion: reduce) {
   .hero-grid { animation: none !important; }
 }
+
+/* Gold light sweep across hero */
+.hero-gold-sweep {
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    hsl(38 92% 62% / 0.00) 42%,
+    hsl(38 92% 62% / 0.28) 50%,
+    hsl(38 92% 62% / 0.00) 58%,
+    transparent 70%
+  );
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  animation: hero-gold-sweep 9s ease-in-out 0.6s infinite;
+  mix-blend-mode: screen;
+}
+@keyframes hero-gold-sweep {
+  0%   { background-position: 150% 0; opacity: 0; }
+  15%  { opacity: 1; }
+  60%  { background-position: -50% 0; opacity: 1; }
+  100% { background-position: -50% 0; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-gold-sweep { animation: none !important; opacity: 0 !important; }
+}

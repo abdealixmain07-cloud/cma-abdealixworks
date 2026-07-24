@@ -1,5 +1,5 @@
 import { ArrowRight, Download, Linkedin } from "lucide-react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate, useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
 import profilePhoto from "@/assets/profile.png.asset.json";
 import bgDubai from "@/assets/dubai-skyline.jpg";
@@ -86,11 +86,15 @@ const kpis = [
 ];
 
 const Hero = () => {
+  const { scrollY } = useScroll();
+  const bgY = useTransform(scrollY, [0, 800], ["0%", "18%"]);
+  const bgScale = useTransform(scrollY, [0, 800], [1.05, 1.12]);
+
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-28 pb-24 overflow-hidden isolate">
-      {/* Skyline backdrop */}
+      {/* Skyline backdrop with parallax */}
       <div className="absolute inset-0 -z-10">
-        <img
+        <motion.img
           src={bgDubai}
           alt=""
           aria-hidden
@@ -98,11 +102,14 @@ const Hero = () => {
           decoding="async"
           width={1920}
           height={1088}
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ y: bgY, scale: bgScale }}
+          className="absolute inset-0 w-full h-full object-cover object-center will-change-transform"
         />
-        {/* Lighter, glass-like wash so content sits over a bright, airy skyline */}
+        {/* Lighter, glass-like wash */}
         <div className="absolute inset-0 bg-[hsl(0_0%_100%/0.55)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0_0%_100%/0.35)] via-[hsl(30_40%_96%/0.30)] to-[hsl(220_30%_96%/0.55)]" />
+        {/* Gold light sweep */}
+        <div aria-hidden className="hero-gold-sweep absolute inset-0 pointer-events-none" />
       </div>
 
 
