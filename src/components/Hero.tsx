@@ -2,7 +2,7 @@ import { ArrowRight, Download, Linkedin } from "lucide-react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
 import profilePhoto from "@/assets/profile.png.asset.json";
-import bgMumbai from "@/assets/mumbai-skyline.jpg";
+import bgDubai from "@/assets/dubai-skyline.jpg";
 
 const PROFILE_PHOTO = profilePhoto.url;
 
@@ -91,7 +91,7 @@ const Hero = () => {
       {/* Skyline backdrop */}
       <div className="absolute inset-0 -z-10">
         <img
-          src={bgMumbai}
+          src={bgDubai}
           alt=""
           aria-hidden
           fetchPriority="high"
@@ -100,8 +100,9 @@ const Hero = () => {
           height={1088}
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-[hsl(220_30%_8%/0.58)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220_30%_8%/0.52)] via-[hsl(220_28%_10%/0.42)] to-[hsl(220_30%_8%/0.74)]" />
+        {/* Lighter, glass-like wash so content sits over a bright, airy skyline */}
+        <div className="absolute inset-0 bg-[hsl(0_0%_100%/0.55)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0_0%_100%/0.35)] via-[hsl(30_40%_96%/0.30)] to-[hsl(220_30%_96%/0.55)]" />
       </div>
 
 
