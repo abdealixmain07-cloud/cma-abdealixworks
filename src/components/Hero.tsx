@@ -1,5 +1,5 @@
 import { ArrowRight, Download, Linkedin } from "lucide-react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate, useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
 import profilePhoto from "@/assets/profile.png.asset.json";
 import bgDubai from "@/assets/dubai-skyline.jpg";
